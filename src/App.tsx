@@ -1,15 +1,11 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import CreateProductForm from './Components/createProductForm/createProductForm'
-
 
 function App() {
 
 
   return (
-    <div>
-      <CreateProductForm/>
+    <div className="App">
+      <h1>PROBANDO</h1>
     </div>
   )
 }
