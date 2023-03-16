@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
+//agrego esta linea para modificar el nombre a mayuscula
+
 
 const SearchBar: React.FC = () => {
 
@@ -23,10 +25,10 @@ const SearchBar: React.FC = () => {
     const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Do something with the query here, like search for it
-        let response = await axios.get(`http://localhost:3001/products?name=${query}`)
+       const response: AxiosResponse<Product[]> = await axios.get(`http://localhost:3001/products?name=${query}`)
         let productsFound = response.data
         setProducts(productsFound)
-        console.log(productsFound)
+        console.log(products)
 
     };
 

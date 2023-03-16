@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import style from './createProductForm.module.css'
 
+
 interface Product {
   descriptionName: string;
   category: string;
@@ -54,12 +55,14 @@ const CreateProductForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      if (Object.keys(errors).length === 0) {
-        await axios.post('http://localhost:3001/products/', product);
+    // Sin la fn Validate no anda el form!!! 
+    // if (Object.keys(errors).length === 0) {
+        await axios.post('http://localhost:3001/products', product);
+        console.log(product)
         alert("Producto creado");
-      } else {
-        alert("Faltan completar campos")
-      }
+    //     } else {
+    //     alert("Faltan completar campos")
+    //   }
     } catch (error) {
       console.error(error)
     }
