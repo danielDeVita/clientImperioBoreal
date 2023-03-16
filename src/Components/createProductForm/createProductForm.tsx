@@ -1,81 +1,69 @@
-import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 import axios from 'axios';
 import style from './createProductForm.module.css'
 
 interface Product {
-    descriptionName: string;
-    category: string;
-    price: number;
-    priceBusiness: number;
-    priceVAT: number;
-    priceVATBusiness: number;
+  descriptionName: string;
+  category: string;
+  price: number;
+  priceBusiness: number;
+  priceVAT: number;
+  priceVATBusiness: number;
 }
 
 interface Errors {
-    descriptionName: string;
-    category: string;
-    price: string;
-    priceBusiness: string;
-    priceVAT: string;
-    priceVATBusiness: string;
+  descriptionName: string;
+  category: string;
+  price: string;
+  priceBusiness: string;
+  priceVAT: string;
+  priceVATBusiness: string;
 }
-
 
 const validate = (product: Product) => {
-    // Validation logic here
-    return {};
-}
+  // Validation logic here
+  return {};
+};
 
 const CreateProductForm: React.FC = () => {
+  const [product, setProduct] = useState<Product>({
+    descriptionName: "",
+    category: "",
+    price: 0,
+    priceBusiness: 0,
+    priceVAT: 0,
+    priceVATBusiness: 0,
+  });
 
-    // const navigate = useNavigate();
+  const [errors, setErrors] = useState<Errors>({
+    descriptionName: "",
+    category: "",
+    price: "",
+    priceBusiness: "",
+    priceVAT: "",
+    priceVATBusiness: "",
+  });
 
-    const [product, setProduct] = useState<Product>({
-        descriptionName: "",
-        category: "",
-        price: 0,
-        priceBusiness: 0,
-        priceVAT: 0,
-        priceVATBusiness: 0,
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProduct({
+      ...product,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const [errors, setErrors] = useState<Errors>({
-        descriptionName: "",
-        category: "",
-        price: "",
-        priceBusiness: "",
-        priceVAT: "",
-        priceVATBusiness: "",
-    });
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProduct({
-            ...product,
-            [e.target.name]: e.target.value
-        });
-        console.log(product)
-        console.log(`esto es value ${e.target.value}`)
-        console.log(`esto es name ${e.target.name}`)
-
-
-    };
-
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        try {
-            if (Object.keys(errors).length === 0) {
-                await axios.post('http://localhost:3001/products/', product);
-                alert("Producto creado");
-                // navigate("/")
-            } else {
-                alert("Faltan completar campos")
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      if (Object.keys(errors).length === 0) {
+        await axios.post('http://localhost:3001/products/', product);
+        alert("Producto creado");
+      } else {
+        alert("Faltan completar campos")
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  };
 
     return (
         <form className={style.formContainer} onSubmit={handleSubmit}>
@@ -119,5 +107,6 @@ const CreateProductForm: React.FC = () => {
     )
 
 }
+
 
 export default CreateProductForm;
