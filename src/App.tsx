@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import SearchBar from './Components/SearchBar/SearchBar'
+import CreateProductForm from './Components/CreateProductForm/CreateProductForm'
 
 function App() {
 
 
   return (
     <div className="App">
-      <h1>PROBANDO</h1>
+      <SearchBar/>
+      <CreateProductForm/>
     </div>
   )
 }

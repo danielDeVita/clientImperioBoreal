@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 
-const searchBar: React.FC = () => {
+const SearchBar: React.FC = () => {
 
     interface Product {
         descriptionName: string;
@@ -40,4 +40,4 @@ const searchBar: React.FC = () => {
     );
 };
 
-export default searchBar;
+export default SearchBar;
