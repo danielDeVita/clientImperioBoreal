@@ -1,0 +1,22 @@
+.dashboardTable {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dashboardTable th,
+.dashboardTable td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.dashboardTable th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.dashboardTable tbody tr:hover {
+    background-color: #f5f5f5;
+}
