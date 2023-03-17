@@ -1,13 +1,13 @@
-import { useState } from "react";
-
-//Si tienen problemas con el import en minuscula o mayuscula 
-//es por el cache de vscode, tienen que cerrar y volver a abrirlo
+import * as React from "react";
+import Home from './Components/Home/Home';
 
 function App() {
   return (
     <div className='App'>
-    
+      <Home />
     </div>
   );
 }
+
 export default App;
+
