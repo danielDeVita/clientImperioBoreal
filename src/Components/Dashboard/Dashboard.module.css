@@ -3,10 +3,12 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    margin-top: 20px ;
 }
 
 .dashboardTable th,
 .dashboardTable td {
+    
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -14,9 +16,47 @@
 
 .dashboardTable th {
     background-color: #f5f5f5;
+    
     font-weight: bold;
 }
 
 .dashboardTable tbody tr:hover {
     background-color: #f5f5f5;
+    
+}
+
+.logoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background-color: white;
+    border-radius: 12px;
+    border-top: 3px solid #0FB1BD;
+}
+
+.logoStyle{
+    margin: 0;
+    height: 180px;
+    width: 180px;
+}
+
+.searchbarContainer{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 60px;
+}
+
+.backBtn{
+    position: relative;
+    left: 20px;
+    color: #0FB1BD;
+    font-size: 24px;
+    font-weight: 700;
 }
