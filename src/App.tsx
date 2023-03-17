@@ -10,10 +10,10 @@ import UpdateProductForm from './Components/UpdateProductForm/UpdateProductForm'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
-      <Route path="/productform" element={<CreateProductForm/>}/>
-      <Route path="/updateform" element={<UpdateProductForm/>}/>
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/productform" element={<CreateProductForm />} />
+      <Route path="/updateform/:id" element={<UpdateProductForm />} />
     </Routes>
   );
 }
