@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import style from './UpdateProductForm.module.css'
 import { useParams } from "react-router";
@@ -22,6 +22,16 @@ interface Errors {
   priceVATBusiness: string;
 }
 
+interface OldProduct {
+  _id: string;
+  descriptionName: string;
+  category: string;
+  price: number;
+  priceBusiness: number;
+  priceVAT: number;
+  priceVATBusiness: number;
+}
+
 const validate = (product: Product) => {
   // Validation logic here
   return {};
@@ -30,6 +40,18 @@ const validate = (product: Product) => {
 const UpdateProductForm: React.FC = () => {
 
   const { id } = useParams();
+
+  useEffect(() => {
+    axios.get<OldProduct>(`http://localhost:3001/products/${id}`)
+      .then((response) => {
+        const oldProduct = response.data;
+        setProduct(oldProduct)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [])
+
 
   const [product, setProduct] = useState<Product>({
     descriptionName: "",
@@ -70,9 +92,7 @@ const UpdateProductForm: React.FC = () => {
   return (
     <form className={style.formContainer} onSubmit={handleSubmit}>
 
-
       <h1 className={style.formTitulo}>Modifique su producto</h1>
-
 
       <label className={style.formLabel} htmlFor="descriptionName">Nombre: </label>
       <input className={style.formInput} value={product.descriptionName} onChange={handleInputChange} id='descriptionName' type="text" name='descriptionName' />
@@ -91,8 +111,6 @@ const UpdateProductForm: React.FC = () => {
 
       <label className={style.formLabel} htmlFor="priceVATBusiness">Precio Empresa C/IVA: </label>
       <input className={style.formInput} value={product.priceVATBusiness} onChange={handleInputChange} id='priceVATBusiness' type="number" name='priceVATBusiness' />
-
-
 
       <button className={style.formButton} type='submit'>Modificar producto</button>
 
