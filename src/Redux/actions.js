@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_USERS = "GET_USERS";
+export const GET_DETAIL = "GET_DETAIL";
 
 export const getProducts = () => {
     return async function (dispatch) {
@@ -16,4 +17,16 @@ export const getUsers = () => {
         const users = response.data;
         dispatch({ type: GET_PRODUCTS, payload: users })
     }
+};
+
+export const getDetail = (id) => {
+    return async function (dispatch) {
+        try{  
+            const response = await axios.get(`http://localhost:3001/products/${id}`)
+            const detail = response.data;
+            dispatch({ type: GET_DETAIL, payload: detail })
+        } catch (error) {
+            console.error(error);
+        }
+    };
 };
