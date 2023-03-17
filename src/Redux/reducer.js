@@ -1,8 +1,9 @@
-import { GET_PRODUCTS, GET_USERS, } from './actions';
+import { GET_PRODUCTS, GET_USERS, GET_DETAIL } from './actions';
 
 const initialState = {
     products: [],
     users: [],
+    detail: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.payload,
+            };
+        case GET_DETAIL:
+            return {
+                ...state,
+                detail: action.payload,
             };
         default:
             return { ...state }
