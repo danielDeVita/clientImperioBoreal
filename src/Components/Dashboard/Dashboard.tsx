@@ -71,7 +71,8 @@ const Dashboard: React.FC = () => {
                         <td>
                             <button onClick={() => { handleDelete(product._id) }}>Eliminar producto</button>
                         </td>
-                        <td><button>Modificar producto</button></td>
+                        <td ><Link to= "/updateform"><button>Modificar producto</button></Link></td>
+                        
                     </tr>
                 ))}
             </tbody>
