@@ -87,20 +87,33 @@ const CreateProductForm: React.FC = () => {
   });
   
   const [errors, setErrors] = useState<Errors>({
-    // descriptionName: "",
-    // category: "",
-    // price: "",
-    // priceBusiness: "",
-    // priceVAT: "",
-    // priceVATBusiness: "",
+    descriptionName: "",
+    category: "",
+    price: "",
+    priceBusiness: "",
+    priceVAT: "",
+    priceVATBusiness: "",
   });
-  
+    
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({
       ...product,
       [e.target.name]: e.target.value,
     });
-       
+       setErrors(
+        validateInputs({
+          ...product,
+          [e.target.name]:e.target.value
+        })
+       )
+       console.log(`this is product: ${product}`)
+       console.log(`this is product.category: ${product.category}`)
+
+       console.log(`this is errors: ${errors}`)
+       console.log(`this is errors.category ${errors.category}`)
+
+       console.log(`this is e.target.name: ${e.target.name}`)
+       console.log(`this is e.target.value:${e.target.value}`)
     };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -134,12 +147,12 @@ const CreateProductForm: React.FC = () => {
 
             <label className={style.formLabel} htmlFor="descriptionName">Nombre: </label>
             <input className={style.formInput} value={product.descriptionName} onChange={handleInputChange} id='descriptionName' type="text" name='descriptionName'/>
-            {(errors?.descriptionName && product?.descriptionName !== '') && <p style ={{color: 'red'}}>{errors.descriptionName}</p>}
+            {errors?.descriptionName  && <p style ={{color: 'red'}}>{errors.descriptionName}</p>}
 
 
             <label className={style.formLabel} htmlFor="category">Categoría: </label>
             <input className={style.formInput} value={product.category} onChange={handleInputChange} id='category' type="text" name='category' />
-            {(errors?.category && product?.category !== '') && <p style ={{color: 'red'}}>{errors.category}</p>}
+            {(errors?.category && product.category !== '') && <p style ={{color: 'red'}}>{errors.category}</p>}
 
             <label className={style.formLabel} htmlFor="price">Precio: </label>
             <input className={style.formInput} value={product.price} onChange={handleInputChange} id='price' type="number" name='price'/>
