@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios, {AxiosResponse} from 'axios';
-//agrego esta linea para modificar el nombre a mayuscula
+
 
 
 const SearchBar: React.FC = () => {
