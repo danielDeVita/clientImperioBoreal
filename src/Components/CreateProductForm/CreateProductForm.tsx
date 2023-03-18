@@ -1,30 +1,6 @@
-
-
-
-
-// export const validate = (product: Errors) => {
-//   // Validation logic here
-//   let error:Errors = {}
-
-//   if (!product.descriptionName) error.descriptionName = 'El producto necesita un nombre!';
-//   else if (/[^A-Za-z0-9 ]+/g.test(product.descriptionName)) 
-//   error.descriptionName = " Name cannot have special characters or tildes"; 
-//   if (!product.category) error.category= 'El producto necesita una categoría!'
-//   if (product.price < 0) error.price = 'El precio no puede ser negativo!'
-//   if (product.priceBusiness < 0) error.priceBusiness = 'El precio de venta a empresas no puede ser negativo'
-//   if (product.priceVAT < 0) error.priceVAT = 'El precio con IVA no puede ser negativo'
-//   if (product.priceVATBusiness < 0) error.priceVATBusiness= 'El precio para empresas con IVA no puede ser negativo'
-
-
-//   return error;
-// };
-
 import React, { useState } from "react";
 import axios from 'axios';
 import style from './createProductForm.module.css'
-import { validate } from "./validate";
-
-
 
 interface Product {
   descriptionName: string;
@@ -44,34 +20,15 @@ interface Errors {
   priceVATBusiness?: string;
 }
 
-
-
 const validateInputs = (product: Product): Errors => {
   const errors: Errors = {};
 
-  if (!product.descriptionName) {
-    errors.descriptionName = "Por favor ingrese un nombre para el producto.";
-  }
-
-  if (!product.category) {
-    errors.category = "Por favor ingrese una categoría para el producto.";
-  }
-
-  if (product.price <= 0) {
-    errors.price = "El precio debe ser mayor a cero.";
-  }
-
-  if (product.priceBusiness <= 0) {
-    errors.priceBusiness = "El precio de venta a empresas debe ser mayor a cero.";
-  }
-
-  if (product.priceVAT <= 0) {
-    errors.priceVAT = "El precio con IVA para consumidores finales debe ser mayor a cero.";
-  }
-
-  if (product.priceVATBusiness <= 0) {
-    errors.priceVATBusiness = "El precio con IVA para empresas debe ser mayor a cero.";
-  }
+  if (!product.descriptionName) errors.descriptionName = "Por favor ingrese un nombre para el producto.";
+  if (!product.category) errors.category = "Por favor ingrese una categoría para el producto.";
+  if (product.price <= 0) errors.price = "El precio debe ser mayor a cero.";
+  if (product.priceBusiness <= 0) errors.priceBusiness = "El precio de venta a empresas debe ser mayor a cero.";
+  if (product.priceVAT <= 0) errors.priceVAT = "El precio con IVA para consumidores finales debe ser mayor a cero.";
+  if (product.priceVATBusiness <= 0) errors.priceVATBusiness = "El precio con IVA para empresas debe ser mayor a cero.";
 
   return errors;
 };
@@ -94,6 +51,7 @@ const CreateProductForm: React.FC = () => {
     priceVAT: "",
     priceVATBusiness: "",
   });
+  
     
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({
@@ -106,20 +64,21 @@ const CreateProductForm: React.FC = () => {
           [e.target.name]:e.target.value
         })
        )
-       console.log(`this is product: ${product}`)
-       console.log(`this is product.category: ${product.category}`)
+      //  console.log(product)
+      //  console.log(errors)
+      //  console.log(`this is product.category: ${product.category}`)
 
-       console.log(`this is errors: ${errors}`)
-       console.log(`this is errors.category ${errors.category}`)
+      //  console.log(`this is errors: ${errors}`)
+      //  console.log(`this is errors.category ${errors.category}`)
 
-       console.log(`this is e.target.name: ${e.target.name}`)
-       console.log(`this is e.target.value:${e.target.value}`)
+      //  console.log(`this is e.target.name: ${e.target.name}`)
+      //  console.log(`this is e.target.value:${e.target.value}`)
+      //  console.log(`----------------- break ---------------------`)
     };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-  
     if (Object.keys(errors).length === 0) {
         await axios.post('http://localhost:3001/products', product);
         console.log(product)
@@ -147,12 +106,11 @@ const CreateProductForm: React.FC = () => {
 
             <label className={style.formLabel} htmlFor="descriptionName">Nombre: </label>
             <input className={style.formInput} value={product.descriptionName} onChange={handleInputChange} id='descriptionName' type="text" name='descriptionName'/>
-            {errors?.descriptionName  && <p style ={{color: 'red'}}>{errors.descriptionName}</p>}
-
-
+            {errors?.descriptionName  && <p style ={{color: 'red'}}>{errors?.descriptionName}</p>}
+      {/*El descriptionName ERROR y category ERROR se renderizan mal, el resto anda bien.*/}
             <label className={style.formLabel} htmlFor="category">Categoría: </label>
             <input className={style.formInput} value={product.category} onChange={handleInputChange} id='category' type="text" name='category' />
-            {(errors?.category && product.category !== '') && <p style ={{color: 'red'}}>{errors.category}</p>}
+            {errors?.category && <p style ={{color: 'red'}}>{errors?.category}</p>}
 
             <label className={style.formLabel} htmlFor="price">Precio: </label>
             <input className={style.formInput} value={product.price} onChange={handleInputChange} id='price' type="number" name='price'/>
@@ -174,10 +132,7 @@ const CreateProductForm: React.FC = () => {
             <button  className={style.formButton} type='submit'>Crear producto</button>
 
         </form>
-
     )
-
 }
-
 
 export default CreateProductForm;
