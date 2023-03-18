@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import style from './Home.module.css';
 import CardContainer from "../CardContainer/CardContainer";
 import AboutUs from "../AboutUs/AboutUs";
+import Footer from "../Footer/Footer";
 
 
 const Home: React.FC = () => {
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
       <div className="card-container">
         <CardContainer />
       </div>
+      <Footer />
     </>
   );
 };
