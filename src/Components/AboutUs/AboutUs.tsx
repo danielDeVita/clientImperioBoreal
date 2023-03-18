@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import style from '../AboutUs/AboutUs.module.css';
 
 const AboutUs: React.FC = () => {
   return (
-    <div>
+    <div className={style.container}>
       <h1>Bienvenidos Imperio Boreal</h1>
       <p>Somos una empresa comprometida con la educación y el desarrollo de nuestros clientes más jóvenes.
        Desde nuestra fundación, nos hemos enfocado en ofrecer una amplia variedad de productos de calidad,
@@ -19,6 +21,12 @@ const AboutUs: React.FC = () => {
          excepcional. Siempre estamos dispuestos a escuchar tus comentarios y sugerencias para seguir mejorando
           nuestros servicios y productos.</p>
       <p>¡Gracias por elegirnos como tu librería y tienda de útiles escolares de confianza!</p>
+    
+      <div className={style.containerBtn}>
+        <Link to="/">
+          <button>VOLVER</button>
+        </Link>
+      </div>
     </div>
   );
 };
