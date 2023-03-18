@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import style from './Home.module.css';
-import CardContainer from "../CardContainer/CardContainer";
+import CardContainer from '../CardContainer/CardContainer';
 import AboutUs from "../AboutUs/AboutUs";
 import Footer from "../Footer/Footer";
 

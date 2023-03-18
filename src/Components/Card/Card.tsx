@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Card.module.css';
+import noImage from '../../assets/no-image.png'
 
 interface CardProp {
     descriptionName: string;
@@ -16,11 +17,11 @@ interface CardProp {
 const Card: React.FC<CardProp> = ({ descriptionName, category, price, priceBusiness, priceVAT, priceVATBusiness, id, img }) => {
     return (
         <div className={style.card}>
-            <Link to={`/${id}`}>
+            
                 <h1>Nombre:</h1>
                 <p>{descriptionName}</p>
                 <div className={style.cardImage}>
-                    <img src={img} alt={descriptionName} />
+                <Link to={`/${id}`}><img src={!img ? noImage : img} alt={descriptionName} /></Link>
                 </div>
                 <div className={style.cardContent}>
                     <h3>Categoria:</h3>
@@ -30,7 +31,6 @@ const Card: React.FC<CardProp> = ({ descriptionName, category, price, priceBusin
                     {/* Esto es para info nuestra mientras esta en development */}
                     <h5>Id del producto: {id}</h5>
                 </div>
-            </Link>
         </div>
     );
 }
