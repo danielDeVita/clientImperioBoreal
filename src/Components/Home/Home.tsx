@@ -17,7 +17,6 @@ const Home: React.FC = () => {
         <SearchBar />
       </div>
       <div className="card-container">
-        <h3>Aca va cardContainer</h3>
         <CardContainer />
       </div>
     </>

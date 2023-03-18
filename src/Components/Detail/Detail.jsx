@@ -22,7 +22,6 @@ const Detail = () => {
       <p>Precio + IVA: {productDetail.priceVAT}</p>
       <p>Precio mayorista + IVA: {productDetail.priceVATBusiness}</p>
     </div>
-
   )
 }
 
