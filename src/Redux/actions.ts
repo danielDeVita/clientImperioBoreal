@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { RootState } from './store';
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_USERS = "GET_USERS";
@@ -38,7 +40,7 @@ interface GetDetailAction {
 
 export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction;
 
-export const getProducts = () => {
+export const getProducts = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     const response = await axios.get<Product[]>("http://localhost:3001/products");
     const products = response.data;

@@ -1,24 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getProducts } from '../../Redux/actions';
 import Card from '../Card/Card';
-import style from './CardContainer.module.css'
+import style from './CardContainer.module.css';
+import { RootState, AppDispatch } from '../../Redux/store';
+import { getProducts } from '../../Redux/actions';
 
-const CardContainer = () => {
+const CardContainer: React.FC = () => {
+    const dispatch: AppDispatch = useDispatch();
+    const products = useSelector((state: RootState) => state.products);
 
-    const dispatch = useDispatch();
-    const products = useSelector(state => state.products);
-    console.log(products)
     useEffect(() => {
         dispatch(getProducts())
-    }, [])
+    }, [dispatch])
 
     return (
         <>
             <h1>Nuestros productos</h1>
             <div className={style.cardContainer}>
                 {
-                    products.map(product => {
+                    products.map((product: any) => {
                         return (
                             <Card
                                 key={product._id}
@@ -28,8 +28,8 @@ const CardContainer = () => {
                                 priceBusiness={product.priceBusiness}
                                 priceVAT={product.priceVAT}
                                 priceVATBusiness={product.priceVATBusiness}
-                                id={product._id}
-                            />
+                                id={product._id} 
+                                img={''}                            />
                         )
                     })
                 }
