@@ -17,10 +17,8 @@ const Card: React.FC<CardProp> = ({ descriptionName, category, price, priceBusin
     return (
         <div className={style.card}>
             <Link to={`/${id}`}>
-                <a href="/">
-                    <h2>Nombre:</h2>
-                    <p>{descriptionName}</p>
-                </a>
+                <h1>Nombre:</h1>
+                <p>{descriptionName}</p>
                 <div className={style.cardImage}>
                     <img src={img} alt={descriptionName} />
                 </div>
