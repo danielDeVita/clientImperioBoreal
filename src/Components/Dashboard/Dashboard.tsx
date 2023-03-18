@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import style from './Dashboard.module.css'
 import { Link } from 'react-router-dom';
+import { isButtonElement } from 'react-router-dom/dist/dom';
 
 interface Product {
     _id: string;
@@ -44,6 +45,13 @@ const Dashboard: React.FC = () => {
             <Link to="/">
                 <p className={style.backBtn}><i className="fa-solid fa-arrow-left"></i></p>
             </Link>
+            <Link to="/productForm">
+                <button>
+                    CREAR PRODUCTO
+                </button>
+            </Link>
+            
+            
             <table className={style.dashboardTable} >
                 <thead>
                     <tr>
