@@ -1,0 +1,54 @@
+.footer {
+    display: flex;
+    border: solid 1px white;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 12px;
+    height: 9rem;
+    color: black;
+    text-align: left;
+    background:  white;
+  }
+  
+
+  .infoLeft,
+  .infoRight {
+    padding: 1rem;
+    line-height: 1em;
+  }
+  
+  .infoRight {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem;
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+  
+  .infoRight > a {
+    text-decoration: none;
+    color: rgb(245, 245, 245);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    border-radius: 3rem;
+    background-color: rgb(69, 69, 69);
+    padding-left: 1.2rem;
+    transition: transform 2s;
+  }
+  
+  .infoRight > a:hover {
+    scale: 1.02;
+  }
+  
+  .infoRight > a:active {
+    scale: 0.98;
+  }
+  
+  .infoRight img {
+    height: 2rem;
+  }
