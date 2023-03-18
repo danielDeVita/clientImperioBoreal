@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import style from './UpdateProductForm.module.css'
 import { useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
 
 
 interface Product {
@@ -38,7 +39,7 @@ const validate = (product: Product) => {
 };
 
 const UpdateProductForm: React.FC = () => {
-
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -84,6 +85,7 @@ const UpdateProductForm: React.FC = () => {
       await axios.put(`http://localhost:3001/products/${id}`, product);
       console.log(product)
       alert("Producto modificado");
+      navigate('/dashboard');
     } catch (error) {
       console.error(error)
     }
