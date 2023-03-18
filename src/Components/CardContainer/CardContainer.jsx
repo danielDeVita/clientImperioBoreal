@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getProducts } from '../../Redux/actions';
 import Card from '../Card/Card';
+import style from './CardContainer.module.css'
 
 const CardContainer = () => {
 
@@ -13,24 +14,27 @@ const CardContainer = () => {
     }, [])
 
     return (
-        <div><h1>Nuestros productos</h1>
-            {
-                products.map(product => {
-                    return (
-                        <Card
-                            key={product._id}
-                            descriptionName={product.descriptionName}
-                            category={product.category}
-                            price={product.price}
-                            priceBusiness={product.priceBusiness}
-                            priceVAT={product.priceVAT}
-                            priceVATBusiness={product.priceVATBusiness}
-                            id={product._id}
-                        />
-                    )
-                })
-            }
-        </div>
+        <>
+            <h1>Nuestros productos</h1>
+            <div className={style.cardContainer}>
+                {
+                    products.map(product => {
+                        return (
+                            <Card
+                                key={product._id}
+                                descriptionName={product.descriptionName}
+                                category={product.category}
+                                price={product.price}
+                                priceBusiness={product.priceBusiness}
+                                priceVAT={product.priceVAT}
+                                priceVATBusiness={product.priceVATBusiness}
+                                id={product._id}
+                            />
+                        )
+                    })
+                }
+            </div>
+        </>
     )
 }
 
