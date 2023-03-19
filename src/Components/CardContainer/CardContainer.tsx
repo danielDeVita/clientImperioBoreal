@@ -1,17 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector, } from 'react-redux';
 import Card from '../Card/Card';
 import style from './CardContainer.module.css';
-import { RootState, AppDispatch } from '../../Redux/store';
-import { getProducts } from '../../Redux/actions';
+import { RootState, } from '../../Redux/store';
+
 
 const CardContainer: React.FC = () => {
-    const dispatch: AppDispatch = useDispatch();
-    const products = useSelector((state: RootState) => state.filteredProducts);
 
-    // useEffect(() => {
-    //     dispatch(getProducts())
-    // }, [dispatch])
+    const products = useSelector((state: RootState) => state.filteredProducts);
 
     return (
         <>

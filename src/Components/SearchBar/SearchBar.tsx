@@ -1,7 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
+import React, { useState, ChangeEvent, FormEvent} from "react";
 import style from "./SearchBar.module.css";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchProducts } from "../../Redux/actions";
 import { AppDispatch } from "../../Redux/store";
