@@ -32,7 +32,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     margin-right: 60px;
     margin-top: 1px;
@@ -44,17 +44,28 @@
     font-size: 16px;
     font-weight: 600;
     margin: 5px;
-    margin-right: -40px;
     display: flex;
     align-items: center;
-    font-size: 16px;
     padding: 3px;
   }
-  
+  .socialIcons {
+    display: flex;
+    flex-direction: column;
+    
+    
+    border: 1px solid red;
+    
+    
+    
+  }
+  .infoRight > a img {
+    margin-left: 5px;
+  }
  
   .infoLeft, .infoCenter{
     display: flex;
     flex-direction: column;
+
   }
   
   .infoCenter{
