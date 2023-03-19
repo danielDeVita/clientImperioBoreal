@@ -40,13 +40,16 @@ const Home: React.FC = () => {
 
   return (
     <>
+    <div className={style.homeContainer}>
       <NavBar />
-      <button onClick={(e) => handleReset(e)} value='reset'>Resetear Productos</button>
-      <select name="orderByPrice" id="orderByPrice" defaultValue={"default"} onChange={(e) => selectHandler(e)}>
-        <option value="default" disabled>Ordenar por Precio</option>
-        <option value="ascendente">Ascendente</option>
-        <option value="descendente">Descendente</option>
+      <div className={style.filtersContainer}>
+      <select className={style.selectOrderStyle} name="orderByPrice" id="orderByPrice" defaultValue={"default"} onChange={(e) => selectHandler(e)}>
+        <option className={style.selectOptioonStyle} value="default" disabled>Ordenar por Precio</option>
+        <option className={style.selectOptioonStyle}  value="ascendente">Ascendente</option>
+        <option className={style.selectOptioonStyle}  value="descendente">Descendente</option>
       </select>
+      <button className={style.resetFiltersBtnStyle} onClick={(e) => handleReset(e)} value='reset'>Resetear Productos</button>
+      </div>
       <div className="card-container">
         <CardContainer productProps={currentProducts} />
       </div>
@@ -56,11 +59,10 @@ const Home: React.FC = () => {
       paginado={paginado}
       currentPage={currentPage}
     />
-      
-      
       <div className={style.footerContainer}>
       <Footer />
       </div>
+    </div>
     </>
   );
 };
