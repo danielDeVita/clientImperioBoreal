@@ -109,6 +109,7 @@ const CreateProductForm: React.FC = () => {
 
 
   return (
+    <div className={style.divFormContainer}>
     <form className={style.formContainer} onSubmit={handleSubmit}>
       <h1 className={style.formTitulo}>Ingrese su producto</h1>
 
@@ -204,6 +205,7 @@ const CreateProductForm: React.FC = () => {
         Crear producto
       </button>
     </form>
+    </div>
   );
 };
 
