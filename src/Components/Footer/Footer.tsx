@@ -1,11 +1,13 @@
-import React, { FC } from "react";
 import style from "../Footer/Footer.module.css";
 import { Link } from "react-router-dom";
 import logoNegro from "../../assets/logoNegro.png";
+import { FaFacebook } from 'react-icons/fa';
+import {GrInstagram } from 'react-icons/gr';
+
 
 interface FooterProps {}
 
-const Footer: FC<FooterProps> = () => {
+const Footer: React.FC<FooterProps> = () => {
   return (
     <div className={style.footer}>
       
@@ -30,12 +32,17 @@ const Footer: FC<FooterProps> = () => {
       </div>
       <div className={style.infoRight}>
       <h4>REDES SOCIALES</h4>
+
+      <div className={style.socialIcons}>
         <a href="https://instagram.com/imperio.boreal?igshid=YjNmNGQ3MDY= ">
           Instagram
+          <GrInstagram/>
         </a>
         <a href="https://www.facebook.com/imperio.borealcc">
-          Facebook
+          Facebook <FaFacebook/>
+          
         </a>
+        </div>
       </div>
       
     </div>
