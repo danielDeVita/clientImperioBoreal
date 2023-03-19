@@ -1,4 +1,5 @@
-import { GET_PRODUCTS, GET_USERS, GET_DETAIL } from './actions';
+
+import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH } from './actions';
 
 interface Product {
     descriptionName: string;
@@ -18,8 +19,10 @@ interface User {
 
 interface State {
     products: Product[];
+    filteredProducts: Product[];
     users: User[];
     detail: Product;
+
 }
 
 interface GetProductsAction {
@@ -37,10 +40,17 @@ interface GetDetailAction {
     payload: Product;
 }
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction;
+interface SearchProducts {
+    type: typeof SEARCH;
+    payload: any;
+  }
+
+
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts;
 
 const initialState: State = {
     products: [],
+    filteredProducts: [],
     users: [],
     detail: {} as Product,
 };
@@ -51,6 +61,7 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
             return {
                 ...state,
                 products: action.payload,
+                filteredProducts: action.payload
             };
         case GET_USERS:
             return {
@@ -62,6 +73,12 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
                 ...state,
                 detail: action.payload,
             };
+        case SEARCH: 
+        return {
+            ...state, 
+            filteredProducts: state.products.filter((product) => product.descriptionName === action.payload)
+        }
+
         default:
             return { ...state };
     }

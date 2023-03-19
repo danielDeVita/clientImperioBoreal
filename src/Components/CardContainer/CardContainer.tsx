@@ -7,11 +7,11 @@ import { getProducts } from '../../Redux/actions';
 
 const CardContainer: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const products = useSelector((state: RootState) => state.products);
+    const products = useSelector((state: RootState) => state.filteredProducts);
 
-    useEffect(() => {
-        dispatch(getProducts())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getProducts())
+    // }, [dispatch])
 
     return (
         <>
