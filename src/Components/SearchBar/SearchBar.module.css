@@ -1,5 +1,6 @@
 input.searcher{
     background-color: transparent;
+    width: 92%;
     color: #0FB1BD;
     height: 40px;
     font-size: 24px;
@@ -8,6 +9,7 @@ input.searcher{
     border-top: none;
     border-right: none;
     border-bottom: 2px solid #0FB1BD;
+    margin-top: 45px;
 }
 
 .searchBtnStyle{
@@ -17,32 +19,13 @@ input.searcher{
     font-size: 24px;
 }
 
+.searchBtnStyle:hover{
+    color: #13c8d5;
+    cursor: pointer;
+}
+
 
 .input.searcher::placeholder {
     color: #0FB1BD;
   }
   
-
-.AdminDashboardButton {
-    position: absolute;
-    right: 30px;
-    top: 145px;
-	box-shadow: 0px 0px 0px #8a2a21;
-	background:linear-gradient(to bottom, #E4171C 5%, #f24437 100%);
-	background-color:#E4171C;
-	border-radius:12px;
-	border:1px solid #d02718;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	padding:7px 20px;
-	text-decoration:none;
-    font-weight: 800;
-	text-shadow:0px 1px 0px #810e05;
-}
-.AdminDashboardButton:hover {
-	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
-	background-color:#f24437;
-}

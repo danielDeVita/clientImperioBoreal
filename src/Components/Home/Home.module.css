@@ -1,20 +1,3 @@
-.logoContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: center;
-    padding: 0;
-    background-color: white;
-    border-radius: 12px;
-    border-top: 3px solid #0FB1BD;
-}
-
-.logoStyle{
-    margin: 0;
-    height: 180px;
-    width: 180px;
-}
 
 .searchbarContainer{
     margin-top: 20px;
@@ -26,50 +9,8 @@
     height: 60px;
 }
 
-.links{
-    color: black;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-    text-decoration: none;
-    align-items: center;
-
-    margin-left: 1rem;
-    margin-top: .5rem;
-    width: fit-content;
-    height: 2.2rem;
-    border: transparent;
-
-    overflow: hidden;
-    transition: 300ms;
-}
-.links::after{
-    content: '';
+.footerContainer {
     position: absolute;
-    border-bottom: 2px solid black;
-    top: 40%;
-    left: 50%;
-    right: 50%;
-    width: 0%;
-    border-top-left-radius: .5rem;
-    border-top-right-radius: .5rem;
-    transition: .3s;
-}
-.links:hover::after{
-    left: 0%;
-    right: 0%;
+    bottom: 2px;
     width: 100%;
-    margin-top: 1rem;
-}
-
-.container{
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
-    margin-left: 28rem;
-    gap: 4rem;
-    
-}
-
- 
+  }
