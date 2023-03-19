@@ -37,7 +37,7 @@ const SearchBar: React.FC = () => {
         <input
           className={style.searcher}
           type="search"
-          placeholder="Buscar..."
+          placeholder="Buscar productos..."
           onChange={handleChange}
           value={query}
         />
@@ -45,10 +45,6 @@ const SearchBar: React.FC = () => {
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
-
-      <Link to="/dashboard">
-        <button className={style.AdminDashboardButton}>DASHBOARD ADMIN</button>
-      </Link>
     </>
   );
 };

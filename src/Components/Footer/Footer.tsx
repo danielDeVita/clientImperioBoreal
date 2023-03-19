@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 import style from "../Footer/Footer.module.css";
+import { Link } from "react-router-dom";
+import logoNegro from "../../assets/logoNegro.png";
 
 interface FooterProps {}
 
@@ -7,19 +9,32 @@ const Footer: FC<FooterProps> = () => {
   return (
     <div className={style.footer}>
       <div className={style.infoLeft}>
-        <h4>Imperio Boreal</h4>
-        <span>
+          <Link to="/aboutUs" className={style.aboutUsStyle}>
+        <div>
+            ACERCA DE NOSOTROS
+        </div>
+        <div>
+          <img className={style.logoNegroStyle} src={logoNegro} alt="logo" />
+        </div>
+          </Link>
+      </div>
+      <div className={style.infoCenter}>
+        <h4>CONTACTO</h4>
+        <p>
           Tel: +54 3525 63-8899
-          <br />
-          Dirección:
-          <br />
-          Mail:
-        </span>
+        </p>
+        <p>
+          Dirección: Calle 22 Norte 289,<br></br>Col. Caroya, Córdoba
+        </p>
       </div>
       <div className={style.infoRight}>
-      <a href='https://instagram.com/imperio.boreal?igshid=YjNmNGQ3MDY= '>Instagram
-      <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="Instagram"/>
-        </a> 
+      <h4>REDES SOCIALES</h4>
+        <a href="https://instagram.com/imperio.boreal?igshid=YjNmNGQ3MDY= ">
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/imperio.borealcc">
+          Facebook
+        </a>
       </div>
     </div>
   );
