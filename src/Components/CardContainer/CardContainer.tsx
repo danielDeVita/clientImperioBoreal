@@ -4,7 +4,7 @@ import style from './CardContainer.module.css';
 import { RootState, } from '../../Redux/store';
 
 
-const CardContainer: React.FC = () => {
+const CardContainer: React.FC = ({currentProducts}:any) => {
 
     const products = useSelector((state: RootState) => state.filteredProducts);
 
@@ -13,7 +13,7 @@ const CardContainer: React.FC = () => {
             <h1>Nuestros productos</h1>
             <div className={style.cardContainer}>
                 {
-                    products.map((product: any) => {
+                    currentProducts.map((product: any) => {
                         return (
                             <Card
                                 key={product._id}
