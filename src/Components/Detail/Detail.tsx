@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getDetail } from "../../Redux/actions";
 import styles from './Detail.module.css';
 import noImage from '../../assets/no-image.png'
 import { AppDispatch } from "../../Redux/store";
+
 
 interface DetailParams {
   id: string;
@@ -33,6 +34,10 @@ const Detail: React.FC = () => {
   }, [dispatch, id]);
 
   return (
+    <>
+  <Link to={'/'}>
+    <button>Volver </button>
+    </Link>
     <div className={styles.container}>
       <img src={!img ? noImage : img} alt={descriptionName} className={styles.image} />
       <h2 className={styles.title}>{descriptionName}</h2>
@@ -42,6 +47,7 @@ const Detail: React.FC = () => {
       <p className={styles.detail}>Precio + IVA: {priceVAT}</p>
       <p className={styles.detail}>Precio mayorista + IVA: {priceVATBusiness}</p>
     </div>
+    </>
   )
 }
 
