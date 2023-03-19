@@ -8,12 +8,13 @@ interface FooterProps {}
 const Footer: FC<FooterProps> = () => {
   return (
     <div className={style.footer}>
+      
       <div className={style.infoLeft}>
           <Link to="/aboutUs" className={style.aboutUsStyle}>
         <div>
             ACERCA DE NOSOTROS
         </div>
-        <div>
+        <div className={style.imgContainer}>
           <img className={style.logoNegroStyle} src={logoNegro} alt="logo" />
         </div>
           </Link>
@@ -36,6 +37,7 @@ const Footer: FC<FooterProps> = () => {
           Facebook
         </a>
       </div>
+      
     </div>
   );
 };

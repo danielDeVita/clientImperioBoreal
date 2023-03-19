@@ -10,7 +10,8 @@
 }
 
 .footerContainer {
-    position: absolute;
+    display: flex;
+    position: relative;
     bottom: 2px;
     width: 100%;
   }
