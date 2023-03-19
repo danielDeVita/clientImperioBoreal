@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../Navbar/Navbar";
 import style from './Home.module.css';
 import CardContainer from '../CardContainer/CardContainer';
 import Footer from "../Footer/Footer";
 import { resetFilters, orderByPrice } from "../../Redux/actions";
 import { useDispatch} from "react-redux";
-import { AppDispatch } from "../../Redux/store";
-
-
+import { AppDispatch, RootState } from "../../Redux/store";
+import { useSelector } from 'react-redux';
+import Pagination from "../Pagination/Pagination"
 
 const Home: React.FC = () => {
 
@@ -16,12 +16,28 @@ const Home: React.FC = () => {
 
   const handleReset = (e:any) => {
     dispatch(resetFilters(e.target.value))
-
+    setCurrentPage(1);
   }
 
   const selectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(orderByPrice(e.target.value))
+    setCurrentPage(1);
   }
+
+//////Paginado
+  const allProducts = useSelector((state: RootState) => state.filteredProducts);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [productsPerPage, setProductsPerPage] = useState<number>(5);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginado = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+
   return (
     <>
       <NavBar />
@@ -32,8 +48,16 @@ const Home: React.FC = () => {
         <option value="descendente">Descendente</option>
       </select>
       <div className="card-container">
-        <CardContainer />
+        <CardContainer productProps={currentProducts} />
       </div>
+      <Pagination
+      productsPerPage={productsPerPage}
+      allProducts={allProducts.length}
+      paginado={paginado}
+      currentPage={currentPage}
+    />
+      
+      
       <div className={style.footerContainer}>
       <Footer />
       </div>
