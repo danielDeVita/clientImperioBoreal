@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = () => {
           Tel: +54 3525 63-8899
         </p>
         <p>
-          Dirección: Calle 22 Norte 289,<br></br>Col. Caroya, Córdoba
+          Dirección: Calle 22 Norte 289,<br> </br>Col. Caroya, Córdoba
         </p>
       </div>
       <div className={style.infoRight}>

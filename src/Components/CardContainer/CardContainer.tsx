@@ -20,7 +20,6 @@ const CardContainer: React.FC<Props> = ({productProps}) => {
 
     return (
         <>
-            <h1>Nuestros productos</h1>
             <div className={style.cardContainer}>
                 {
                     productProps.map((product: any) => {

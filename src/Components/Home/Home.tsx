@@ -48,7 +48,7 @@ const Home: React.FC = () => {
         <option className={style.selectOptioonStyle}  value="ascendente">Ascendente</option>
         <option className={style.selectOptioonStyle}  value="descendente">Descendente</option>
       </select>
-      <button className={style.resetFiltersBtnStyle} onClick={(e) => handleReset(e)} value='reset'>Resetear Productos</button>
+      <button className={style.resetFiltersBtnStyle} onClick={(e) => handleReset(e)} value='reset'>Mostrar todo</button>
       </div>
       <div className="card-container">
         <CardContainer productProps={currentProducts} />
