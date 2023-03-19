@@ -3,17 +3,27 @@ import Card from '../Card/Card';
 import style from './CardContainer.module.css';
 import { RootState, } from '../../Redux/store';
 
+interface Product {
+    descriptionName: string;
+    category: string;
+    price: number;
+    priceBusiness: number;
+    priceVAT: number;
+    priceVATBusiness: number;
+  }
+  interface Props {
+    productProps: Product[];
+  }
+  
 
-const CardContainer: React.FC = ({currentProducts}:any) => {
-
-    const products = useSelector((state: RootState) => state.filteredProducts);
+const CardContainer: React.FC<Props> = ({productProps}) => {
 
     return (
         <>
             <h1>Nuestros productos</h1>
             <div className={style.cardContainer}>
                 {
-                    currentProducts.map((product: any) => {
+                    productProps.map((product: any) => {
                         return (
                             <Card
                                 key={product._id}

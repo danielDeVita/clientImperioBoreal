@@ -9,22 +9,6 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import { useSelector } from 'react-redux';
 import Pagination from "../Pagination/Pagination"
 
-
-interface Product {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-}
-interface Props {
-  productsPerPage: number;
-  allProducts: Product[]; // suponiendo que tienes un tipo de datos llamado Product para tus productos
-  paginado: (pageNumber: number) => void;
-  currentPage: number;
-}
-
 const Home: React.FC = () => {
 
   const dispatch:AppDispatch = useDispatch();
@@ -32,18 +16,19 @@ const Home: React.FC = () => {
 
   const handleReset = (e:any) => {
     dispatch(resetFilters(e.target.value))
-
+    setCurrentPage(1);
   }
 
   const selectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(orderByPrice(e.target.value))
+    setCurrentPage(1);
   }
 
 //////Paginado
   const allProducts = useSelector((state: RootState) => state.filteredProducts);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [productsPerPage, setProductsPerPage] = useState<number>(3);
+  const [productsPerPage, setProductsPerPage] = useState<number>(5);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -63,7 +48,7 @@ const Home: React.FC = () => {
         <option value="descendente">Descendente</option>
       </select>
       <div className="card-container">
-        <CardContainer currentProducts={currentProducts} />
+        <CardContainer productProps={currentProducts} />
       </div>
       <Pagination
       productsPerPage={productsPerPage}
