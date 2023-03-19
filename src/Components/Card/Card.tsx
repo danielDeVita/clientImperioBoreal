@@ -18,18 +18,15 @@ const Card: React.FC<CardProp> = ({ descriptionName, category, price, priceBusin
     return (
         <div className={style.card}>
             
-                <h1>Nombre:</h1>
-                <p>{descriptionName}</p>
+                <h1>{descriptionName}</h1>
                 <div className={style.cardImage}>
                 <Link to={`/${id}`}><img src={!img ? noImage : img} alt={descriptionName} /></Link>
                 </div>
                 <div className={style.cardContent}>
-                    <h3>Categoria:</h3>
-                    <p>{category}</p>
-                    <h4>Precio:</h4>
-                    <p>${price} ARS</p>
+                    <h5>Categoria: {category}</h5>
+                    <h2>${price} ARS</h2>
                     {/* Esto es para info nuestra mientras esta en development */}
-                    <h5>Id del producto: {id}</h5>
+                    <h5>Id:{id}</h5>
                 </div>
         </div>
     );

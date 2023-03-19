@@ -23,7 +23,6 @@ return (
         <SearchBar />
     </div>
     <div className={style.filterAndOrderContainer}>
-        //Aca componente filter&Order. 
     </div>
     </div>
     <div className={style.cartAndLoginContainer}>
