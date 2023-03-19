@@ -7,6 +7,8 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_USERS = "GET_USERS";
 export const GET_DETAIL = "GET_DETAIL";
 export const SEARCH = 'SEARCH';
+export const ORDER_BY_PRICE = 'ORDER_BY_PRICE';
+export const RESET_FILTERS = 'RESET_FILTERS';
 
 interface Product {
   descriptionName: string;
@@ -43,8 +45,17 @@ interface SearchProducts {
   type: typeof SEARCH;
   payload: Product[];
 }
+interface OrderByPrice {
+  type: typeof ORDER_BY_PRICE;
+  payload: 'ascendente' | 'descendente';
+}
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts;
+interface ResetFilters {
+  type: typeof RESET_FILTERS;
+  payload: 'reset';
+}
+
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters;
 
 export const getProducts = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
@@ -54,7 +65,7 @@ export const getProducts = (): ThunkAction<void, RootState, null, ProductActionT
   }
 };
 
-export const getUsers = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
+export const getUsers = () => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     const response = await axios.get<User[]>("http://localhost:3001/users");
     const users = response.data;
@@ -62,7 +73,7 @@ export const getUsers = (): ThunkAction<void, RootState, null, ProductActionType
   }
 };
 
-export const getDetail = (id: number | string): ThunkAction<void, RootState, null, ProductActionTypes> => {
+export const getDetail = (id: number | string) => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     try {
       const response = await axios.get<Product>(`http://localhost:3001/products/${id}`);
@@ -77,3 +88,11 @@ export const getDetail = (id: number | string): ThunkAction<void, RootState, nul
 export const searchProducts = (query: string) => {
   return {type: SEARCH, payload: query}
 } 
+
+export const orderByPrice = (criteria: string) => {
+  return {type: ORDER_BY_PRICE, payload: criteria}
+}
+
+export const resetFilters = (criteria: string) => {
+  return {type: RESET_FILTERS, payload: criteria}
+}

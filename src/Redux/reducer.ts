@@ -1,5 +1,5 @@
 
-import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH } from './actions';
+import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH, ORDER_BY_PRICE, RESET_FILTERS } from './actions';
 
 interface Product {
     descriptionName: string;
@@ -21,8 +21,7 @@ interface State {
     products: Product[];
     filteredProducts: Product[];
     users: User[];
-    detail: Product;
-
+    detail: Product;    
 }
 
 interface GetProductsAction {
@@ -45,8 +44,17 @@ interface SearchProducts {
     payload: any;
   }
 
+  interface OrderByPrice {
+    type: typeof ORDER_BY_PRICE;
+    payload: 'ascendente' | 'descendente';
+  }
+  interface ResetFilters {
+    type: typeof RESET_FILTERS;
+    payload: 'reset';
+  }
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts;
+
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters;
 
 const initialState: State = {
     products: [],
@@ -78,7 +86,27 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
             ...state, 
             filteredProducts: state.products.filter((product) => product.descriptionName === action.payload)
         }
-
+        case ORDER_BY_PRICE:
+            const isDescendent = action.payload === "descendente";
+      return {
+        ...state,
+        filteredProducts: [...state.filteredProducts].sort((a, b) => {
+          if (isDescendent) {
+            if (a.price < b.price) return 1;
+            if (a.price > b.price) return -1;
+            return 0;
+          } else {
+            if (a.price > b.price) return 1;
+            if (a.price < b.price) return -1;
+            return 0;
+          }
+        }),
+      };
+      case RESET_FILTERS:
+        return {
+            ...state,
+            filteredProducts: state.products
+        }
         default:
             return { ...state };
     }
