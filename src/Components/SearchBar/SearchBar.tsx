@@ -40,6 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({setCurrentPage}) => {
 
     dispatch(searchProducts(query));
     setCurrentPage(1);
+    setQuery('');
   };
 
   return (
