@@ -8,23 +8,20 @@
 
 .dashboardTable th,
 .dashboardTable td {
-
-    color: #0FB1BD;
-    font-weight: 800;
+    
     padding: 0.75rem;
     text-align: left;
-    border-bottom: 2px solid #0FB1BD;
+    border-bottom: 1px solid #ddd;
 }
 
 .dashboardTable th {
     background-color: #f5f5f5;
+    
     font-weight: bold;
-    color: #0FB1BD;
 }
 
 .dashboardTable tbody tr:hover {
     background-color: #f5f5f5;
-    color: #0FB1BD;
     
 }
 
@@ -32,7 +29,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     text-align: center;
     padding: 0;
     background-color: white;
@@ -57,49 +54,9 @@
 }
 
 .backBtn{
-    position: absolute;
+    position: relative;
     left: 20px;
     color: #0FB1BD;
     font-size: 24px;
     font-weight: 700;
-}
-
-.backBtn:hover{
-    color: #13deec;
-}
-
-.crearProductoBtn{
-    background-color: transparent;
-    border: none;
-    font-size: 40px;
-    color: #0FB1BD;
-    cursor: pointer;
-    float: right;
-    margin-right: 20px;
-    margin-top: 5px;
-}
-
-.crearProductoBtn:hover{
-    color: #13deec;
-}
-
-.elimProdStyleBtn, .modProdStyleBtn{
-    color: #0FB1BD;
-    background-color: transparent;
-    border-radius: 12px;
-    border: 2px solid #0FB1BD;
-    font-weight: 800;
-}
-
-.modProdStyleBtn:hover{
-    background-color: #0FB1BD;
-    color: #fff;
-    cursor: pointer;
-}
-
-.elimProdStyleBtn:hover{
-
-    background-color: red;
-    color: #fff;
-    cursor: pointer;
 }
