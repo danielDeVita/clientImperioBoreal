@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import style from "./createProductForm.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../Redux/store";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../../Redux/actions";
 
 interface Product {
   descriptionName: string;
@@ -72,6 +75,8 @@ const CreateProductForm: React.FC = () => {
     priceVAT: "",
     priceVATBusiness: "",
   });
+  const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -132,6 +137,9 @@ const CreateProductForm: React.FC = () => {
           priceVATBusiness: 0,
           image: null
         });
+
+        dispatch(getProducts())
+        navigate("/dashboard");
       } else {
         alert("Faltan completar campos");
       }
