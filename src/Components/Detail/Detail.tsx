@@ -33,22 +33,24 @@ const Detail: React.FC = () => {
     }
   }, [dispatch, id]);
 
-  return (
-    <>
-  <Link to={'/'}>
-    <button>Volver </button>
-    </Link>
-    <div className={styles.container}>
-      <img src={!img ? noImage : img} alt={descriptionName} className={styles.image} />
-      <h2 className={styles.title}>{descriptionName}</h2>
-      <p className={styles.detail}>Categoría: {category}</p>
-      <p className={styles.detail}>Precio: {price}</p>
-      <p className={styles.detail}>Precio mayorista: {priceBusiness}</p>
-      <p className={styles.detail}>Precio + IVA: {priceVAT}</p>
-      <p className={styles.detail}>Precio mayorista + IVA: {priceVATBusiness}</p>
-    </div>
-    </>
-  )
+    return (
+      <div className={styles.card}>
+        <div className={styles.imageContainer}>
+          <img src={!img ? noImage : img} alt={descriptionName} className={styles.image} />
+        </div>
+        <div className={styles.content}>
+          <h2 className={styles.title}>{descriptionName}</h2>
+          <p className={styles.detail}>Categoría: {category}</p>
+          <p className={styles.detail}>Precio: ${price} ARS</p>
+          <p className={styles.detail}>Precio mayorista: ${priceBusiness} ARS</p>
+          <p className={styles.detail}>Precio + IVA: ${priceVAT} ARS</p>
+          <p className={styles.detail}>Precio mayorista + IVA: ${priceVATBusiness} ARS</p>
+          <Link to={'/'}>
+            <button className={styles.button}>Volver</button>
+          </Link>
+        </div>
+      </div>
+    );
 }
 
 export default Detail;
