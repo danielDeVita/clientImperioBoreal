@@ -89,7 +89,7 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
         case SEARCH: 
         return {
             ...state, 
-            filteredProducts: state.products.filter((product) => product.descriptionName === action.payload)
+            filteredProducts: state.products.filter((product) => product.descriptionName.toLowerCase().includes(action.payload.toLowerCase()))
         }
         case ORDER_BY_PRICE:
             const isDescendent = action.payload === "descendente";
