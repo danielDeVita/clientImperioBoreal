@@ -10,6 +10,7 @@ interface Product {
   priceBusiness: number;
   priceVAT: number;
   priceVATBusiness: number;
+  image: string
 }
 
 interface Errors {
@@ -60,6 +61,7 @@ const CreateProductForm: React.FC = () => {
     priceBusiness: 0,
     priceVAT: 0,
     priceVATBusiness: 0,
+    image: ""
   });
 
   const [errors, setErrors] = useState<Errors>({
@@ -91,8 +93,13 @@ const CreateProductForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      const config = {
+        headers: {
+          "content-type": "application/json; charset=utf-8"
+        }
+      };
       if (Object.keys(errors).length === 0) {
-        await axios.post("http://localhost:3001/products", product);
+        await axios.post("http://localhost:3001/products", product, config);
         console.log(product);
         alert("Producto creado");
         setProduct({
@@ -102,6 +109,7 @@ const CreateProductForm: React.FC = () => {
           priceBusiness: 0,
           priceVAT: 0,
           priceVATBusiness: 0,
+          image: ""
         });
       } else {
         alert("Faltan completar campos");
@@ -224,6 +232,16 @@ const CreateProductForm: React.FC = () => {
           {errors?.priceVATBusiness && product?.priceVATBusiness !== 0 && (
             <p style={{ color: "red" }}>{errors.priceVATBusiness}</p>
           )}
+
+          <label className={style.formLabel} htmlFor="image">Imagen</label>
+          <input
+            className={style.formInput}
+            value={product.image}
+            onChange={handleInputChange}
+            id="image"
+            type="file"
+            name="image"
+          />
 
           <button className={style.formButton} type="submit">
             Crear producto
