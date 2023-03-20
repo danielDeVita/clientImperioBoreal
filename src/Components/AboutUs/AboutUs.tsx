@@ -24,7 +24,7 @@ const AboutUs: React.FC = () => {
     
       <div className={style.containerBtn}>
         <Link to="/">
-          <button>VOLVER</button>
+          <button  className={style.button}>VOLVER</button>
         </Link>
       </div>
     </div>
