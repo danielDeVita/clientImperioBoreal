@@ -12,6 +12,12 @@ input.searcher{
     margin-top: 45px;
 }
 
+.searcher:focus{
+    border-bottom: 2px solid #771e62;
+}
+
+
+
 .searchBtnStyle{
     background-color: transparent;
     border: none;

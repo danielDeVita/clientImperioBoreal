@@ -38,12 +38,12 @@
 }
 
 .number:hover {
-    background-color: #151921da;
+    background-color: #771e62;
     color: white;
 }
 
 .active {
-    background-color: black;
+    background-color: #0FB1BD;
     color: white;
     border-radius: .4rem;
     padding: .4rem;
@@ -56,7 +56,7 @@
     display: inline-flex;
     align-items: center;
     align-content: center;
-    background-color: rgba(109, 108, 108, 0.5);
+    background-color:#0FB1BD;
     font-weight: 300;
     font-size: 1em;
     padding: 1rem;
@@ -70,7 +70,7 @@
 }
 .btn:hover {
     cursor: pointer;
-    transition: 0.3s;
+    background-color: #771e62;
     border: .1rem solid rgb(247, 244, 237);
-    transform: scale(1.1);
+    
 }

@@ -73,3 +73,66 @@
     outline: none;
   }
   
+
+.filterOrderContainer{
+    position: absolute;
+    display: flex;
+    color: #0FB1BD;
+    top: 115px;
+    left: 25%;
+}
+
+.resetFiltersBtn {
+background-color: #0FB1BD;
+border: 2px solid #fff;
+border-radius: 4px;
+color: #fff;
+cursor: pointer;
+font-size: 1rem;
+padding: 8px 12px;
+margin-left: 110px;
+font-weight: 600;
+}
+
+.resetFiltersBtn:hover {
+background-color: #771e62;
+color: #fff;
+}
+
+.priceOrderSelectorStyle {
+outline: none;
+background-color: #fff;
+border:none;
+border-radius: 4px;
+font-weight: 600;
+color: #0FB1BD;
+cursor: pointer;
+font-size: 1rem;
+padding: 4px 6px;
+margin: 3px;
+}
+
+.priceOrderSelectorStyle option {
+    color: #0FB1BD;
+}
+
+.orderOptionStyle {
+    color: #0FB1BD;
+}
+
+.CategorySelectorStyle {
+outline: none;
+background-color: #fff;
+border:none;
+border-radius: 4px;
+font-weight: 600;
+color: #0FB1BD;
+cursor: pointer;
+font-size: 1rem;
+padding: 4px 6px;
+margin: 3px;
+}
+
+.categoryOptionStyle {
+color: #333;
+}
