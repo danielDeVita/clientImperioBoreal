@@ -46,12 +46,12 @@ const Dashboard: React.FC = () => {
                 <p className={style.backBtn}><i className="fa-solid fa-arrow-left"></i></p>
             </Link>
             <Link to="/productForm">
-                <button>
-                    CREAR PRODUCTO
+                <button className={style.crearProductoBtn}>
+                    <i className="fa-regular fa-circle-plus"></i>
                 </button>
             </Link>
-            
-            
+
+
             <table className={style.dashboardTable} >
                 <thead>
                     <tr>
@@ -76,10 +76,10 @@ const Dashboard: React.FC = () => {
                             <td>{product.priceBusiness}</td>
                             <td>{product.priceVAT}</td>
                             <td>{product.priceVATBusiness}</td>
+                            <td ><Link to={`/updateform/${product._id}`}><button className={style.modProdStyleBtn}>Modificar producto</button></Link></td>
                             <td>
-                                <button onClick={() => { handleDelete(product._id) }}>Eliminar producto</button>
+                                <button className={style.elimProdStyleBtn} onClick={() => { handleDelete(product._id) }}>Eliminar producto</button>
                             </td>
-                            <td ><Link to={`/updateform/${product._id}`}><button>Modificar producto</button></Link></td>
 
                         </tr>
                     ))}
