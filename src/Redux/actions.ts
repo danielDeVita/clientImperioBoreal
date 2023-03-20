@@ -9,7 +9,7 @@ export const GET_DETAIL = "GET_DETAIL";
 export const SEARCH = 'SEARCH';
 export const ORDER_BY_PRICE = 'ORDER_BY_PRICE';
 export const RESET_FILTERS = 'RESET_FILTERS';
-
+export const FILTER_BY_CATEGORY = 'FILTER_BY_CATEGORY';
 interface Product {
   descriptionName: string;
   category: string;
@@ -54,8 +54,12 @@ interface ResetFilters {
   type: typeof RESET_FILTERS;
   payload: 'reset';
 }
+interface FilterByCategory {
+  type: typeof FILTER_BY_CATEGORY;
+  payload: string;  
+}
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters;
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters | FilterByCategory;
 
 export const getProducts = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
@@ -95,4 +99,8 @@ export const orderByPrice = (criteria: string) => {
 
 export const resetFilters = (criteria: string) => {
   return {type: RESET_FILTERS, payload: criteria}
+}
+
+export const filterByCategory = (category: string) => {
+  return {type: FILTER_BY_CATEGORY, payload: category}
 }

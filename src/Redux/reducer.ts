@@ -1,5 +1,5 @@
 
-import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH, ORDER_BY_PRICE, RESET_FILTERS } from './actions';
+import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH, ORDER_BY_PRICE, RESET_FILTERS, FILTER_BY_CATEGORY } from './actions';
 
 interface Product {
     descriptionName: string;
@@ -53,8 +53,13 @@ interface SearchProducts {
     payload: 'reset';
   }
 
+  interface FilterByCategory {
+    type: typeof FILTER_BY_CATEGORY;
+    payload: string;  
+  }
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters;
+
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters | FilterByCategory;
 
 const initialState: State = {
     products: [],
@@ -107,6 +112,13 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
             ...state,
             filteredProducts: state.products
         }
+        case FILTER_BY_CATEGORY:
+            return {
+                ...state,
+                filteredProducts: [...state.products].filter((product) => product.category === action.payload)
+
+        
+            }
         default:
             return { ...state };
     }
