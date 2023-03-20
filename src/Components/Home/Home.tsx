@@ -100,8 +100,6 @@ const Home: React.FC = () => {
       paginado={paginado}
       currentPage={currentPage}
     />
-      
-      
       <div className={style.footerContainer}>
       <Footer />
       </div>
