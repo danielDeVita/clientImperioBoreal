@@ -1,143 +1,138 @@
 .card {
-    display: flex;
-    flex-direction: row;
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 2rem auto;
-    max-width: 800px;
-    border: 2px solid #080708;
-    transition: border-color 6.3s ease-in-out;
-    font-family: 'Roboto', sans-serif;
-    -webkit-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    -moz-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    
-  }
-  
-  .imageContainer {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    border-right: 2px solid #080708;
-  }
-  
-  .image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border: 2px solid black;
-  }
-  
-  .content {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #080708;
-  }
-  
-  .detail {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #555;
-  }
-  
-  .price {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #080708;
-  }
-  
-  .priceBusiness {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #555;
-  }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-  
-  .Backbutton {
-    position: absolute;
-    left: 46.5%;
-    background-color: #0FB1BD;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    -moz-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    
-  }
-  
-  .Backbutton:hover {
-    background-color: #771e62;
-  }
-
-  .logoContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0;
-    background-color: white;
-    border-radius: 12px;
-    border-top: 3px solid #0fb1bd;
-    -webkit-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    -moz-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
-    
-  }
-  
-  .logoStyle {
-    margin: 0;
-    height: 180px;
-    width: 180px;
-  }
-
-  .footerContainer {
-    width: 100%;
-    margin-top: 100px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    bottom: 10px;
-
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 2rem auto;
+  max-width: 800px;
+  border: 2px solid #080708;
+  transition: border-color 6.3s ease-in-out;
+  font-family: "Roboto", sans-serif;
+  -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
 }
-  
-  @media only screen and (max-width: 768px) {
-    .card {
-      flex-direction: column;
-      max-width: 500px;
-    }
-  
-    .imageContainer {
-      width: 100%;
-      border-right: none;
-      border-bottom: 2px solid #080708;
-    }
-  
-    .content {
-      width: 100%;
-    }
+
+.imageContainer {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-right: 2px solid #080708;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #080708;
+}
+
+.detail {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.price {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #080708;
+}
+
+.priceBusiness {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.Backbutton {
+  position: absolute;
+  left: 46.5%;
+  background-color: #0fb1bd;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+}
+
+.Backbutton:hover {
+  background-color: #771e62;
+}
+
+.logoContainer {
+  -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  border-top: 3px solid #0fb1bd;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.logoStyle {
+  margin: 0;
+  height: 180px;
+  width: 180px;
+}
+
+.footerContainer {
+  width: 100%;
+  margin-top: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    max-width: 500px;
   }
+
+  .imageContainer {
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #080708;
+  }
+
+  .content {
+    width: 100%;
+  }
+}

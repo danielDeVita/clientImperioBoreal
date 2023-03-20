@@ -1,28 +1,43 @@
+.logoContainer {
+  -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  border-top: 3px solid #0fb1bd;
+  margin-left: 50px;
+  margin-right: 50px;
+}
 .dashboardTable {
   border-collapse: collapse;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
   margin-top: 20px;
+  border: 2px solid black;
+  background: white;
 }
 
 .dashboardTable th,
 .dashboardTable td {
-  color: #0fb1bd;
+  color: #07323e;
   font-weight: 800;
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 2px solid #0fb1bd;
+  border-bottom: 2px solid #07323e;
 }
 
 .dashboardTable th {
-  background-color: #f5f5f5;
+  background-color: #e1f1f3;
   font-weight: bold;
   color: #0fb1bd;
 }
 
 .dashboardTable tbody tr:hover {
-  background-color: #f5f5f5;
+  background: linear-gradient(45deg, #fbc316, #771e62, #0fb1bd, #e4171c);
   color: #0fb1bd;
 }
 
