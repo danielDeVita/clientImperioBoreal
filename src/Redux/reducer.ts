@@ -22,7 +22,6 @@ interface State {
     filteredProducts: Product[];
     users: User[];
     detail: Product;    
-    categories: string[];
 }
 
 interface GetProductsAction {
@@ -67,7 +66,6 @@ const initialState: State = {
     filteredProducts: [],
     users: [],
     detail: {} as Product,
-    categories: []
 };
 
 const reducer = (state: State = initialState, action: ProductActionTypes): State => {
@@ -117,6 +115,8 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
         case FILTER_BY_CATEGORY:
             return {
                 ...state,
+                filteredProducts: [...state.products].filter((product) => product.category === action.payload)
+
         
             }
         default:
