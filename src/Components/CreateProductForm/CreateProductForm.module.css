@@ -57,34 +57,3 @@
   .formButton:hover {
     background-color: #6c6cb1;
   }
-
-  .logoContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0;
-    background-color: white;
-    border-radius: 12px;
-    border-top: 3px solid #0FB1BD;
-}
-
-.logoStyle{
-    margin: 0;
-    height: 180px;
-    width: 180px;
-}
-
-
-.backBtn{
-    position: absolute;
-    left: 20px;
-    color: #0FB1BD;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.backBtn:hover{
-    color: #13deec;
-}
