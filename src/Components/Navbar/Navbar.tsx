@@ -10,7 +10,11 @@ import style from './NavBar.module.css';
 
 //<------------------COMPONENTE NAVBAR---------------------->
 
-const NavBar: React.FC = () => {
+interface NavBarProps {
+    setCurrentPage: (pageNumber: number) => void;
+}
+
+const NavBar: React.FC<NavBarProps> = ({setCurrentPage}) => {
 return (
 <div className={style.NavbarContainer}>
     <div className={style.logoContainer}>
@@ -20,7 +24,7 @@ return (
     </div>
     <div className={style.middleNavbarContainer}>
     <div className={style.searchbarContainer}>
-        <SearchBar />
+        <SearchBar setCurrentPage={setCurrentPage}/>
     </div>
     <div className={style.filterAndOrderContainer}>
     </div>
