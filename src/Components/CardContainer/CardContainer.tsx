@@ -30,7 +30,7 @@ const CardContainer: React.FC<Props> = ({ productProps }) => {
               priceVAT={product.priceVAT}
               priceVATBusiness={product.priceVATBusiness}
               id={product._id}
-              img={""}
+              img={product.image?.secure_url}
             />
           );
         })}
