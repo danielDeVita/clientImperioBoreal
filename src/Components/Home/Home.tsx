@@ -56,7 +56,7 @@ const Home: React.FC = () => {
   }, [])
   return (
     <>
-    <NavBar />
+    <NavBar setCurrentPage={setCurrentPage} />
       <button onClick={handleReset} value="reset">
         Resetear Productos
       </button>

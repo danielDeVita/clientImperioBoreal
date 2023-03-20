@@ -3,11 +3,11 @@ import style from "./SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { searchProducts } from "../../Redux/actions";
 import { AppDispatch } from "../../Redux/store";
+interface SearchBarProps {
+    setCurrentPage: (pageNumber: number) => void;
+}
 
-
-
-
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<SearchBarProps> = ({setCurrentPage}) => {
   interface Product {
     descriptionName: string;
     category: string;
@@ -38,7 +38,8 @@ const SearchBar: React.FC = () => {
     // setProducts(productsFound);
     // console.log(products);
 
-    dispatch(searchProducts(query))
+    dispatch(searchProducts(query));
+    setCurrentPage(1);
   };
 
   return (
