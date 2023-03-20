@@ -69,6 +69,7 @@ const Detail: React.FC = () => {
           <p className={style.detail}>
             Precio mayorista + IVA: ${priceVATBusiness} ARS
           </p>
+          <p className={style.detail}>ID:{id}</p>
         </div>
       </div>
       <Link to={"/"}>

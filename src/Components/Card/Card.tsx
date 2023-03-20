@@ -58,8 +58,6 @@ const Card: React.FC<CardProp> = ({
       <div className={style.cardContent}>
         <h5>Categoria: {category}</h5>
         <h2>${price} ARS</h2>
-        {/* Esto es para info nuestra mientras esta en development */}
-        <h5>Id:{id}</h5>
       </div>
     </div>
   );
