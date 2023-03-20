@@ -57,10 +57,9 @@ const Home: React.FC = () => {
   return (
     <>
     <NavBar setCurrentPage={setCurrentPage} />
-      <button onClick={handleReset} value="reset">
-        Resetear Productos
-      </button>
+      <div className={style.filterOrderContainer}>
       <select
+        className={style.priceOrderSelectorStyle}
         name="orderByPrice"
         id="orderByPrice"
         defaultValue="default"
@@ -70,24 +69,28 @@ const Home: React.FC = () => {
         <option value="default" disabled>
           Ordenar por Precio
         </option>
-        <option value="ascendente">Ascendente</option>
-        <option value="descendente">Descendente</option>
+        <option className={style.orderOptionStyle} value="ascendente">Ascendente</option>
+        <option className={style.orderOptionStyle} value="descendente">Descendente</option>
       </select>
-
       <select
+        className={style.CategorySelectorStyle}
         onChange={handleCategory}
         name="filterByCategory"
         id="filterByCategory"
         value={selectedOption}
       >
-        <option value="default" disabled>Categorias</option>
-        <option value="lapiz">Lapices</option>
-        <option value="resmas">Resmas</option>
-        <option value="agenda">Agendas</option>
-        <option value="oficina">Articulos de oficina</option>
-        <option value="lapicera">Lapiceras</option>
-        <option value="escolar">Escolares</option>
+        <option className={style.categoryOptionStyle} value="default" disabled>Categorias</option>
+        <option className={style.categoryOptionStyle} value="lapiz">Lapices</option>
+        <option className={style.categoryOptionStyle} value="resmas">Resmas</option>
+        <option className={style.categoryOptionStyle} value="agenda">Agendas</option>
+        <option className={style.categoryOptionStyle} value="oficina">Articulos de oficina</option>
+        <option className={style.categoryOptionStyle} value="lapicera">Lapiceras</option>
+        <option className={style.categoryOptionStyle} value="escolar">Escolares</option>
       </select>
+      <button className={style.resetFiltersBtn} onClick={handleReset} value="reset">
+        Resetear Productos
+      </button>
+      </div>
       <div className="card-container">
         <CardContainer productProps={currentProducts} />
       </div>

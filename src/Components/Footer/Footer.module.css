@@ -88,6 +88,7 @@ h4{
   margin-right: 8px;
 }
 
+
 p{
   color: black;
   font-size: 16px;
@@ -106,4 +107,8 @@ p{
 .socialIcon > i{
   margin-right:5px;
   font-size: 20px;
+}
+
+.contactoTitle{
+  margin-left: 80px;
 }

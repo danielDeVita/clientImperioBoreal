@@ -20,7 +20,7 @@ const Footer: React.FC<FooterProps> = () => {
           </Link>
       </div>
       <div className={style.infoCenter}>
-        <h4>CONTACTO</h4>
+        <h4 className={style.contactoTitle}>CONTACTO</h4>
         <p>
           Tel: +54 3525 63-8899
         </p>

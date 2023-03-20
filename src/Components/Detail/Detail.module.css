@@ -2,14 +2,17 @@
     display: flex;
     flex-direction: row;
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
     overflow: hidden;
     margin: 2rem auto;
     max-width: 800px;
     border: 2px solid #080708;
     transition: border-color 6.3s ease-in-out;
     font-family: 'Roboto', sans-serif;
+    -webkit-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    -moz-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    
   }
   
   .imageContainer {
@@ -69,20 +72,58 @@
     margin-top: 1rem;
   }
   
-  .button {
+  .Backbutton {
+    position: absolute;
+    left: 46.5%;
     background-color: #0FB1BD;
     color: white;
     font-size: 1.2rem;
+    font-weight: 600;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    -moz-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    
   }
   
-  .button:hover {
+  .Backbutton:hover {
     background-color: #771e62;
   }
+
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background-color: white;
+    border-radius: 12px;
+    border-top: 3px solid #0fb1bd;
+    -webkit-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    -moz-box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    box-shadow: 0px 7px 19px 2px rgba(0,0,0,0.27);
+    
+  }
+  
+  .logoStyle {
+    margin: 0;
+    height: 180px;
+    width: 180px;
+  }
+
+  .footerContainer {
+    width: 100%;
+    margin-top: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    bottom: 10px;
+
+}
   
   @media only screen and (max-width: 768px) {
     .card {
