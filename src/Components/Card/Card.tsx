@@ -37,19 +37,21 @@ const Card: React.FC<CardProp> = ({
         <Link to={`/${id}`}>
           <img
             src={
-              category === "lapiz"
-                ? lapices
-                : category === "resmas"
-                ? resmas
-                : category === "agenda"
-                ? agendas
-                : category === "oficina"
-                ? articulosDeOficina
-                : category === "lapicera"
-                ? lapiceras
-                : category === "escolar"
-                ? escolares
-                : noImage
+              img
+                ? img
+                : category === "lapiz"
+                  ? lapices
+                  : category === "resmas"
+                    ? resmas
+                    : category === "agenda"
+                      ? agendas
+                      : category === "oficina"
+                        ? articulosDeOficina
+                        : category === "lapicera"
+                          ? lapiceras
+                          : category === "escolar"
+                            ? escolares
+                            : noImage
             }
             alt={descriptionName}
           />

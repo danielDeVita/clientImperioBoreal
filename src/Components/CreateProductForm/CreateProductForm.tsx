@@ -10,6 +10,7 @@ interface Product {
   priceBusiness: number;
   priceVAT: number;
   priceVATBusiness: number;
+  image: File | null;
 }
 
 interface Errors {
@@ -60,6 +61,7 @@ const CreateProductForm: React.FC = () => {
     priceBusiness: 0,
     priceVAT: 0,
     priceVATBusiness: 0,
+    image: null
   });
 
   const [errors, setErrors] = useState<Errors>({
@@ -72,6 +74,7 @@ const CreateProductForm: React.FC = () => {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     setProduct({
       ...product,
       [e.target.name]: e.target.value,
@@ -88,11 +91,36 @@ const CreateProductForm: React.FC = () => {
     );
   };
 
+  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0]
+    setProduct(prevFormData => ({
+      ...prevFormData,
+      image: selectedFile || null,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+
+      const dataToSend = new FormData();
+
+      dataToSend.append('descriptionName', product.descriptionName);
+      dataToSend.append('category', product.category)
+      dataToSend.append('price', String(product.price))
+      dataToSend.append('priceBusiness', String(product.priceBusiness))
+      dataToSend.append('priceVAT', String(product.priceVAT))
+      dataToSend.append('priceVATBusiness', String(product.priceVATBusiness))
+      if (product.image) {
+        dataToSend.append('image', (product.image))
+      }
+      const config = {
+        headers: {
+          "content-type": "application/json; charset=utf-8"
+        }
+      };
       if (Object.keys(errors).length === 0) {
-        await axios.post("http://localhost:3001/products", product);
+        await axios.post("http://localhost:3001/products", dataToSend);
         console.log(product);
         alert("Producto creado");
         setProduct({
@@ -102,6 +130,7 @@ const CreateProductForm: React.FC = () => {
           priceBusiness: 0,
           priceVAT: 0,
           priceVATBusiness: 0,
+          image: null
         });
       } else {
         alert("Faltan completar campos");
@@ -224,6 +253,16 @@ const CreateProductForm: React.FC = () => {
           {errors?.priceVATBusiness && product?.priceVATBusiness !== 0 && (
             <p style={{ color: "red" }}>{errors.priceVATBusiness}</p>
           )}
+
+          <label className={style.formLabel} htmlFor="image">Imagen</label>
+          <input
+            className={style.formInput}
+
+            onChange={handleAvatarChange}
+            id="image"
+            type="file"
+            name="image"
+          />
 
           <button className={style.formButton} type="submit">
             Crear producto
