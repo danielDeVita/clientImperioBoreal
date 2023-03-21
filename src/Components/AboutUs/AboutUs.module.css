@@ -1,6 +1,12 @@
 .container {
+  
   text-align: justify;
-  margin: 2rem;
+
+  background-color: white;
+  opacity: .8;
+  border: 1px solid black;
+  border-radius: 16px;
+ 
 }
 
 .containerBtn {
@@ -9,7 +15,7 @@
   align-items: center;
 }
 
-.button {
+/* .button {
   background-color: #0fb1bd;
   color: white;
   font-size: 1.2rem;
@@ -23,4 +29,44 @@
 
 .button:hover {
   background-color: #771e62;
-}
+} */
+
+.button {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 17px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: white;
+  background-color: #0fb1bd;
+  box-shadow: 6px 6px 12px #c5c5c5,
+              -6px -6px 12px #ffffff;
+ }
+ 
+ .button::before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #771e62 0%, 100%);
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+ }
+ 
+ .button:hover::before {
+  width: 9em;
+  background-color: #771e62;
+  
+ }
+
+ .container p{
+  font-size: 18px;
+ }
