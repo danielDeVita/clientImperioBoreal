@@ -1,7 +1,7 @@
 //<------------------IMPORTACIONES---------------------->
 
 import React from 'react';
-import SearchBar from '../searchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from '../LogoutButton/LogoutButton';
 import { Link } from 'react-router-dom';
@@ -49,8 +49,9 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
                         null
                 }
 
-
+                <Link to={'/shoppingcart'}>
                 <button className={style.cartBtn}><i className="fa-solid fa-cart-shopping"></i></button>
+                </Link>
             </div>
             <div>
 

@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { getProducts } from './Redux/actions';
 import { AppDispatch } from './Redux/store';
 import NotFound from './Components/NotFound/NotFound';
+import ShoppingCart from './Components/ShoppingCart/ShoppingCart'
 
 //Si tienen problemas con el import en minuscula o mayuscula 
 //es por el cache de vscode, tienen que cerrar y volver a abrirlo
@@ -24,6 +25,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path ="/shoppingcart" element ={<ShoppingCart/>}></Route>
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/productform" element={<CreateProductForm />} />
       <Route path="/updateform/:id" element={<UpdateProductForm />} />
