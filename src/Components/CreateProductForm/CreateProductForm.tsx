@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import style from "./createProductForm.module.css";
+import style from "./CreateProductForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../Redux/store";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/actions";
-import { Errors, Product } from '../../types.d'
+import { Errors, Product } from '../../types'
 
 const validateInputs = (product: Product, touched: any): Errors => {
   const errors: Errors = {};
