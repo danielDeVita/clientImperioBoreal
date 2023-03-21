@@ -11,7 +11,8 @@
 }
 
 body {
-  background: linear-gradient(45deg, #fbc316, #771e62, #0fb1bd, #e4171c);
+  background-image: url('./assets/backgroundImage.jpg');
+  background-size: cover;
   margin: 0;
   padding: 0;
 }
