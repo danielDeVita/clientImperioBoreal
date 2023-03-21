@@ -5,6 +5,8 @@ import SearchBar from '../searchBar/SearchBar';
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from '../LogoutButton/LogoutButton';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import { User } from "auth0";
 
 import style from './NavBar.module.css';
 
@@ -17,6 +19,9 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
+
+    const { user, isAuthenticated } = useAuth0<User>();
+
     return (
         <div className={style.NavbarContainer}>
             <div className={style.logoContainer}>
@@ -33,13 +38,31 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
             </div>
             <div className={style.cartAndLoginContainer}>
                 <button className={style.loginBtn}><i className="fa-solid fa-user"></i></button>
-                <Link to="/dashboard">
-                    <button className={style.AdminDashboardButton}><i className="fa-solid fa-gear"></i></button>
-                </Link>
+
+                {
+                    user?.email === "danielitodevita@gmail.com"
+                        ?
+                        <Link to="/dashboard">
+                            <button className={style.AdminDashboardButton}><i className="fa-solid fa-gear"></i></button>
+                        </Link>
+                        :
+                        null
+                }
+
+
                 <button className={style.cartBtn}><i className="fa-solid fa-cart-shopping"></i></button>
             </div>
-            <div><LoginButton></LoginButton></div>
-            <div><LogoutButton></LogoutButton></div>
+            <div>
+
+                {
+                    isAuthenticated
+                        ?
+                        <LogoutButton />
+                        :
+                        <LoginButton />
+                }
+
+            </div>
         </div>
 
     );
