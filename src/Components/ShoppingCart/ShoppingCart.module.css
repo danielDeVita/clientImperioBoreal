@@ -1,0 +1,73 @@
+.Contenedor{
+    display: flex;
+}
+.dashboardTable {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 2px solid black;
+    background: white;
+  }
+  
+  .dashboardTable th,
+  .dashboardTable td {
+    color: #07323e;
+    font-weight: 800;
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 2px solid #07323e;
+  }
+  
+  .dashboardTable th {
+    background-color: #e1f1f3;
+    font-weight: bold;
+    color: #0fb1bd;
+  }
+  
+  .dashboardTable tbody tr:hover {
+    background: #fbc316;
+    color: #fff;
+  }
+
+  .tablaComprar{
+      
+      border: 1px solid black;
+      height: 40vh;
+      width: 300px;
+      background-color: white;
+      margin-right: 70px;
+      margin-top: 50px;
+      padding: 20px; 
+      
+    }
+    
+    .tablaComprar h2 {
+        text-align: center;
+    }
+    
+    .tablaComprar p {
+        font-size: 1.7rem;
+    }
+
+.btnComprar{
+    background-color: #0fb1bd;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+    -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+    box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+    margin-top: 180px;
+    margin-left: 95px;
+}
+      
+.btnComprar:hover {
+    background-color: #771e62;
+}
+    

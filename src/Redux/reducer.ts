@@ -8,6 +8,9 @@ interface Product {
     priceBusiness: number;
     priceVAT: number;
     priceVATBusiness: number;
+    image: {
+        secure_url: string
+    }
 }
 
 interface User {
