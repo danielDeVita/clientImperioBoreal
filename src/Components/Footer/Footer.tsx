@@ -31,8 +31,8 @@ const Footer: React.FC<FooterProps> = () => {
       <div className={style.infoRight}>
       <h4>REDES SOCIALES</h4>
       <div className={style.socialIcons}>
-        <a className={style.socialIcon} href="https://instagram.com/imperio.boreal?igshid=YjNmNGQ3MDY= "><i className="fa-brands fa-instagram"></i>Instagram</a>
-        <a className={style.socialIcon}  href="https://www.facebook.com/imperio.borealcc"><i className="fa-brands fa-facebook"></i>Facebook</a>
+        <a className={style.socialIcon} target='_blank' href="https://instagram.com/imperio.boreal?igshid=YjNmNGQ3MDY= "><i className="fa-brands fa-instagram"></i>Instagram</a>
+        <a className={style.socialIcon} target='_blank'  href="https://www.facebook.com/imperio.borealcc"><i className="fa-brands fa-facebook"></i>Facebook</a>
         </div>
       </div>
       
