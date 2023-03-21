@@ -7,13 +7,15 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 import { Auth0Provider } from "@auth0/auth0-react";
 
-import.meta.env.CLIENT_SECRET
+import.meta.env.VITE_DOMAIN
+import.meta.env.VITE_CLIENT_ID
+import.meta.env.VITE_CLIENT_SECRET
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Auth0Provider
-      domain={import.meta.env.DOMAIN}
-      clientId={import.meta.env.CLIENT_ID}
+      domain={import.meta.env.VITE_DOMAIN}
+      clientId={import.meta.env.VITE_CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
