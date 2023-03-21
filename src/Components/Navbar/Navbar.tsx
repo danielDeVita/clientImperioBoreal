@@ -2,6 +2,7 @@
 
 import React from 'react';
 import SearchBar from '../SearchBar/SearchBar';
+import LoginButton from '../LoginButton/LoginButton';
 import { Link } from 'react-router-dom';
 
 import style from './NavBar.module.css';
@@ -36,6 +37,7 @@ return (
         </Link>
         <button className={style.cartBtn}><i className="fa-solid fa-cart-shopping"></i></button>
     </div>
+    <div><LoginButton></LoginButton></div>
 </div>
 
 );
