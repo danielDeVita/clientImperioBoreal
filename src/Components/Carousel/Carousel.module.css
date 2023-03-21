@@ -1,14 +1,15 @@
 .CarouselContainer {
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .bannerone {
   display: flex;
   width: 80%;
   height: 510px;
-  margin-left:10%
+  margin-left: 10%;
+  object-fit: contain;
 }
 .bannertwo {
   display: flex;
@@ -16,7 +17,8 @@
   justify-content: center;
   width: 80%;
   height: 510px;
-  margin-left:10%
+  margin-left: 10%;
+  object-fit: contain;
 }
 
 .bannerthree {
@@ -25,5 +27,34 @@
   justify-content: center;
   width: 80%;
   height: 510px;
-  margin-left:10%
+  margin-left: 10%;
+  object-fit: contain;
+}
+.iButtonLeft {
+  margin-left: 80px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.iButtonRight {
+  margin-right: 80px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.iButtonLeft i {
+  color: #0fb1bd;
+  font-size: 50px;
+  font-weight: 700;
+}
+.iButtonRight i {
+  color: #0fb1bd;
+  font-size: 50px;
+  font-weight: 700;
+}
+.iButtonLeft i:hover {
+  color: #13deec;
+}
+.iButtonRight i:hover {
+  color: #13deec;
 }

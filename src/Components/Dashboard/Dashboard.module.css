@@ -37,8 +37,8 @@
 }
 
 .dashboardTable tbody tr:hover {
-  background: linear-gradient(45deg, #fbc316, #771e62, #0fb1bd, #e4171c);
-  color: #0fb1bd;
+  background: #fbc316;
+  color: #fff;
 }
 
 .logoContainer {
@@ -103,21 +103,21 @@
 
 .elimProdStyleBtn,
 .modProdStyleBtn {
-  color: #0fb1bd;
+  color: black;
   background-color: transparent;
   border-radius: 12px;
-  border: 2px solid #0fb1bd;
+  border: 2px solid black;
   font-weight: 800;
 }
 
 .modProdStyleBtn:hover {
   background-color: #0fb1bd;
-  color: #fff;
+  color: black;
   cursor: pointer;
 }
 
 .elimProdStyleBtn:hover {
   background-color: red;
-  color: #fff;
+  color: black;
   cursor: pointer;
 }
