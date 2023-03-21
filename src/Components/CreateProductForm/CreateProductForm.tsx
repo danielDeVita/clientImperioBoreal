@@ -5,25 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../Redux/store";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/actions";
-
-interface Product {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-  image: File | null;
-}
-
-interface Errors {
-  descriptionName?: string;
-  category?: string;
-  price?: string;
-  priceBusiness?: string;
-  priceVAT?: string;
-  priceVATBusiness?: string;
-}
+import { Errors, Product } from '../../types.d'
 
 const validateInputs = (product: Product, touched: any): Errors => {
   const errors: Errors = {};

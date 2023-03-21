@@ -12,25 +12,7 @@ import lapices from "../../assets/lapices.jpg";
 import resmas from "../../assets/resmas.jpg";
 import { AppDispatch } from "../../Redux/store";
 import Footer from "../Footer/Footer";
-
-interface DetailParams {
-  id: string;
-  [key: string]: string | undefined;
-}
-interface RootState {
-  detail: {
-    descriptionName: string;
-    category: string;
-    price: number;
-    priceBusiness: number;
-    priceVAT: number;
-    priceVATBusiness: number;
-    image: {
-      public_id: string;
-      secure_url: string;
-    };
-  };
-}
+import { DetailParams, RootState } from '../../types.d'
 
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();

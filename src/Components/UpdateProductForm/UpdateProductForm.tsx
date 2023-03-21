@@ -4,34 +4,7 @@ import style from "./UpdateProductForm.module.css";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
-interface Product {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-}
-
-interface Errors {
-  descriptionName: string;
-  category: string;
-  price: string;
-  priceBusiness: string;
-  priceVAT: string;
-  priceVATBusiness: string;
-}
-
-interface OldProduct {
-  _id: string;
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-}
+import { ProductWithOutImage as Product, OldProduct, Errors } from '../../types.d'
 
 const validate = (product: Product) => {
   // Validation logic here
