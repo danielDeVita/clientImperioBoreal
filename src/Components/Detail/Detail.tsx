@@ -25,9 +25,13 @@ interface RootState {
     priceBusiness: number;
     priceVAT: number;
     priceVATBusiness: number;
-    img: string;
+    image: {
+      public_id: string;
+      secure_url: string;
+    };
   };
 }
+
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams<DetailParams>();
@@ -38,8 +42,8 @@ const Detail: React.FC = () => {
     priceBusiness,
     priceVAT,
     priceVATBusiness,
-    img,
-  } = useSelector((state: RootState) => state.detail);
+    image
+  } = useSelector((state: RootState) => state.detail); 
 
   useEffect(() => {
     if (id) {
@@ -62,19 +66,21 @@ const Detail: React.FC = () => {
         <div className={style.imageContainer}>
           <img
             src={
-              category === "lapiz"
-                ? lapices
-                : category === "resmas"
-                ? resmas
-                : category === "agenda"
-                ? agendas
-                : category === "oficina"
-                ? articulosDeOficina
-                : category === "lapicera"
-                ? lapiceras
-                : category === "escolar"
-                ? escolares
-                : noImage
+              image
+                ? image.secure_url
+                : category === "lapiz"
+                  ? lapices
+                  : category === "resmas"
+                    ? resmas
+                    : category === "agenda"
+                      ? agendas
+                      : category === "oficina"
+                        ? articulosDeOficina
+                        : category === "lapicera"
+                          ? lapiceras
+                          : category === "escolar"
+                            ? escolares
+                            : noImage
             }
             alt={descriptionName}
             className={style.image}
