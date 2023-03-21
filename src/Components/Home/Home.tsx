@@ -8,6 +8,7 @@ import { useDispatch} from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { useSelector } from 'react-redux';
 import Pagination from "../Pagination/Pagination"
+import Carousel from "../Carousel/Carousel"
 
 const Home: React.FC = () => {
 
@@ -91,6 +92,7 @@ const Home: React.FC = () => {
         Resetear Productos
       </button>
       </div>
+      <Carousel />
       <div className="card-container">
         <CardContainer productProps={currentProducts} />
       </div>
