@@ -1,12 +1,6 @@
 import React from "react";
 import style from "../Pagination/Pagination.module.css";
-
-interface PaginationProps {
-  productsPerPage: number;
-  allProducts: any;
-  paginado: (pageNumber: number) => void;
-  currentPage: number;
-}
+import { PaginationProps } from '../../props.d'
 
 const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, paginado, currentPage }) => {
     const pageNumbers: number[] = [];

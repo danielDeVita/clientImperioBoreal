@@ -2,25 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import style from "./createProductForm.module.css";
 import { Link } from "react-router-dom";
-
-interface Product {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-  image: string
-}
-
-interface Errors {
-  descriptionName?: string;
-  category?: string;
-  price?: string;
-  priceBusiness?: string;
-  priceVAT?: string;
-  priceVATBusiness?: string;
-}
+import { Errors, Product } from '../../types.d'
 
 const validateInputs = (product: Product, touched: any): Errors => {
   const errors: Errors = {};

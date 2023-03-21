@@ -2,18 +2,7 @@ import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 import style from "./CardContainer.module.css";
 import { RootState } from "../../Redux/store";
-
-interface Product {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-}
-interface Props {
-  productProps: Product[];
-}
+import { productProps as Props } from '../../props.d'
 
 const CardContainer: React.FC<Props> = ({ productProps }) => {
   return (

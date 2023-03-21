@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { RootState } from './store';
+import { ProductWithoutImage as Product, User, ACTIONS_TYPE } from '../types.d'
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_USERS = "GET_USERS";
@@ -10,52 +11,38 @@ export const SEARCH = 'SEARCH';
 export const ORDER_BY_PRICE = 'ORDER_BY_PRICE';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const FILTER_BY_CATEGORY = 'FILTER_BY_CATEGORY';
-interface Product {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-}
 
-interface User {
-  first_name: String,
-  password: String,
-  email: String,
-  isAdmin: Boolean,
-}
 
 interface GetProductsAction {
-  type: typeof GET_PRODUCTS;
+  type: string;
   payload: Product[];
 }
 
 interface GetUsersAction {
-  type: typeof GET_USERS;
+  type: string;
   payload: User[];
 }
 
 interface GetDetailAction {
-  type: typeof GET_DETAIL;
+  type: string;
   payload: Product;
 }
 
 interface SearchProducts {
-  type: typeof SEARCH;
+  type: string;
   payload: Product[];
 }
 interface OrderByPrice {
-  type: typeof ORDER_BY_PRICE;
+  type: string;
   payload: 'ascendente' | 'descendente';
 }
 
 interface ResetFilters {
-  type: typeof RESET_FILTERS;
+  type: string;
   payload: 'reset';
 }
 interface FilterByCategory {
-  type: typeof FILTER_BY_CATEGORY;
+  type: string;
   payload: string;  
 }
 
@@ -65,7 +52,7 @@ export const getProducts = (): ThunkAction<void, RootState, null, ProductActionT
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     const response = await axios.get<Product[]>("http://localhost:3001/products");
     const products = response.data;
-    dispatch({ type: GET_PRODUCTS, payload: products });
+    dispatch({ type: ACTIONS_TYPE.GET_PRODUCTS, payload: products });
   }
 };
 
@@ -73,7 +60,7 @@ export const getUsers = () => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     const response = await axios.get<User[]>("http://localhost:3001/users");
     const users = response.data;
-    dispatch({ type: GET_USERS, payload: users });
+    dispatch({ type: ACTIONS_TYPE.GET_USERS, payload: users });
   }
 };
 
@@ -82,7 +69,8 @@ export const getDetail = (id: number | string) => {
     try {
       const response = await axios.get<Product>(`http://localhost:3001/products/${id}`);
       const detail = response.data;
-      dispatch({ type: GET_DETAIL, payload: detail });
+      console.log(detail);
+      dispatch({ type: ACTIONS_TYPE.GET_DETAIL, payload: detail });
     } catch (error) {
       console.error(error);
     }
@@ -90,17 +78,17 @@ export const getDetail = (id: number | string) => {
 };
 
 export const searchProducts = (query: string) => {
-  return {type: SEARCH, payload: query}
+  return {type: ACTIONS_TYPE.SEARCH, payload: query}
 } 
 
 export const orderByPrice = (criteria: string) => {
-  return {type: ORDER_BY_PRICE, payload: criteria}
+  return {type: ACTIONS_TYPE.ORDER_BY_PRICE, payload: criteria}
 }
 
 export const resetFilters = (criteria: string) => {
-  return {type: RESET_FILTERS, payload: criteria}
+  return {type: ACTIONS_TYPE.RESET_FILTERS, payload: criteria}
 }
 
 export const filterByCategory = (category: string) => {
-  return {type: FILTER_BY_CATEGORY, payload: category}
+  return {type: ACTIONS_TYPE.FILTER_BY_CATEGORY, payload: category}
 }

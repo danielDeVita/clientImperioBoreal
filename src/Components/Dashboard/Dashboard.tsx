@@ -2,16 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import style from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
-
-interface Product {
-  _id: string;
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-}
+import { ProductToDashboard as Product } from '../../types.d'
 
 const Dashboard: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);

@@ -8,17 +8,7 @@ import escolares from "../../assets/escolares.jpg";
 import lapiceras from "../../assets/lapiceras.jpg";
 import lapices from "../../assets/lapices.jpg";
 import resmas from "../../assets/resmas.jpg";
-
-interface CardProp {
-  descriptionName: string;
-  category: string;
-  price: number;
-  priceBusiness: number;
-  priceVAT: number;
-  priceVATBusiness: number;
-  id: string;
-  img: string;
-}
+import { CardProp } from '../../props.d'
 
 const Card: React.FC<CardProp> = ({
   descriptionName,
