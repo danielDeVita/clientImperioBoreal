@@ -1,15 +1,8 @@
-import { ProductWithOutImage } from './types.d'
+import { ProductWithOutImage, DetailInterface } from './types.d'
 
-export interface CardProp {
-    descriptionName: string;
-    category: string;
-    price: number;
-    priceBusiness: number;
-    priceVAT: number;
-    priceVATBusiness: number;
-    id: string;
-    img: string;
-  }
+export interface CardProp extends DetailInterface{
+   id:string
+}
 
 export interface productProps {
   productProps: ProductWithOutImage[];

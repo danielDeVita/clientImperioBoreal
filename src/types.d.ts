@@ -15,6 +15,14 @@ export interface OldProduct extends ProductWithOutImage {
     readonly _id: string;
 }
 
+export interface ProductToStorage extends Omit<Product, 'image'> {
+    readonly id: string;
+    image: {
+        public_id: string;
+        secure_url: string;
+    }
+}
+
 export interface Errors {
     descriptionName?: string;
     category?: string;
@@ -43,4 +51,8 @@ interface DetailInterface extends ProductWithOutImage {
 
 export interface RootState {
     detail: DetailInterface  
+}
+
+export enum KEY_LOCAL_STORAGE {
+    KEY = 'CART_PRODUCT'
 }

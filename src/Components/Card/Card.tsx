@@ -11,6 +11,8 @@ import resmas from "../../assets/resmas.jpg";
 import { CardProp } from "../../props.d";
 import addToCart from '../../assets/add-to-cart.png'
 import checkOut from '../../assets/check-out.png'
+import { KEY_LOCAL_STORAGE } from "../../types.d";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Card: React.FC<CardProp> = ({
   descriptionName,
@@ -20,10 +22,25 @@ const Card: React.FC<CardProp> = ({
   priceVAT,
   priceVATBusiness,
   id,
-  img,
+  image,
 }) => {
-  const [added, setAdded] = useState(false)
+  const { setItmes, deleteItems, validateProducst } = useLocalStorage(KEY_LOCAL_STORAGE.KEY)
+  const [added, setAdded] = useState<boolean>(validateProducst(id))
   const handlerAddProduct = () => {
+    if (added) {
+       deleteItems(id)
+    } else {
+      setItmes({
+        descriptionName,
+        category,
+        price,
+        id,
+        image,
+        priceBusiness,
+        priceVAT,
+        priceVATBusiness
+      })
+    }
     setAdded(prevValue => !prevValue)
   }
   return (
@@ -33,8 +50,8 @@ const Card: React.FC<CardProp> = ({
         <Link to={`/products/${id}`}>
           <img
             src={
-              img
-                ? img
+              image?.secure_url
+                ? image?.secure_url
                 : category === "lapiz"
                   ? lapices
                   : category === "resmas"
