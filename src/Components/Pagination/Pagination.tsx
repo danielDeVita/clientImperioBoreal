@@ -25,8 +25,8 @@ const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, pa
                 </li>
                 { pageNumbers && 
                         pageNumbers.map(number =>(                  
-                    <li key={number} className={`${style.number} ${currentPage === number && style.active}`}>
-                        <a onClick={() => paginado(number)}>{number}</a>  
+                    <li onClick={() => paginado(number)} key={number} className={`${style.number} ${currentPage === number && style.active}`}>
+                        <a>{number}</a>  
                     </li>
                 ))
                 }
