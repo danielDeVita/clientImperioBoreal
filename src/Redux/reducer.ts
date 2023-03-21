@@ -1,5 +1,4 @@
-
-import { ACTIONS_TYPE } from '../types.d'
+import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH, ORDER_BY_PRICE, RESET_FILTERS, FILTER_BY_CATEGORY } from './actions';
 
 interface Product {
     descriptionName: string;
@@ -25,36 +24,36 @@ interface State {
 }
 
 interface GetProductsAction {
-    type: string;
+    type: typeof GET_PRODUCTS;
     payload: Product[];
 }
 
 interface GetUsersAction {
-    type: string;
+    type: typeof GET_USERS;
     payload: User[];
 }
 
 interface GetDetailAction {
-    type: string;
+    type: typeof GET_DETAIL;
     payload: Product;
 }
 
 interface SearchProducts {
-    type: string;
+    type: typeof SEARCH;
     payload: any;
   }
 
   interface OrderByPrice {
-    type: string;
+    type: typeof ORDER_BY_PRICE;
     payload: 'ascendente' | 'descendente';
   }
   interface ResetFilters {
-    type: string;
+    type: typeof RESET_FILTERS;
     payload: 'reset';
   }
 
   interface FilterByCategory {
-    type: string;
+    type: typeof FILTER_BY_CATEGORY;
     payload: string;  
   }
 
@@ -70,28 +69,28 @@ const initialState: State = {
 
 const reducer = (state: State = initialState, action: ProductActionTypes): State => {
     switch (action.type) {
-        case ACTIONS_TYPE.GET_PRODUCTS:
+        case GET_PRODUCTS:
             return {
                 ...state,
                 products: action.payload,
                 filteredProducts: action.payload
             };
-        case ACTIONS_TYPE.GET_USERS:
+        case GET_USERS:
             return {
                 ...state,
                 users: action.payload,
             };
-        case ACTIONS_TYPE.GET_DETAIL:
+        case GET_DETAIL:
             return {
                 ...state,
                 detail: action.payload,
             };
-        case ACTIONS_TYPE.SEARCH: 
+        case SEARCH: 
         return {
             ...state, 
             filteredProducts: state.products.filter((product) => product.descriptionName.toLowerCase().includes(action.payload.toLowerCase()))
         }
-        case ACTIONS_TYPE.ORDER_BY_PRICE:
+        case ORDER_BY_PRICE:
             const isDescendent = action.payload === "descendente";
       return {
         ...state,
@@ -107,12 +106,12 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
           }
         }),
       };
-      case ACTIONS_TYPE.RESET_FILTERS:
+      case RESET_FILTERS:
         return {
             ...state,
             filteredProducts: state.products
         }
-        case ACTIONS_TYPE.FILTER_BY_CATEGORY:
+        case FILTER_BY_CATEGORY:
             return {
                 ...state,
                 filteredProducts: [...state.products].filter((product) => product.category === action.payload)
