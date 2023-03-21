@@ -24,7 +24,7 @@ const Card: React.FC<CardProp> = ({
     <div className={style.card}>
       <h1>{descriptionName}</h1>
       <div className={style.cardImage}>
-        <Link to={`/${id}`}>
+        <Link to={`/products/${id}`}>
           <img
             src={
               img
