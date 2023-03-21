@@ -70,4 +70,7 @@
 .btnComprar:hover {
     background-color: #771e62;
 }
-    
+
+.imagen{
+  width: 130px;
+}

@@ -3,6 +3,13 @@ import { useSelector } from "react-redux";
 import { Product } from "../../types";
 import { RootState } from "../../Redux/store";
 import style from "../ShoppingCart/ShoppingCart.module.css"
+import noImage from "../../assets/no-image.png";
+import agendas from "../../assets/agendas.jpg";
+import articulosDeOficina from "../../assets/articulos-de-oficina.jpg";
+import escolares from "../../assets/escolares.jpg";
+import lapiceras from "../../assets/lapiceras.jpg";
+import lapices from "../../assets/lapices.jpg";
+import resmas from "../../assets/resmas.jpg";
 
 
 const ShoppingCart: React.FC = () => {
@@ -26,7 +33,24 @@ const ShoppingCart: React.FC = () => {
         <tbody>
           {products.map((product) => (
             <tr className={style.trContainer}>
-              <td><img src={product.image?.secure_url} /></td>
+              <td>
+               <img className={style.imagen} src={
+                 product.image
+                   ? product.image.secure_url
+                   : product.category === "lapiz"
+                     ? lapices
+                     : product.category === "resmas"
+                       ? resmas
+                       : product.category === "agenda"
+                         ? agendas
+                         : product.category === "oficina"
+                           ? articulosDeOficina
+                           : product.category === "lapicera"
+                             ? lapiceras
+                             : product.category === "escolar"
+                               ? escolares
+                               : noImage
+               }/></td>
               <td>{product.descriptionName}</td>
               <td>{product.category}</td>
               <td>{product.price}</td>
