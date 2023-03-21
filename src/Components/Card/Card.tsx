@@ -24,6 +24,7 @@ const Card: React.FC<CardProp> = ({
   id,
   image,
 }) => {
+  console.log(image);
   const { setItmes, deleteItems, validateProducst } = useLocalStorage(KEY_LOCAL_STORAGE.KEY)
   const [added, setAdded] = useState<boolean>(validateProducst(id))
   const handlerAddProduct = () => {
