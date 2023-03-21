@@ -6,7 +6,7 @@ import BannerThree from '../../assets/escolares.jpg'
 
 const CarouselComponent = () => {
   return (
-  <Carousel className={s.CarouselContainer} autoplay={true} wrapAround = {true}
+  <Carousel className={s.CarouselContainer} autoplay={true} wrapAround = {true} autoplayInterval={4500}
   renderCenterLeftControls={({ previousSlide }) => (
     <button style={{marginLeft:"80px", backgroundColor:"transparent", border:"none", cursor:"pointer" }} onClick={previousSlide}>
       <i style={{color:"black", fontSize:"50px"}} >&#60;</i>
