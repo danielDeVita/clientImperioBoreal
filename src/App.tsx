@@ -9,13 +9,14 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getProducts } from './Redux/actions';
 import { AppDispatch } from './Redux/store';
+import NotFound from './Components/NotFound/NotFound';
 
 //Si tienen problemas con el import en minuscula o mayuscula 
 //es por el cache de vscode, tienen que cerrar y volver a abrirlo
 
 function App() {
 
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProducts())
@@ -26,8 +27,9 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/productform" element={<CreateProductForm />} />
       <Route path="/updateform/:id" element={<UpdateProductForm />} />
-      <Route path="/:id" element={<Detail />} />
-      <Route path="/aboutUs" element={<AboutUs />}/>
+      <Route path="/products/:id" element={<Detail />} />
+      <Route path="/aboutUs" element={<AboutUs />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
