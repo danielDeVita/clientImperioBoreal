@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     createStorage()
     dispatch(getProducts())
-  })
+  },[])
   return (
       <Routes>
         <Route path="/" element={<Home />} />
