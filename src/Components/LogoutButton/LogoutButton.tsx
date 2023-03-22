@@ -7,7 +7,7 @@ const LogoutButton: React.FC = () => {
 
     return (
         <button className={style.logoutBtn}  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-     <i className="fa-regular fa-right-from-bracket"></i>
+     <i className="fas fa-right-from-bracket"></i>
         </button>
     );
 };
