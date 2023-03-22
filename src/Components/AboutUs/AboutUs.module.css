@@ -1,16 +1,34 @@
-.container {
-  text-align: justify;
+/* .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 1000px;
   background-color: white;
   opacity: .8;
   border: 1px solid black;
   border-radius: 16px;
  
+} */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Agregamos esta propiedad */
+  width: 1000px;
+  height: 100%; /* Agregamos esta propiedad */
+  background-color: white;
+  opacity: .8;
+  border: 1px solid black;
+  border-radius: 16px;
+  margin: 0 auto; /* Agregamos esta propiedad para centrar horizontalmente */
 }
 
 .containerBtn {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 9px;
 }
 
 /* .button {
@@ -31,7 +49,7 @@
 
 .button {
   width: 9em;
-  height: 3em;
+  height: 2.5em;
   border-radius: 30em;
   font-size: 17px;
   font-family: inherit;
@@ -41,6 +59,7 @@
   z-index: 1;
   color: white;
   background-color: #0fb1bd;
+  cursor: pointer;
   box-shadow: 6px 6px 12px #c5c5c5,
               -6px -6px 12px #ffffff;
  }
@@ -48,7 +67,7 @@
  .button::before {
   content: '';
   width: 0;
-  height: 3em;
+  height: 2.5em;
   border-radius: 30em;
   position: absolute;
   top: 0;
@@ -62,7 +81,6 @@
  .button:hover::before {
   width: 9em;
   background-color: #771e62;
-  
  }
 
  .container p{
