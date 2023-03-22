@@ -56,3 +56,8 @@ export interface RootState {
 export enum KEY_LOCAL_STORAGE {
     KEY = 'CART_PRODUCT'
 }
+
+export interface CartContextType {
+    totalCart: number;
+    setTotalCart: (count:number) => void;
+}
