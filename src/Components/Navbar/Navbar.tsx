@@ -1,12 +1,15 @@
 //<------------------IMPORTACIONES---------------------->
 
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from '../LogoutButton/LogoutButton';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "auth0";
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { CartContext } from '../../context/index'
+import { CartContextType } from '../../types.d'
 
 import style from './NavBar.module.css';
 
@@ -19,7 +22,7 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
-
+    const { totalCart } = useContext(CartContext) as CartContextType
     const { user, isAuthenticated } = useAuth0<User>();
 
     return (
@@ -49,8 +52,9 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
                         null
                 }
 
-                <Link to={'/shoppingcart'}>
-                <button className={style.cartBtn}><i className="fa-solid fa-cart-shopping"></i></button>
+                <Link to={'/shoppingcart'} className={style.containerCart}>
+                  <button className={style.cartBtn}><i className="fa-solid fa-cart-shopping"></i></button>
+                  { totalCart > 0 &&  <div>{totalCart}</div>}
                 </Link>
             </div>
             <div>

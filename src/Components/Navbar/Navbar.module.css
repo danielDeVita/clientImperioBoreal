@@ -55,6 +55,24 @@
     
 }
 
+.containerCart {
+    position: relative;
+}
+
+.cartBtn ~ div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #a22986;
+    right: 0;
+    top: 0;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .loginBtn:hover, .cartBtn:hover, .AdminDashboardButton:hover {
     color: #a22986;
     cursor: pointer;
