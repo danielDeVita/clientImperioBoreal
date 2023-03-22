@@ -25,17 +25,11 @@ const ShoppingCart: React.FC = () => {
   const products = getLocalStorage()
 
   const cartToDB = async (products: ProductToStorage[]) => {
-
-    let arrayDeProductos = []
-    for (let i = 0; i < products.length; i++) {
-      arrayDeProductos.push(products[i].id)
+    const carrito = {
+      user: "64121757bc70cbbe06154e6f", //este dato de donde se saca?
+      products: products.map(product => product.id)
     }
-    const cartToDB = {
-      user: "64121757bc70cbbe06154e6f", //un objectID del usuario
-      //products: ["64121757bc70cbbe06154e6f", "64121757bc70cbbe06154e6f"]
-      products: arrayDeProductos
-    }
-    await axios.post("http://localhost:3001/carts", cartToDB);
+    await axios.post("http://localhost:3001/carts", carrito);
   }
 
   return (
@@ -94,7 +88,7 @@ const ShoppingCart: React.FC = () => {
       <div className={style.tablaComprar}>
         <h2>Total:</h2>
         <p>${products[0].price}</p>
-        <button className={style.btnComprar} onClick={cartToDB}>Comprar</button>
+        <button className={style.btnComprar} onClick={() => cartToDB(products)}>Comprar</button>
       </div>
 
     </div>
