@@ -1,10 +1,11 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import style from "./LoginButton.module.css"
 
 const LoginButton: React.FC = () => {
     const { loginWithRedirect } = useAuth0();
 
-    return <button onClick={() => loginWithRedirect()}>Log In</button>;
+    return <button className={style.loginBtn} onClick={() => loginWithRedirect()}><i className="fa-regular fa-right-to-bracket"></i></button>;
 };
 
 export default LoginButton;
