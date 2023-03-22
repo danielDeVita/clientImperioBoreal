@@ -1,4 +1,8 @@
 :root {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -8,11 +12,5 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-body {
   background-image: url('./assets/backgroundImage.jpg');
-  background-size: cover;
-  margin: 0;
-  padding: 0;
 }
