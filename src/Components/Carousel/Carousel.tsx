@@ -4,7 +4,7 @@ import BannerOne from "../../assets/Banner_30oFF.png";
 import BannerTwo from "../../assets/2_X_1_AGENDAS.png";
 import BannerThree from "../../assets/banner1.jpg";
 
-const CarouselComponent = () => {
+const CarouselComponent: React.FC = () => {
   return (
     <Carousel
       className={s.CarouselContainer}
@@ -14,17 +14,9 @@ const CarouselComponent = () => {
       renderCenterLeftControls={({ previousSlide }) => (
         <button
           className={s.iButtonLeft}
-          // style={{
-          //   marginLeft: "80px",
-          //   backgroundColor: "transparent",
-          //   border: "none",
-          //   cursor: "pointer",
-          // }}
           onClick={previousSlide}
         >
-          <i
-          // style={{ color: "#0fb1bd", fontSize: "50px", fontWeight: "700" }}
-          >
+          <i>
             &#60;
           </i>
         </button>
@@ -32,22 +24,13 @@ const CarouselComponent = () => {
       renderCenterRightControls={({ nextSlide }) => (
         <button
           className={s.iButtonRight}
-          // style={{
-          //   marginRight: "80px",
-          //   backgroundColor: "transparent",
-          //   border: "none",
-          //   cursor: "pointer",
-          // }}
           onClick={nextSlide}
         >
-          <i
-          // style={{ color: "#0fb1bd", fontSize: "50px", fontWeight: "700" }}
-          >
+          <i>
             &#62;
           </i>
         </button>
       )}
-      renderBottomCenterControls={false}
     >
       <img className={s.bannerone} src={BannerOne} alt='banner' />
       <img className={s.bannertwo} src={BannerTwo} alt='banner' />
