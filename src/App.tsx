@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     createStorage()
     dispatch(getProducts())
-    dispatch(getProducts())
+    dispatch(getCategories())
   },[])
   return (
       <Routes>

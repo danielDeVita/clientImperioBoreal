@@ -114,7 +114,7 @@ export const filterByCategory = (category: string) => {
 export const getCategories = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     try {
-      const { data } = await axios.get('http://localhost:3001/productcategories');
+      const { data } = await axios.get('http://localhost:3001/products/categories');
       dispatch({ type: GET_CATEGORIES, payload: data})
     } catch (error) {
       console.error(error);
