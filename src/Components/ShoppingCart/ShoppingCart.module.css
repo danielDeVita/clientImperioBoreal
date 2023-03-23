@@ -1,76 +1,122 @@
-.Contenedor{
-    display: flex;
+.Contenedor {
+  margin: 1em auto;
+  max-width: 800px;
 }
+
 .dashboardTable {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    margin-top: 20px;
-    border: 2px solid black;
-    background: white;
-  }
-  
-  .dashboardTable th,
-  .dashboardTable td {
-    color: #07323e;
-    font-weight: 800;
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 2px solid #07323e;
-  }
-  
-  .dashboardTable th {
-    background-color: #e1f1f3;
-    font-weight: bold;
-    color: #0fb1bd;
-  }
-  
-  .dashboardTable tbody tr:hover {
-    background: #fbc316;
-    color: #fff;
-  }
-
-  .tablaComprar{
-      
-      border: 1px solid black;
-      height: 40vh;
-      width: 300px;
-      background-color: white;
-      margin-right: 70px;
-      margin-top: 50px;
-      padding: 20px; 
-      
-    }
-    
-    .tablaComprar h2 {
-        text-align: center;
-    }
-    
-    .tablaComprar p {
-        font-size: 1.7rem;
-    }
-
-.btnComprar{
-    background-color: #0fb1bd;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
-    -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
-    box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
-    margin-top: 180px;
-    margin-left: 95px;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9em;
+  min-width: 400px;
 }
-      
+
+.dashboardTable thead tr {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: left;
+}
+
+.dashboardTable th,
+.dashboardTable td {
+  padding: 12px 15px;
+}
+
+.dashboardTable tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.dashboardTable tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.dashboardTable tbody tr:last-of-type {
+  border-bottom: 2px solid #333333;
+}
+
+.imagen {
+  height: 80px;
+  width: 80px;
+}
+
+.btnComprar {
+  background-color: #0FB1BD;
+  color: #ffffff;
+  font-size: 1em;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .btnComprar:hover {
-    background-color: #771e62;
+  background-color: #771e62;
+  color: #fff;
 }
 
-.imagen{
-  width: 130px;
+.tablaComprar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  background-color: #f3f3f3;
+  border-radius: 5px;
 }
+
+.tablaComprar h2 {
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+.trContainer{
+  background-color: #fff;
+}
+
+
+
+.trContainer button {
+  background-color: transparent;
+  border: none;
+  color: #11d5e3;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.trContainer button:hover {
+  color: #11d5e3;
+}
+
+
+.logoContainer {
+  -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  border-top: 3px solid #0fb1bd;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.logoStyle {
+  margin: 0;
+  height: 180px;
+  width: 180px;
+}
+
+.backBtn {
+  position: absolute;
+  left: 20px;
+  color: #0fb1bd;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.backBtn:hover {
+  color: #13deec;
+}
+
