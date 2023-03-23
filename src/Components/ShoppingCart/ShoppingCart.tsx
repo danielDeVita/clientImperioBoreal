@@ -1,7 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Product, ProductToStorage } from "../../types";
-import { RootState } from "../../Redux/store";
+import React, { useEffect, useState } from "react";
+import { ProductToStorage } from "../../types";
 import style from "../ShoppingCart/ShoppingCart.module.css"
 import noImage from "../../assets/no-image.png";
 import agendas from "../../assets/agendas.jpg";
@@ -13,20 +11,33 @@ import resmas from "../../assets/resmas.jpg";
 import { KEY_LOCAL_STORAGE } from "../../types.d";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import axios from "axios";
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ShoppingCart: React.FC = () => {
+
+  const [user_id, setUser_id] = useState("");
+
+  const { user } = useAuth0();
+
+  const getUser_id = async () => {
+    const response = await axios.get(`http://localhost:3001/users/${user?.email}`)
+    const user_id = response.data._id
+    setUser_id(user_id)
+  }
+
+  useEffect(() => {
+    getUser_id()
+  }, [user])
 
   const { getLocalStorage } = useLocalStorage(
     KEY_LOCAL_STORAGE.KEY
   );
-  //const products = useSelector((state: RootState) => state.products)
 
   const products = getLocalStorage()
 
-  const cartToDB = async (products: ProductToStorage[]) => {
+  const cartToDB = async (products: ProductToStorage[], user_id: string) => {
     const carrito = {
-      user: "64121757bc70cbbe06154e6f", //este dato de donde se saca?
+      user: user_id,
       products: products.map(product => product.id)
     }
     await axios.post("http://localhost:3001/carts", carrito);
@@ -88,7 +99,7 @@ const ShoppingCart: React.FC = () => {
       <div className={style.tablaComprar}>
         <h2>Total:</h2>
         <p>${products[0]?.price}</p>
-        <button className={style.btnComprar} onClick={() => cartToDB(products)}>Comprar</button>
+        <button className={style.btnComprar} onClick={() => cartToDB(products, user_id)}>Comprar</button>
       </div>
 
     </div>
