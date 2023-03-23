@@ -17,21 +17,21 @@ const Profile: any = () => {
 
   return (
     <>
-  {
-    !isAuthenticated ? loginWithRedirect() : (
-      <div className={styles.profileContainer}>
-      <img className={styles.profileImage} src={user?.picture} alt={user?.name} />
-      <div className={styles.profileDetails}>
-        <h2 className={styles.profileName}>{user?.name}</h2>
-        <p className={styles.profilEmail}>email: {user?.email}</p>
-        <p className={styles.profileNickname}>nickname: {user?.nickname}</p>
-      </div>
-      <Link to={"/"}>
-        <button className={styles.button}>Volver</button>
-      </Link>
-    </div>
-    )
-  }
+      {
+        !isAuthenticated ? loginWithRedirect() : (
+          <div className={styles.profileContainer}>
+            <img className={styles.profileImage} src={user?.picture} alt={user?.name} />
+            <div className={styles.profileDetails}>
+              <h2 className={styles.profileName}>{user?.name}</h2>
+              <p className={styles.profilEmail}>email: {user?.email}</p>
+              <p className={styles.profileNickname}>nickname: {user?.nickname}</p>
+            </div>
+            <Link to={"/"}>
+              <button className={styles.button}>Volver</button>
+            </Link>
+          </div>
+        )
+      }
     </>
   );
 };
