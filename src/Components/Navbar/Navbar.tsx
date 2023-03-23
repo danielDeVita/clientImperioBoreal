@@ -63,9 +63,9 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
                 {
                     isAuthenticated
                         ?
-                       <label>Cerrar sesion <LogoutButton /> </label>
+                       <LogoutButton />
                         :
-                       <label>Iniciar sesion <LoginButton /> </label> 
+                       <LoginButton />
                 }
 
             </div>
