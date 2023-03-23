@@ -1,5 +1,5 @@
 
-import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH, ORDER_BY_PRICE, RESET_FILTERS, FILTER_BY_CATEGORY } from './actions';
+import { GET_PRODUCTS, GET_USERS, GET_DETAIL, SEARCH, ORDER_BY_PRICE, RESET_FILTERS, FILTER_BY_CATEGORY, GET_CATEGORIES } from './actions';
 
 interface Product {
     descriptionName: string;
@@ -25,6 +25,7 @@ interface State {
     filteredProducts: Product[];
     users: User[];
     detail: Product;    
+    categories: String[];
 }
 
 interface GetProductsAction {
@@ -60,15 +61,21 @@ interface SearchProducts {
     type: typeof FILTER_BY_CATEGORY;
     payload: string;  
   }
+  interface GetCategories {
+    type: typeof GET_CATEGORIES;
+    payload: String[];
+  }
+  
 
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters | FilterByCategory;
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters | FilterByCategory | GetCategories;
 
 const initialState: State = {
     products: [],
     filteredProducts: [],
     users: [],
     detail: {} as Product,
+    categories: []
 };
 
 const reducer = (state: State = initialState, action: ProductActionTypes): State => {
@@ -119,9 +126,12 @@ const reducer = (state: State = initialState, action: ProductActionTypes): State
             return {
                 ...state,
                 filteredProducts: [...state.products].filter((product) => product.category === action.payload)
-
-        
             }
+        case GET_CATEGORIES: 
+            return {
+                ...state,
+                categories: action.payload
+            }    
         default:
             return { ...state };
     }
