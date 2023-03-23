@@ -1,0 +1,371 @@
+.pencil {
+  width: 15rem;
+  height: 15rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pencil__body1,
+.pencil__body2,
+.pencil__body3,
+.pencil__eraser,
+.pencil__eraser-skew,
+.pencil__point,
+.pencil__rotate,
+.pencil__stroke {
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.pencil__body1,
+.pencil__body2,
+.pencil__body3 {
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.pencil__body1 {
+  -webkit-animation-name: pencilBody1;
+          animation-name: pencilBody1;
+}
+
+.pencil__body2 {
+  -webkit-animation-name: pencilBody2;
+          animation-name: pencilBody2;
+}
+
+.pencil__body3 {
+  -webkit-animation-name: pencilBody3;
+          animation-name: pencilBody3;
+}
+
+.pencil__eraser {
+  -webkit-animation-name: pencilEraser;
+          animation-name: pencilEraser;
+  -webkit-transform: rotate(-90deg) translate(49px,0);
+      -ms-transform: rotate(-90deg) translate(49px,0);
+          transform: rotate(-90deg) translate(49px,0);
+}
+
+.pencil__eraser-skew {
+  -webkit-animation-name: pencilEraserSkew;
+          animation-name: pencilEraserSkew;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+}
+
+.pencil__point {
+  -webkit-animation-name: pencilPoint;
+          animation-name: pencilPoint;
+  -webkit-transform: rotate(-90deg) translate(49px,-30px);
+      -ms-transform: rotate(-90deg) translate(49px,-30px);
+          transform: rotate(-90deg) translate(49px,-30px);
+}
+
+.pencil__rotate {
+  -webkit-animation-name: pencilRotate;
+          animation-name: pencilRotate;
+}
+
+.pencil__stroke {
+  -webkit-animation-name: pencilStroke;
+          animation-name: pencilStroke;
+  -webkit-transform: translate(100px,100px) rotate(-113deg);
+      -ms-transform: translate(100px,100px) rotate(-113deg);
+          transform: translate(100px,100px) rotate(-113deg);
+}
+
+/* Animations */
+@-webkit-keyframes pencilBody1 {
+  from,
+	to {
+    stroke-dashoffset: 351.86;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+
+  50% {
+    stroke-dashoffset: 150.8;
+ /* 3/8 of diameter */
+    -webkit-transform: rotate(-225deg);
+            transform: rotate(-225deg);
+  }
+}
+@keyframes pencilBody1 {
+  from,
+	to {
+    stroke-dashoffset: 351.86;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+
+  50% {
+    stroke-dashoffset: 150.8;
+ /* 3/8 of diameter */
+    -webkit-transform: rotate(-225deg);
+            transform: rotate(-225deg);
+  }
+}
+
+@-webkit-keyframes pencilBody2 {
+  from,
+	to {
+    stroke-dashoffset: 406.84;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+
+  50% {
+    stroke-dashoffset: 174.36;
+    -webkit-transform: rotate(-225deg);
+            transform: rotate(-225deg);
+  }
+}
+
+@keyframes pencilBody2 {
+  from,
+	to {
+    stroke-dashoffset: 406.84;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+
+  50% {
+    stroke-dashoffset: 174.36;
+    -webkit-transform: rotate(-225deg);
+            transform: rotate(-225deg);
+  }
+}
+
+@-webkit-keyframes pencilBody3 {
+  from,
+	to {
+    stroke-dashoffset: 296.88;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+
+  50% {
+    stroke-dashoffset: 127.23;
+    -webkit-transform: rotate(-225deg);
+            transform: rotate(-225deg);
+  }
+}
+
+@keyframes pencilBody3 {
+  from,
+	to {
+    stroke-dashoffset: 296.88;
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+
+  50% {
+    stroke-dashoffset: 127.23;
+    -webkit-transform: rotate(-225deg);
+            transform: rotate(-225deg);
+  }
+}
+
+@-webkit-keyframes pencilEraser {
+  from,
+	to {
+    -webkit-transform: rotate(-45deg) translate(49px,0);
+            transform: rotate(-45deg) translate(49px,0);
+  }
+
+  50% {
+    -webkit-transform: rotate(0deg) translate(49px,0);
+            transform: rotate(0deg) translate(49px,0);
+  }
+}
+
+@keyframes pencilEraser {
+  from,
+	to {
+    -webkit-transform: rotate(-45deg) translate(49px,0);
+            transform: rotate(-45deg) translate(49px,0);
+  }
+
+  50% {
+    -webkit-transform: rotate(0deg) translate(49px,0);
+            transform: rotate(0deg) translate(49px,0);
+  }
+}
+
+@-webkit-keyframes pencilEraserSkew {
+  from,
+	32.5%,
+	67.5%,
+	to {
+    -webkit-transform: skewX(0);
+            transform: skewX(0);
+  }
+
+  35%,
+	65% {
+    -webkit-transform: skewX(-4deg);
+            transform: skewX(-4deg);
+  }
+
+  37.5%, 
+	62.5% {
+    -webkit-transform: skewX(8deg);
+            transform: skewX(8deg);
+  }
+
+  40%,
+	45%,
+	50%,
+	55%,
+	60% {
+    -webkit-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+  }
+
+  42.5%,
+	47.5%,
+	52.5%,
+	57.5% {
+    -webkit-transform: skewX(15deg);
+            transform: skewX(15deg);
+  }
+}
+
+@keyframes pencilEraserSkew {
+  from,
+	32.5%,
+	67.5%,
+	to {
+    -webkit-transform: skewX(0);
+            transform: skewX(0);
+  }
+
+  35%,
+	65% {
+    -webkit-transform: skewX(-4deg);
+            transform: skewX(-4deg);
+  }
+
+  37.5%, 
+	62.5% {
+    -webkit-transform: skewX(8deg);
+            transform: skewX(8deg);
+  }
+
+  40%,
+	45%,
+	50%,
+	55%,
+	60% {
+    -webkit-transform: skewX(-15deg);
+            transform: skewX(-15deg);
+  }
+
+  42.5%,
+	47.5%,
+	52.5%,
+	57.5% {
+    -webkit-transform: skewX(15deg);
+            transform: skewX(15deg);
+  }
+}
+
+@-webkit-keyframes pencilPoint {
+  from,
+	to {
+    -webkit-transform: rotate(-90deg) translate(49px,-30px);
+            transform: rotate(-90deg) translate(49px,-30px);
+  }
+
+  50% {
+    -webkit-transform: rotate(-225deg) translate(49px,-30px);
+            transform: rotate(-225deg) translate(49px,-30px);
+  }
+}
+
+@keyframes pencilPoint {
+  from,
+	to {
+    -webkit-transform: rotate(-90deg) translate(49px,-30px);
+            transform: rotate(-90deg) translate(49px,-30px);
+  }
+
+  50% {
+    -webkit-transform: rotate(-225deg) translate(49px,-30px);
+            transform: rotate(-225deg) translate(49px,-30px);
+  }
+}
+
+@-webkit-keyframes pencilRotate {
+  from {
+    -webkit-transform: translate(100px,100px) rotate(0);
+            transform: translate(100px,100px) rotate(0);
+  }
+
+  to {
+    -webkit-transform: translate(100px,100px) rotate(720deg);
+            transform: translate(100px,100px) rotate(720deg);
+  }
+}
+
+@keyframes pencilRotate {
+  from {
+    -webkit-transform: translate(100px,100px) rotate(0);
+            transform: translate(100px,100px) rotate(0);
+  }
+
+  to {
+    -webkit-transform: translate(100px,100px) rotate(720deg);
+            transform: translate(100px,100px) rotate(720deg);
+  }
+}
+
+@-webkit-keyframes pencilStroke {
+  from {
+    stroke-dashoffset: 439.82;
+    -webkit-transform: translate(100px,100px) rotate(-113deg);
+            transform: translate(100px,100px) rotate(-113deg);
+  }
+
+  50% {
+    stroke-dashoffset: 164.93;
+    -webkit-transform: translate(100px,100px) rotate(-113deg);
+            transform: translate(100px,100px) rotate(-113deg);
+  }
+
+  75%,
+	to {
+    stroke-dashoffset: 439.82;
+    -webkit-transform: translate(100px,100px) rotate(112deg);
+            transform: translate(100px,100px) rotate(112deg);
+  }
+}
+
+@keyframes pencilStroke {
+  from {
+    stroke-dashoffset: 439.82;
+    -webkit-transform: translate(100px,100px) rotate(-113deg);
+            transform: translate(100px,100px) rotate(-113deg);
+  }
+
+  50% {
+    stroke-dashoffset: 164.93;
+    -webkit-transform: translate(100px,100px) rotate(-113deg);
+            transform: translate(100px,100px) rotate(-113deg);
+  }
+
+  75%,
+	to {
+    stroke-dashoffset: 439.82;
+    -webkit-transform: translate(100px,100px) rotate(112deg);
+            transform: translate(100px,100px) rotate(112deg);
+  }
+}

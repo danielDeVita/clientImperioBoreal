@@ -14,18 +14,26 @@ import ShoppingCart from './Components/ShoppingCart/ShoppingCart'
 import useLocalStorage from './hooks/useLocalStorage';
 import { KEY_LOCAL_STORAGE } from './types.d';
 import Profile from './Components/Profile/Profile';
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "./Components/Loading/Loading"
 //Si tienen problemas con el import en minuscula o mayuscula 
 //es por el cache de vscode, tienen que cerrar y volver a abrirlo
 
 function App() {
   const {  createStorage } = useLocalStorage(KEY_LOCAL_STORAGE.KEY)
   const dispatch: AppDispatch = useDispatch();
+  const {  isLoading } = useAuth0();
 
   useEffect(() => {
     createStorage()
     dispatch(getProducts())
     dispatch(getProducts())
   },[])
+
+
+  if (isLoading) {
+    return <div> <Loading /></div>;
+  }
   return (
       <Routes>
         <Route path="/" element={<Home />} />
