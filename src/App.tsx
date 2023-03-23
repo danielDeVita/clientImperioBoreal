@@ -7,7 +7,7 @@ import Detail from "./Components/Detail/Detail";
 import AboutUs from './Components/AboutUs/AboutUs';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getProducts } from './Redux/actions';
+import { getProducts, getCategories } from './Redux/actions';
 import { AppDispatch } from './Redux/store';
 import NotFound from './Components/NotFound/NotFound';
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart'
@@ -23,6 +23,7 @@ function App() {
 
   useEffect(() => {
     createStorage()
+    dispatch(getProducts())
     dispatch(getProducts())
   },[])
   return (

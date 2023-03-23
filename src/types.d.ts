@@ -9,6 +9,8 @@ export interface Product {
 }
 
 
+
+
 export interface ProductWithOutImage extends Omit<Product, 'image'> {}
 
 export interface OldProduct extends ProductWithOutImage {

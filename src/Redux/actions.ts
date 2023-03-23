@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { RootState } from './store';
+import { AppDispatch, RootState } from './store';
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_USERS = "GET_USERS";
@@ -10,6 +10,7 @@ export const SEARCH = 'SEARCH';
 export const ORDER_BY_PRICE = 'ORDER_BY_PRICE';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const FILTER_BY_CATEGORY = 'FILTER_BY_CATEGORY';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 interface Product {
   descriptionName: string;
   category: string;
@@ -18,6 +19,7 @@ interface Product {
   priceVAT: number;
   priceVATBusiness: number;
 }
+
 
 interface User {
   first_name: String,
@@ -58,8 +60,12 @@ interface FilterByCategory {
   type: typeof FILTER_BY_CATEGORY;
   payload: string;  
 }
+interface GetCategories {
+  type: typeof GET_CATEGORIES;
+  payload: String[];
+}
 
-export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters | FilterByCategory;
+export type ProductActionTypes = GetProductsAction | GetUsersAction | GetDetailAction | SearchProducts | OrderByPrice | ResetFilters | FilterByCategory | GetCategories;
 
 export const getProducts = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
@@ -103,4 +109,15 @@ export const resetFilters = (criteria: string) => {
 
 export const filterByCategory = (category: string) => {
   return {type: FILTER_BY_CATEGORY, payload: category}
+}
+
+export const getCategories = (): ThunkAction<void, RootState, null, ProductActionTypes> => {
+  return async (dispatch: Dispatch<ProductActionTypes>) => {
+    try {
+      const { data } = await axios.get('http://localhost:3001/productcategories');
+      dispatch({ type: GET_CATEGORIES, payload: data})
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
