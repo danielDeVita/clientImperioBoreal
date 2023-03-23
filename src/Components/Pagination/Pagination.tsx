@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, pa
               {currentPage > 1 ? (
                 <button className={style.btn} onClick={prevPage}>Previous</button>
                 ) : ( 
-                    <button hidden className={style.btn}>Previous</button>
+                    <button hidden className={style.btn}>Anterior</button>
                 )}
                 { pageNumbers && 
                         pageNumbers.map(number =>(                  
@@ -34,7 +34,7 @@ const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, pa
                 ))
                 }
                 <li>
-                    <button className={style.btn} onClick={nextPage} disabled={currentPage === Math.ceil(allProducts/productsPerPage)}>Next</button>
+                    <button className={style.btn} onClick={nextPage} disabled={currentPage === Math.ceil(allProducts/productsPerPage)}>Siguiente</button>
                 </li>
             </ul>
             )}
