@@ -13,7 +13,7 @@ import { KEY_LOCAL_STORAGE } from "../../types.d";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";import { Link } from "react-router-dom";
-
+//EL QUE DESACOOMODA EL CART LO CAGO A PALOS 
 
 const ShoppingCart: React.FC = () => {
 
