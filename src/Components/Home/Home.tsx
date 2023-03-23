@@ -9,9 +9,19 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import { useSelector } from 'react-redux';
 import Pagination from "../Pagination/Pagination"
 import Carousel from "../Carousel/Carousel"
+import { useAuth0 } from "@auth0/auth0-react";
+import { User } from "auth0";
+import axios from "axios";
 
 const Home: React.FC = () => {
 
+  const {user, isLoading, isAuthenticated, getAccessTokenSilently} = useAuth0<User>()
+  
+
+  const postNewUser = async () => {
+    if(isAuthenticated) await axios.post('http://localhost:3001/users', user)
+  }
+  
   const dispatch = useDispatch();
 
   const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +41,6 @@ const Home: React.FC = () => {
     dispatch(filterByCategory(e.target.value));
     setSelectedOption(e.target.value)
     setCurrentPage(1);
-
 
   };
 
@@ -54,7 +63,9 @@ const Home: React.FC = () => {
   useEffect(() => {
     setSelectedOption('default')
     setSelectedOptionOrder('default')
-  }, [])
+    postNewUser()
+    
+  }, [user])
   return (
     <>
     <NavBar setCurrentPage={setCurrentPage} />
