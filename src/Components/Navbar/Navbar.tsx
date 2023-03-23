@@ -40,8 +40,9 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
                 </div>
             </div>
             <div className={style.cartAndLoginContainer}>
+                <Link to={'/profile'}>
                 <button className={style.loginBtn}><i className="fa-solid fa-user"></i></button>
-
+                </Link>
                 {
                     user?.email === "danielitodevita@gmail.com"
                         ?
@@ -62,9 +63,9 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
                 {
                     isAuthenticated
                         ?
-                        <LogoutButton />
+                       <label>Cerrar sesion <LogoutButton /> </label>
                         :
-                        <LoginButton />
+                       <label>Iniciar sesion <LoginButton /> </label> 
                 }
 
             </div>

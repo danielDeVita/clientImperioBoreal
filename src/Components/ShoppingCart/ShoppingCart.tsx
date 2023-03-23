@@ -49,35 +49,35 @@ const ShoppingCart: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product: ProductToStorage) => (
+          {products?.map((product: ProductToStorage) => (
             <tr className={style.trContainer} key={product.id}>
               <td>
                 <img className={style.imagen} src={
-                  product.image
-                    ? product.image.secure_url
-                    : product.category === "lapiz"
+                  product?.image
+                    ? product?.image.secure_url
+                    : product?.category === "lapiz"
                       ? lapices
-                      : product.category === "resmas"
+                      : product?.category === "resmas"
                         ? resmas
-                        : product.category === "agenda"
+                        : product?.category === "agenda"
                           ? agendas
-                          : product.category === "oficina"
+                          : product?.category === "oficina"
                             ? articulosDeOficina
-                            : product.category === "lapicera"
+                            : product?.category === "lapicera"
                               ? lapiceras
-                              : product.category === "escolar"
+                              : product?.category === "escolar"
                                 ? escolares
                                 : noImage
                 } /></td>
-              <td>{product.descriptionName}</td>
-              <td>{product.category}</td>
-              <td>{product.price}</td>
-              <td>{product.descriptionName.length}</td>
+              <td>{product?.descriptionName}</td>
+              <td>{product?.category}</td>
+              <td>{product?.price}</td>
+              <td>{product?.descriptionName.length}</td>
 
               <td>
                 <button>Eliminar</button>
               </td>
-              <td>{product.price}</td>
+              <td>{product?.price}</td>
             </tr>
           ))}
 
@@ -87,7 +87,7 @@ const ShoppingCart: React.FC = () => {
 
       <div className={style.tablaComprar}>
         <h2>Total:</h2>
-        <p>${products[0].price}</p>
+        <p>${products[0]?.price}</p>
         <button className={style.btnComprar} onClick={() => cartToDB(products)}>Comprar</button>
       </div>
 

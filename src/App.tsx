@@ -13,6 +13,7 @@ import NotFound from './Components/NotFound/NotFound';
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart'
 import useLocalStorage from './hooks/useLocalStorage';
 import { KEY_LOCAL_STORAGE } from './types.d';
+import Profile from './Components/Profile/Profile';
 //Si tienen problemas con el import en minuscula o mayuscula 
 //es por el cache de vscode, tienen que cerrar y volver a abrirlo
 
@@ -27,11 +28,12 @@ function App() {
   return (
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path ="/shoppingcart" element ={<ShoppingCart/>}></Route>
+        <Route path="/shoppingcart" element ={<ShoppingCart/>}></Route>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/productform" element={<CreateProductForm />} />
         <Route path="/updateform/:id" element={<UpdateProductForm />} />
         <Route path="/products/:id" element={<Detail />} />
+        <Route path="/profile" element={<Profile />}/>
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
