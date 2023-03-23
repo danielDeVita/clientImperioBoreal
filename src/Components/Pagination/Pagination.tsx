@@ -19,10 +19,13 @@ const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, pa
     
     return(
         <nav className={style.paginadoNavContainer}>
+             {pageNumbers.length > 1 && (
             <ul className={style.paginadoList} >
-                <li>
-                    <button className={style.btn} onClick={prevPage} disabled={currentPage === 1}>Previous</button>
-                </li>
+              {currentPage > 1 ? (
+                <button className={style.btn} onClick={prevPage}>Previous</button>
+                ) : ( 
+                    <button hidden className={style.btn}>Previous</button>
+                )}
                 { pageNumbers && 
                         pageNumbers.map(number =>(                  
                     <li onClick={() => paginado(number)} key={number} className={`${style.number} ${currentPage === number && style.active}`}>
@@ -34,6 +37,7 @@ const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, pa
                     <button className={style.btn} onClick={nextPage} disabled={currentPage === Math.ceil(allProducts/productsPerPage)}>Next</button>
                 </li>
             </ul>
+            )}
         </nav>
 
     )
