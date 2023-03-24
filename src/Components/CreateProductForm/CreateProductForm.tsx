@@ -184,6 +184,7 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.price}
                   onChange={handleInputChange}
@@ -201,6 +202,7 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceBusiness}
                   onChange={handleInputChange}
@@ -218,6 +220,7 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceVAT}
                   onChange={handleInputChange}
@@ -235,6 +238,7 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceVATBusiness}
                   onChange={handleInputChange}

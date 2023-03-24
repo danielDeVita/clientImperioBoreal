@@ -119,6 +119,8 @@ const UpdateProductForm: React.FC = () => {
                   Precio:{" "}
                 </label>
                 <input
+                  min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.price}
                   onChange={handleInputChange}
@@ -131,6 +133,8 @@ const UpdateProductForm: React.FC = () => {
                   Precio venta empresas:{" "}
                 </label>
                 <input
+                  min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceBusiness}
                   onChange={handleInputChange}
@@ -143,6 +147,8 @@ const UpdateProductForm: React.FC = () => {
                   Precio Consumidor Final C/IVA:{" "}
                 </label>
                 <input
+                  min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceVAT}
                   onChange={handleInputChange}
@@ -155,6 +161,8 @@ const UpdateProductForm: React.FC = () => {
                   Precio Empresa C/IVA:{" "}
                 </label>
                 <input
+                  min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceVATBusiness}
                   onChange={handleInputChange}
