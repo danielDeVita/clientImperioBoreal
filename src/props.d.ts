@@ -1,16 +1,18 @@
-import { ProductWithOutImage, DetailInterface } from './types.d'
+// import { ProductWithOutImage, DetailInterface } from './types.d'
 
-export interface CardProp extends DetailInterface{
-   id:string
-}
+import { Product } from "./types.d";
+
+// export interface CardProp extends DetailInterface{
+//    id:string
+// }
 
 export interface productProps {
-  productProps: ProductWithOutImage[];
+  productsFiltered: Product[];
 }
 
 export interface PaginationProps {
   productsPerPage: number;
-  allProducts: any;
+  allProducts: number;
   paginado: (pageNumber: number) => void;
   currentPage: number;
 }
