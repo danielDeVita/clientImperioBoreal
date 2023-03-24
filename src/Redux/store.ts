@@ -11,26 +11,24 @@ export type AppDispatch = ThunkDispatch<RootState, null, Action>;
 
 // Habilita la extension de Redux DevTools
 declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    }
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
 }
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store: Store<RootState, ProductActionTypes> = createStore(
-    reducer,
-    composeEnhancer(
-        applyMiddleware(
-            thunkMiddleware as ThunkMiddleware<RootState, ProductActionTypes>
-        )
+  reducer,
+  composeEnhancer(
+    applyMiddleware(
+      thunkMiddleware as ThunkMiddleware<RootState, ProductActionTypes>
     )
+  )
 );
 export default store;
-
 
 // const store: Store<ReturnType<typeof reducer>, ProductActionTypes> = createStore(
 //     reducer,
 //     composeEnhancer(applyMiddleware(thunkMiddleware as ThunkMiddleware<ReturnType<typeof reducer>, ProductActionTypes>))
 // );
-

@@ -1,22 +1,23 @@
-.logoutBtn{
-    position: absolute;
-    right: 60px;
-  
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 20px;
-    color: #771E62;
-    padding: 12px;
-    cursor: pointer;
+.logoutBtn {
+  position: absolute;
+  right: 60px;
+  top: 5px;
+
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #771e62;
+  padding: 12px;
+  cursor: pointer;
 }
 
-.logoutBtn i{
-    font-size: 25px;
+.logoutBtn i {
+  font-size: 18px;
+  padding: 5px;
 }
-
 
 .logoutBtn:hover {
-    color: #a22986;
-    cursor: pointer;
+  color: #a22986;
+  cursor: pointer;
 }

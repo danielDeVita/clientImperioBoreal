@@ -1,13 +1,13 @@
-import React, { useState, ChangeEvent, FormEvent} from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import style from "./SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { searchProducts } from "../../Redux/actions";
 import { AppDispatch } from "../../Redux/store";
 interface SearchBarProps {
-    setCurrentPage: (pageNumber: number) => void;
+  setCurrentPage: (pageNumber: number) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({setCurrentPage}) => {
+const SearchBar: React.FC<SearchBarProps> = ({ setCurrentPage }) => {
   interface Product {
     descriptionName: string;
     category: string;
@@ -24,15 +24,13 @@ const SearchBar: React.FC<SearchBarProps> = ({setCurrentPage}) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-    
   };
-  
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Do something with the query here, like search for it
     // const response: AxiosResponse<Product[]> = await axios.get(
-    //   `http://localhost:3001/products?name=${query}`
+    //   `/products?name=${query}`
     // );
     // let productsFound = response.data;
     // setProducts(productsFound);
@@ -40,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({setCurrentPage}) => {
 
     dispatch(searchProducts(query));
     setCurrentPage(1);
-    setQuery('');
+    setQuery("");
   };
 
   return (
@@ -48,13 +46,13 @@ const SearchBar: React.FC<SearchBarProps> = ({setCurrentPage}) => {
       <form onSubmit={handleSearch}>
         <input
           className={style.searcher}
-          type="search"
-          placeholder="Buscar productos..."
+          type='search'
+          placeholder='Buscar productos...'
           onChange={handleChange}
           value={query}
         />
-        <button className={style.searchBtnStyle} type="submit">
-          <i className="fa-solid fa-magnifying-glass"></i>
+        <button className={style.searchBtnStyle} type='submit'>
+          <i className='fa-solid fa-magnifying-glass'></i>
         </button>
       </form>
     </>
