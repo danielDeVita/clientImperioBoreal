@@ -1,7 +1,6 @@
-import React from "react";
 import './styles.css';
 
-export default function Loading() {
+export default function Loading(): JSX.Element {
   return (
           <svg xmlns="http://www.w3.org/2000/svg" height="200px" width="200px" viewBox="0 0 200 200" className="pencil">
             <defs>
@@ -27,7 +26,7 @@ export default function Loading() {
                   <rect height="2" width="30" y="13" fill="hsla(223,10%,10%,0.2)"></rect>
                 </g>
               </g>
-             <g transform="rotate(-90) translate(49,-30)" class="pencil__point">
+             <g transform="rotate(-90) translate(49,-30)" className="pencil__point">
 			<polygon points="15 0,30 30,0 30" fill="hsl(33,90%,70%)"></polygon>
 			<polygon points="15 0,6 30,0 30" fill="hsl(33,90%,50%)"></polygon>
 			<polygon points="15 0,20 10,10 10" fill="hsl(223,10%,10%)"></polygon>
