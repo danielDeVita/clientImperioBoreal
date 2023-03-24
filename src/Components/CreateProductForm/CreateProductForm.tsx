@@ -77,23 +77,24 @@ const CreateProductForm: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setProduct({
+    if(e.target.name === 'image') {
+      console.log(e.target.value)
+      setProduct(prevFormData => ({
+        ...prevFormData,
+        image: e.target.files?.[0] || null
+      }));
+    }
+    else { 
+      setProduct({
       ...product,
       [e.target.name]: e.target.value,
     });
+  }
     setTouched({
       ...touched,
       [e.target.name]: true,
-    });
-  };
-
-  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0]
-    setProduct(prevFormData => ({
-      ...prevFormData,
-      image: selectedFile || null,
-    }));
-  };
+  });
+};
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -101,12 +102,8 @@ const CreateProductForm: React.FC = () => {
       if (Object.keys(errors).length === 0) {
 
         const dataToSend = new FormData(formRef.current as HTMLFormElement);
-        if (product.image) {
-          dataToSend.append('image', (product.image))
-        }
-        
         await axios.post("http://localhost:3001/products", dataToSend);
-        console.log(product);
+        //sweetalert aca
         alert("Producto creado");
         setProduct({
           descriptionName: "",
@@ -117,10 +114,10 @@ const CreateProductForm: React.FC = () => {
           priceVATBusiness: 0,
           image: null
         });
-
         dispatch(getProducts())
         navigate("/dashboard");
       } else {
+        //sweet alert aca
         alert("Faltan completar campos");
       }
     } catch (error) {
@@ -166,7 +163,6 @@ const CreateProductForm: React.FC = () => {
                 {errors?.descriptionName && !product.descriptionName &&(
                   <p style={{ color: "red" }}>{errors?.descriptionName}</p>
                 )}
-                {/*El descriptionName ERROR y category ERROR se renderizan mal, el resto anda bien.*/}
                 <label className={style.formLabel} htmlFor="category">
                   Categoría:{" "}
                 </label>
@@ -255,12 +251,11 @@ const CreateProductForm: React.FC = () => {
                 <input
                   className={style.formInput}
 
-                  onChange={handleAvatarChange}
+                  onChange={handleInputChange}
                   id="image"
                   type="file"
                   name="image"
                 />
-
                 <button className={style.formButton} type="submit">
                   Crear producto
                 </button>
