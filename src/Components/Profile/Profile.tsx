@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./Profile.module.css"
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading"
 
 
 
@@ -8,7 +9,7 @@ const Profile: any = () => {
   const { user, isAuthenticated, isLoading, error, loginWithRedirect } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div> <Loading /></div>;
   }
 
   if (error) {

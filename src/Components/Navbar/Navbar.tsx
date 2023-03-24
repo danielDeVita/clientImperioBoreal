@@ -44,7 +44,7 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
                 <button className={style.loginBtn}><i className="fa-solid fa-user"></i></button>
                 </Link>
                 {
-                    user?.email === "danielitodevita@gmail.com"
+                    user?.email === import.meta.env.VITE_ADMIN_EMAIL
                         ?
                         <Link to="/dashboard">
                             <button className={style.AdminDashboardButton}><i className="fa-solid fa-gear"></i></button>

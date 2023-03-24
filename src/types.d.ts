@@ -23,6 +23,11 @@ export interface ProductToStorage extends Omit<Product, 'image'> {
     }
 }
 
+export interface ShoppingCartInteface extends Pick<Product, 'descriptionName' | 'category' | 'price' > {
+    readonly id: string;
+    image: string
+}
+
 export interface Errors {
     descriptionName?: string;
     category?: string;

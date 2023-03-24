@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import style from "./CreateProductForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const validateInputs = (product: Product, touched: any): Errors => {
   const errors: Errors = {};
-
+  
   if (touched.descriptionName && !product.descriptionName)
     errors.descriptionName = "Por favor ingrese un nombre para el producto.";
   if (touched.category && !product.category)
@@ -26,15 +26,15 @@ const validateInputs = (product: Product, touched: any): Errors => {
   if (touched.priceVATBusiness && product.priceVATBusiness <= 0)
     errors.priceVATBusiness =
       "El precio con IVA para empresas debe ser mayor a cero.";
-
+  
   return errors;
 };
 
 const CreateProductForm: React.FC = () => {
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-
-  const [touched, setTouched] = useState({
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const [touched, setTouched] = useState<any>({
     descriptionName: false,
     category: false,
     price: false,
@@ -64,55 +64,46 @@ const CreateProductForm: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
 
+  const handlerBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (touched[e.target.name]) {
+        if (!e.target.value) {
+          setErrors(validateInputs(product, touched))
+        }else if (errors.hasOwnProperty(e.target.name as keyof Errors)) {
+          delete errors[e.target.name as keyof Errors]
+          setErrors(errors)
+        }
+    }
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setProduct({
+    if(e.target.name === 'image') {
+      console.log(e.target.value)
+      setProduct(prevFormData => ({
+        ...prevFormData,
+        image: e.target.files?.[0] || null
+      }));
+    }
+    else { 
+      setProduct({
       ...product,
       [e.target.name]: e.target.value,
     });
+  }
     setTouched({
       ...touched,
       [e.target.name]: true,
-    });
-    setErrors(
-      validateInputs(product, {
-        ...touched,
-        [e.target.name]: true,
-      })
-    );
-  };
-
-  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0]
-    setProduct(prevFormData => ({
-      ...prevFormData,
-      image: selectedFile || null,
-    }));
-  };
+  });
+};
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-
-      const dataToSend = new FormData();
-
-      dataToSend.append('descriptionName', product.descriptionName);
-      dataToSend.append('category', product.category)
-      dataToSend.append('price', String(product.price))
-      dataToSend.append('priceBusiness', String(product.priceBusiness))
-      dataToSend.append('priceVAT', String(product.priceVAT))
-      dataToSend.append('priceVATBusiness', String(product.priceVATBusiness))
-      if (product.image) {
-        dataToSend.append('image', (product.image))
-      }
-      const config = {
-        headers: {
-          "content-type": "application/json; charset=utf-8"
-        }
-      };
       if (Object.keys(errors).length === 0) {
+
+        const dataToSend = new FormData(formRef.current as HTMLFormElement);
         await axios.post("http://localhost:3001/products", dataToSend);
-        console.log(product);
+        //sweetalert aca
         alert("Producto creado");
         setProduct({
           descriptionName: "",
@@ -123,10 +114,10 @@ const CreateProductForm: React.FC = () => {
           priceVATBusiness: 0,
           image: null
         });
-
         dispatch(getProducts())
         navigate("/dashboard");
       } else {
+        //sweet alert aca
         alert("Faltan completar campos");
       }
     } catch (error) {
@@ -154,7 +145,7 @@ const CreateProductForm: React.FC = () => {
               </p>
             </Link>
             <div className={style.divFormContainer}>
-              <form className={style.formContainer} onSubmit={handleSubmit}>
+              <form className={style.formContainer} onSubmit={handleSubmit} ref={formRef}>
                 <h1 className={style.formTitulo}>Crea un nuevo producto</h1>
 
                 <label className={style.formLabel} htmlFor="descriptionName">
@@ -164,14 +155,14 @@ const CreateProductForm: React.FC = () => {
                   className={style.formInput}
                   value={product.descriptionName}
                   onChange={handleInputChange}
+                  onBlur={handlerBlur}
                   id="descriptionName"
                   type="text"
                   name="descriptionName"
                 />
-                {errors?.descriptionName && (
+                {errors?.descriptionName && !product.descriptionName &&(
                   <p style={{ color: "red" }}>{errors?.descriptionName}</p>
                 )}
-                {/*El descriptionName ERROR y category ERROR se renderizan mal, el resto anda bien.*/}
                 <label className={style.formLabel} htmlFor="category">
                   Categoría:{" "}
                 </label>
@@ -179,11 +170,12 @@ const CreateProductForm: React.FC = () => {
                   className={style.formInput}
                   value={product.category}
                   onChange={handleInputChange}
+                  onBlur={handlerBlur}
                   id="category"
                   type="text"
                   name="category"
                 />
-                {errors?.category && (
+                {errors?.category &&  !product.category &&(
                   <p style={{ color: "red" }}>{errors?.category}</p>
                 )}
 
@@ -192,14 +184,16 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.price}
                   onChange={handleInputChange}
+                  onBlur={handlerBlur}
                   id="price"
                   type="number"
                   name="price"
                 />
-                {errors?.price && product?.price !== 0 && (
+                {errors?.price && (!product?.price || parseInt(product.price as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.price}</p>
                 )}
 
@@ -208,14 +202,16 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceBusiness}
                   onChange={handleInputChange}
+                  onBlur={handlerBlur}
                   id="priceBusiness"
                   type="number"
                   name="priceBusiness"
                 />
-                {errors?.priceBusiness && product?.priceBusiness !== 0 && (
+                {errors?.priceBusiness && (!product?.priceBusiness || parseInt(product.priceBusiness as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.priceBusiness}</p>
                 )}
 
@@ -224,14 +220,16 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceVAT}
                   onChange={handleInputChange}
+                  onBlur={handlerBlur}
                   id="priceBusiness"
                   type="number"
                   name="priceVAT"
                 />
-                {errors?.priceVAT && product?.priceVAT !== 0 && (
+                {errors?.priceVAT && (!product?.priceVAT || parseInt(product.priceVAT as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.priceVAT}</p>
                 )}
 
@@ -240,14 +238,16 @@ const CreateProductForm: React.FC = () => {
                 </label>
                 <input
                   min="0"
+                  max="1000000"
                   className={style.formInput}
                   value={product.priceVATBusiness}
                   onChange={handleInputChange}
+                  onBlur={handlerBlur}
                   id="priceVATBusiness"
                   type="number"
                   name="priceVATBusiness"
                 />
-                {errors?.priceVATBusiness && product?.priceVATBusiness !== 0 && (
+                {errors?.priceVATBusiness && (!product?.priceVATBusiness || parseInt(product.priceVATBusiness as any) <= 0)&& (
                   <p style={{ color: "red" }}>{errors.priceVATBusiness}</p>
                 )}
 
@@ -255,12 +255,11 @@ const CreateProductForm: React.FC = () => {
                 <input
                   className={style.formInput}
 
-                  onChange={handleAvatarChange}
+                  onChange={handleInputChange}
                   id="image"
                   type="file"
                   name="image"
                 />
-
                 <button className={style.formButton} type="submit">
                   Crear producto
                 </button>
