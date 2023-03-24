@@ -1,14 +1,17 @@
 import { useState } from "react"
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { KEY_LOCAL_STORAGE } from "../../types.d";
+import { KEY_LOCAL_STORAGE, ShoppingCartInteface } from "../../types.d";
 import style from "./ShoppingCartItem.module.css";
 
-const ShoppingCartItem = ({ descriptionName, category, price, id, image }) => {
+
+const ShoppingCartItem: React.FC<ShoppingCartInteface> = ({ descriptionName, category, price, id, image }) => {
 
     const [productQuantity, setProductQuantity] = useState(1)
 
-    const handleQuantityChange = (e) => {
-        setProductQuantity(e.target.value)
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (typeof parseInt(e.target.value) === 'number') {
+            setProductQuantity(parseInt(e.target.value) )
+        } 
     };
 
     const { deleteItems } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);

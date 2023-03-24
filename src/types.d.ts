@@ -9,8 +9,6 @@ export interface Product {
 }
 
 
-
-
 export interface ProductWithOutImage extends Omit<Product, 'image'> {}
 
 export interface OldProduct extends ProductWithOutImage {
@@ -23,6 +21,11 @@ export interface ProductToStorage extends Omit<Product, 'image'> {
         public_id: string;
         secure_url: string;
     }
+}
+
+export interface ShoppingCartInteface extends Pick<Product, 'descriptionName' | 'category' | 'price' > {
+    readonly id: string;
+    image: string
 }
 
 export interface Errors {
