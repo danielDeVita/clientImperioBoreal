@@ -36,7 +36,8 @@ export interface Errors {
   descriptionName?: string;
   category?: string;
   price?: string;
-  image?: string
+  stock?: string;
+  image?: string;
 }
 export interface DetailParams {
   id: string;
