@@ -1,23 +1,31 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import style from "./CreateProductForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../Redux/store";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/actions";
-import { Errors, Product, TouchedProductForm, UpProductForm } from "../../types.d";
+import {
+  Errors,
+  Product,
+  TouchedProductForm,
+  UpProductForm,
+} from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const validateInputs = (product: UpProductForm, touched: TouchedProductForm): Errors => {
+const validateInputs = (
+  product: UpProductForm,
+  touched: TouchedProductForm
+): Errors => {
   const errors: Errors = {};
 
   if (touched.descriptionName && !product.descriptionName)
     errors.descriptionName = "Por favor ingrese un nombre para el producto.";
   if (touched.category && !product.category)
     errors.category = "Por favor ingrese una categoría para el producto.";
-    if (touched.price && product.price <= 0)
+  if (touched.price && product.price <= 0)
     errors.price = "El precio debe ser mayor a cero.";
-    if (touched.image && product.image == null)
+  if (touched.image && product.image == null)
     errors.image = "Por favor ingresa una imagen para el producto";
   return errors;
 };
@@ -29,7 +37,7 @@ const CreateProductForm: React.FC = () => {
     descriptionName: false,
     category: false,
     price: false,
-    image: false
+    image: false,
   });
 
   const [product, setProduct] = useState<UpProductForm>({
@@ -43,8 +51,11 @@ const CreateProductForm: React.FC = () => {
     descriptionName: "",
     category: "",
     price: "",
-    image: ""
+    image: "",
   });
+
+  const [imagePreview, setImagePreview] = useState<string | undefined>();
+
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -61,11 +72,15 @@ const CreateProductForm: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "image") {
-      console.log(e.target.value);
       setProduct((prevFormData) => ({
         ...prevFormData,
         image: e.target.files?.[0] || null,
       }));
+      const selectedFile = e.target.files?.[0];
+      if (selectedFile) {
+        const url = URL.createObjectURL(selectedFile);
+        setImagePreview(url);
+      }
     } else {
       setProduct({
         ...product,
@@ -180,7 +195,14 @@ const CreateProductForm: React.FC = () => {
                 (!product?.price || parseInt(product.price as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.price}</p>
                 )}
-
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt={imagePreview}
+                  width='100'
+                  height='100'
+                />
+              )}
               <label className={style.formLabel} htmlFor='image'>
                 Imagen
               </label>
