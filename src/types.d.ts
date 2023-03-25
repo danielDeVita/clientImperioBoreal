@@ -5,7 +5,7 @@ export interface Product {
     _id: string;
     categoryName: string;
   };
-  stock?: number
+  stock: number 
   price: number;
   quantity?: number;
   image: {
@@ -17,7 +17,7 @@ export interface UpProductForm {
   descriptionName: string;
   category: string;
   price: number;
-  stock?: number;
+  stock: number
   image?: File | null
 }
 export interface TouchedProductForm {
