@@ -12,6 +12,12 @@ export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL'
+
+interface GETPaymentTotal {
+  type: typeof GET_PAYMENTOTAL,
+  payload: number
+}
 
 interface GetProductsAction {
   type: typeof GET_PRODUCTS;
@@ -58,7 +64,12 @@ export type ProductActionTypes =
   | OrderByPrice
   | ResetFilters
   | FilterByCategory
-  | GetCategories;
+  | GetCategories
+  | GETPaymentTotal
+
+export const getPaymentTotal = (total: number) => {
+  return { type: GET_PAYMENTOTAL, payload: total }
+}
 
 export const getProducts = (): ThunkAction<
   void,

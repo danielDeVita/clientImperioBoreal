@@ -9,16 +9,18 @@ const ShoppingCartItem: React.FC <Omit <Product, 'stock'>> = ({
   price,
   _id,
   image,
+  quantity
 }) => {
-  const [productQuantity, setProductQuantity] = useState(1);
+  const [productQuantity, setProductQuantity] = useState(quantity);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (typeof parseInt(e.target.value) === "number") {
+      updateQuantity(_id as string, parseInt(e.target.value))
       setProductQuantity(parseInt(e.target.value));
     }
   };
 
-  const { deleteItems } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
+  const { deleteItems, updateQuantity } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
 
   return (
     <tr className={style.trContainer}>
@@ -40,7 +42,7 @@ const ShoppingCartItem: React.FC <Omit <Product, 'stock'>> = ({
       <td>
         <button onClick={() => deleteItems(_id as string)}>Eliminar</button>
       </td>
-      <td>{productQuantity * price}</td>
+      <td>{(productQuantity || 1) * price}</td>
     </tr>
   );
 };

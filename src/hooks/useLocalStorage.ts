@@ -1,9 +1,12 @@
 import { Product, CartContextType } from "../types.d";
 import { useContext } from "react";
 import { CartContext } from "../context/index";
+import { useDispatch } from "react-redux";
+import { getPaymentTotal } from '../Redux/actions'
 
 const useLocalStorage = (KEY: string) => {
   const { setTotalCart } = useContext(CartContext) as CartContextType;
+  const dispatch = useDispatch()
   const createStorage = () => {
     if (!localStorage.getItem(KEY)) {
       localStorage.setItem(KEY, "[]");
@@ -22,6 +25,20 @@ const useLocalStorage = (KEY: string) => {
     getTotal();
   };
 
+  const loadPayment = () => {
+     const values = getLocalStorage()
+     const total = values?.reduce((prev: number, current: Omit<Product, 'stock'>) => prev += (current?.price * (current?.quantity as number)), 0)
+     dispatch(getPaymentTotal(total))
+  }
+
+  const updateQuantity = (_id: string, qty: number) => {
+    const values = getLocalStorage()
+    const index = values?.findIndex((item: Omit<Product, 'stock'>) => item?._id === _id)
+    values[index].quantity = qty
+    localStorage.setItem(KEY, JSON.stringify(values))
+    loadPayment()
+  }
+
   const deleteItems = (id: string) => {
     const products = getLocalStorage();
     const filteredProducst = products?.filter(
@@ -29,6 +46,7 @@ const useLocalStorage = (KEY: string) => {
     );
     localStorage.setItem(KEY, JSON.stringify(filteredProducst));
     getTotal();
+    loadPayment()
   };
 
   const clearStorage = () => {
@@ -53,6 +71,8 @@ const useLocalStorage = (KEY: string) => {
     clearStorage,
     validateProducst,
     getTotal,
+    loadPayment,
+    updateQuantity
   };
 };
 
