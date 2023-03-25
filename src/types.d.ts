@@ -57,6 +57,7 @@ export interface User {
   isAdmin: Boolean;
 }
 export interface State {
+  payment: number
   products: Product[];
   filteredProducts: Product[];
   users: User[];

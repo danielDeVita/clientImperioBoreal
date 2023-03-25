@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Product, KEY_LOCAL_STORAGE } from "../../types.d";
+import { Product, KEY_LOCAL_STORAGE, State } from "../../types.d";
 import style from "../ShoppingCart/ShoppingCart.module.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import ShoppingCartItem from "../ShoppingCartItem/ShoppingCartItem";
+import { useSelector } from "react-redux";
 //EL QUE DESACOOMODA EL CART LO CAGO A PALOS
 
 const ShoppingCart: React.FC = () => {
   const [user_id, setUser_id] = useState("");
-
+  const payment = useSelector((state: State) => state.payment)
   const { user } = useAuth0();
 
   const getUser_id = async () => {
@@ -32,13 +33,19 @@ const ShoppingCart: React.FC = () => {
     return count + 1;
   };
 
+  const { getLocalStorage, loadPayment } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
+
+  const products = getLocalStorage();
+
+
+  useEffect(() => {
+    loadPayment()
+  }, [])
+
   useEffect(() => {
     getUser_id();
   }, [user]);
 
-  const { getLocalStorage } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
-
-  const products = getLocalStorage();
 
   const cartToDB = async (products: Product[], user_id: string) => {
     const carrito = {
@@ -87,13 +94,14 @@ const ShoppingCart: React.FC = () => {
                 price={product.price}
                 _id={product._id}
                 image={product.image}
+                quantity={product.quantity}
               />
             ))}
           </tbody>
         </table>
         <div className={style.tablaComprar}>
           <h2>Total:</h2>
-          <p>${products[0]?.price}</p>
+          <p>${payment}</p>
           <button
             className={style.btnComprar}
             onClick={() => cartToDB(products, user_id)}

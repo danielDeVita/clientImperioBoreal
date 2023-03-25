@@ -8,7 +8,13 @@ import {
   RESET_FILTERS,
   FILTER_BY_CATEGORY,
   GET_CATEGORIES,
+  GET_PAYMENTOTAL
 } from "./actions";
+
+interface GETPaymentTotal {
+  type: typeof GET_PAYMENTOTAL
+  payload: number
+}
 
 interface GetProductsAction {
   type: typeof GET_PRODUCTS;
@@ -55,7 +61,8 @@ export type ProductActionTypes =
   | SearchProducts
   | OrderByPrice
   | ResetFilters
-  | FilterByCategory;
+  | FilterByCategory
+  | GETPaymentTotal
 // GetCategories;
 
 const initialState: State = {
@@ -64,6 +71,7 @@ const initialState: State = {
   users: [],
   detail: {} as Product,
   categories: [],
+  payment: 0
 };
 
 const reducer = (
@@ -71,6 +79,11 @@ const reducer = (
   action: ProductActionTypes
 ): State => {
   switch (action.type) {
+    case GET_PAYMENTOTAL:
+      return {
+        ...state,
+        payment: action.payload
+      }
     case GET_PRODUCTS:
       return {
         ...state,
