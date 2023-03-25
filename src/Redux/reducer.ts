@@ -49,10 +49,10 @@ interface FilterByCategory {
   type: typeof FILTER_BY_CATEGORY;
   payload: string;
 }
-//   interface GetCategories {
-//     type: typeof GET_CATEGORIES;
-//     payload: String[];
-//   }
+  interface GetCategories {
+    type: typeof GET_CATEGORIES;
+    payload: String[];
+  }
 
 export type ProductActionTypes =
   | GetProductsAction
@@ -64,6 +64,7 @@ export type ProductActionTypes =
   | FilterByCategory
   | GETPaymentTotal
 // GetCategories;
+  | GetCategories;
 
 const initialState: State = {
   products: [],
@@ -137,11 +138,11 @@ const reducer = (
           (product) => product.category.categoryName === action.payload
         ),
       };
-    // case GET_CATEGORIES:
-    //     return {
-    //         ...state,
-    //         categories: action.payload
-    //     }
+    case GET_CATEGORIES:
+        return {
+            ...state,
+            categories: action.payload
+        }
     default:
       return { ...state };
   }

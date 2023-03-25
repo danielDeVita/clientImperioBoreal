@@ -1,46 +1,46 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import style from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
-import { Product } from "../../types.d";
+import { Product, State } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import { getProducts } from "../../Redux/actions";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../Redux/store";
 
 const Dashboard: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const dispatch: AppDispatch = useDispatch();
+
+  const allProducts = useSelector((state: State) => state.products);
+
+  useEffect(() => {}, [allProducts]);
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get<Product[]>("/products");
-      setProducts(response.data);
-    }
-    fetchData();
-  }, []);
 
   const handleDelete = async (_id: string) => {
     try {
       Swal.fire({
-        title: 'Seguro que quieres eliminar el producto?',
+        title: "Seguro que quieres eliminar el producto?",
         text: "No se puede revertir",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#0fb1bd',
-        confirmButtonText: 'Eliminar',
-        iconColor: 'red',
-      }).then( async (result) => {
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#0fb1bd",
+        confirmButtonText: "Eliminar",
+        iconColor: "red",
+      }).then(async (result) => {
         if (result.isConfirmed) {
           const deleteProduct = await axios.delete(`/products/${_id}`);
-          setProducts(products.filter((product) => product._id !== _id));
+          dispatch(getProducts());
           Swal.fire(
-            'Eliminado con éxito',
-            'Tu producto ha sido eliminado',
-            'success'
-          )
+            "Eliminado con éxito",
+            "Tu producto ha sido eliminado",
+            "success"
+          );
         }
-      })
+      });
     } catch (error) {
       console.error(error);
     }
@@ -76,6 +76,7 @@ const Dashboard: React.FC = () => {
                 <th>Imagen</th>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Stock</th>
                 <th>Categoría</th>
                 <th>Precio</th>
                 <th></th>
@@ -83,7 +84,7 @@ const Dashboard: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {allProducts.map((product: Product) => (
                 <tr key={product._id}>
                   <th>
                     <img
@@ -95,6 +96,7 @@ const Dashboard: React.FC = () => {
                   </th>
                   <td>{product._id}</td>
                   <td>{product.descriptionName}</td>
+                  <td>{product.stock}</td>
                   <td>{product.category.categoryName}</td>
                   <td>{product.price}</td>
                   <td>
