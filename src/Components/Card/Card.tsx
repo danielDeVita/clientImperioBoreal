@@ -6,6 +6,7 @@ import addToCart from "../../assets/add-to-cart.png";
 import checkOut from "../../assets/check-out.png";
 import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import Swal from "sweetalert2";
 
 const Card: React.FC<Product> = ({
   descriptionName,
@@ -22,6 +23,15 @@ const Card: React.FC<Product> = ({
     if (added) {
       deleteItems(_id as string);
     } else {
+      Swal.fire({
+        returnFocus: false,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Agregado al carrito',
+        showConfirmButton: false,
+        timer: 550,
+        backdrop: false,      
+      })
       setItmes({
         descriptionName,
         category,
