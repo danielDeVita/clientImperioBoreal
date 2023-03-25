@@ -17,7 +17,6 @@ export interface UpProductForm {
   price: number;
   image?: File | null
 }
-
 export interface TouchedProductForm {
   descriptionName: boolean;
   category: boolean;
@@ -29,7 +28,6 @@ export interface ShoppingCartInteface
   readonly id: string;
   image: string;
 }
-
 export interface Errors {
   descriptionName?: string;
   category?: string;
@@ -43,12 +41,10 @@ export interface DetailParams {
 export enum KEY_LOCAL_STORAGE {
   KEY = "CART_PRODUCT",
 }
-
 export interface CartContextType {
   totalCart: number;
   setTotalCart: (count: number) => void;
 }
-
 export interface User {
   name: String;
   password: String;
@@ -62,33 +58,3 @@ export interface State {
   detail: Product;
   categories: String[];
 }
-
-// interface DetailInterface extends ProductWithOutImage {
-//     image: {
-//       public_id: string;
-//       secure_url: string;
-//     };
-// }
-
-// export interface RootState {
-//   detail: DetailInterface;
-// }
-
-
-// export interface ProductToDashboard extends ProductWithOutImage{
-//     readonly _id: string;
-// }
-
-// export interface ProductWithOutImage extends Omit<Product, 'image'> {}
-
-// export interface OldProduct extends ProductWithOutImage {
-//     readonly _id: string;
-// }
-
-// export interface ProductToStorage extends Omit<Product, 'image'> {
-//     readonly id: string;
-//     image: {
-//         public_id: string;
-//         secure_url: string;
-//     }
-// }
