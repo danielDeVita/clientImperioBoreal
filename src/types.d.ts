@@ -17,12 +17,14 @@ export interface UpProductForm {
   descriptionName: string;
   category: string;
   price: number;
+  stock?: number;
   image?: File | null
 }
 export interface TouchedProductForm {
   descriptionName: boolean;
   category: boolean;
   price: boolean;
+  stock?: boolean,
   image?: boolean; 
 }
 export interface ShoppingCartInteface
