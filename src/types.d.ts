@@ -17,11 +17,12 @@ export interface UpProductForm {
   price: number;
   image?: File | null
 }
+
 export interface TouchedProductForm {
   descriptionName: boolean;
   category: boolean;
   price: boolean;
-  image: boolean
+  image?: boolean; 
 }
 // export interface ProductWithOutImage extends Omit<Product, 'image'> {}
 

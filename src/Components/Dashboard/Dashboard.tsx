@@ -4,6 +4,7 @@ import style from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { Product } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const Dashboard: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -20,9 +21,26 @@ const Dashboard: React.FC = () => {
 
   const handleDelete = async (_id: string) => {
     try {
-      const deleteProduct = await axios.delete(`/products/${_id}`);
-      // Remove the deleted product from the state
-      setProducts(products.filter((product) => product._id !== _id));
+      Swal.fire({
+        title: 'Seguro que quieres eliminar el producto?',
+        text: "No se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#0fb1bd',
+        confirmButtonText: 'Eliminar',
+        iconColor: 'red',
+      }).then( async (result) => {
+        if (result.isConfirmed) {
+          const deleteProduct = await axios.delete(`/products/${_id}`);
+          setProducts(products.filter((product) => product._id !== _id));
+          Swal.fire(
+            'Eliminado con éxito',
+            'Tu producto ha sido eliminado',
+            'success'
+          )
+        }
+      })
     } catch (error) {
       console.error(error);
     }
