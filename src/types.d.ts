@@ -5,7 +5,9 @@ export interface Product {
     _id: string;
     categoryName: string;
   };
+  stock?: number
   price: number;
+  quantity?: number;
   image: {
     public_id: string;
     secure_url: string;
