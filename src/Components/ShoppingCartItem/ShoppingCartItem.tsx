@@ -3,7 +3,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
 import style from "./ShoppingCartItem.module.css";
 
-const ShoppingCartItem: React.FC<Product> = ({
+const ShoppingCartItem: React.FC <Omit <Product, 'stock'>> = ({
   descriptionName,
   category,
   price,
