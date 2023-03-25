@@ -4,12 +4,9 @@ import style from "./UpdateProductForm.module.css";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Product, Errors } from "../../types.d";
+import { Product, Errors, UpProductForm } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 
-interface UpdateProductiterface {
-  descriptionName: string;
-}
 const validate = (product: Product) => {
   // Validation logic here
   return {};
@@ -26,24 +23,21 @@ const UpdateProductForm: React.FC = () => {
       .get<Product>(`/products/${id}`)
       .then((response) => {
         const oldProduct = response.data;
-        setProduct(oldProduct);
+        setProduct({
+          descriptionName: oldProduct.descriptionName,
+          category: oldProduct.category.categoryName,
+          price: oldProduct.price
+         });
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  const [product, setProduct] = useState<Product>({
+  const [product, setProduct] = useState<UpProductForm>({
     descriptionName: "",
-    category: {
-      _id: "",
-      categoryName: "",
-    },
+    category: "",
     price: 0,
-    image: {
-      public_id: "",
-      secure_url: "",
-    },
   });
 
   const [errors, setErrors] = useState<Errors>({
@@ -131,48 +125,6 @@ const UpdateProductForm: React.FC = () => {
                 id='price'
                 type='number'
                 name='price'
-              />
-
-              <label className={style.formLabel} htmlFor='priceBusiness'>
-                Precio venta empresas:{" "}
-              </label>
-              <input
-                min='0'
-                max='1000000'
-                className={style.formInput}
-                value={product.priceBusiness}
-                onChange={handleInputChange}
-                id='priceBusiness'
-                type='number'
-                name='priceBusiness'
-              />
-
-              <label className={style.formLabel} htmlFor='priceVAT'>
-                Precio Consumidor Final C/IVA:{" "}
-              </label>
-              <input
-                min='0'
-                max='1000000'
-                className={style.formInput}
-                value={product.priceVAT}
-                onChange={handleInputChange}
-                id='priceBusiness'
-                type='number'
-                name='priceVAT'
-              />
-
-              <label className={style.formLabel} htmlFor='priceVATBusiness'>
-                Precio Empresa C/IVA:{" "}
-              </label>
-              <input
-                min='0'
-                max='1000000'
-                className={style.formInput}
-                value={product.priceVATBusiness}
-                onChange={handleInputChange}
-                id='priceVATBusiness'
-                type='number'
-                name='priceVATBusiness'
               />
 
               <button className={style.formButton} type='submit'>

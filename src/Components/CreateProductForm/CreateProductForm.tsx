@@ -5,50 +5,37 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../Redux/store";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/actions";
-import { Errors, Product } from "../../types";
+import { Errors, Product, TouchedProductForm, UpProductForm } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const validateInputs = (product: Product, touched: any): Errors => {
+const validateInputs = (product: UpProductForm, touched: TouchedProductForm): Errors => {
   const errors: Errors = {};
 
   if (touched.descriptionName && !product.descriptionName)
     errors.descriptionName = "Por favor ingrese un nombre para el producto.";
   if (touched.category && !product.category)
     errors.category = "Por favor ingrese una categoría para el producto.";
-  if (touched.price && product.price <= 0)
+    if (touched.price && product.price <= 0)
     errors.price = "El precio debe ser mayor a cero.";
-  if (touched.priceBusiness && product.priceBusiness <= 0)
-    errors.priceBusiness =
-      "El precio de venta a empresas debe ser mayor a cero.";
-  if (touched.priceVAT && product.priceVAT <= 0)
-    errors.priceVAT =
-      "El precio con IVA para consumidores finales debe ser mayor a cero.";
-  if (touched.priceVATBusiness && product.priceVATBusiness <= 0)
-    errors.priceVATBusiness =
-      "El precio con IVA para empresas debe ser mayor a cero.";
-
+    if (touched.image && product.image == null)
+    errors.image = "Por favor ingresa una imagen para el producto";
   return errors;
 };
 
 const CreateProductForm: React.FC = () => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [touched, setTouched] = useState<any>({
+  const [touched, setTouched] = useState<TouchedProductForm>({
     descriptionName: false,
     category: false,
     price: false,
-    priceBusiness: false,
-    priceVAT: false,
-    priceVATBusiness: false,
+    image: false
   });
 
-  const [product, setProduct] = useState<Product>({
+  const [product, setProduct] = useState<UpProductForm>({
     descriptionName: "",
     category: "",
     price: 0,
-    priceBusiness: 0,
-    priceVAT: 0,
-    priceVATBusiness: 0,
     image: null,
   });
 
@@ -56,15 +43,13 @@ const CreateProductForm: React.FC = () => {
     descriptionName: "",
     category: "",
     price: "",
-    priceBusiness: "",
-    priceVAT: "",
-    priceVATBusiness: "",
+    image: ""
   });
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handlerBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (touched[e.target.name]) {
+  const handlerBlur = (e: any) => {
+    if (touched[e.target.name as keyof TouchedProductForm]) {
       if (!e.target.value) {
         setErrors(validateInputs(product, touched));
       } else if (errors.hasOwnProperty(e.target.name as keyof Errors)) {
@@ -105,9 +90,6 @@ const CreateProductForm: React.FC = () => {
           descriptionName: "",
           category: "",
           price: 0,
-          priceBusiness: 0,
-          priceVAT: 0,
-          priceVATBusiness: 0,
           image: null,
         });
         dispatch(getProducts());
@@ -197,66 +179,6 @@ const CreateProductForm: React.FC = () => {
               {errors?.price &&
                 (!product?.price || parseInt(product.price as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.price}</p>
-                )}
-
-              <label className={style.formLabel} htmlFor='priceBusiness'>
-                Precio venta empresas:{" "}
-              </label>
-              <input
-                min='0'
-                max='1000000'
-                className={style.formInput}
-                value={product.priceBusiness}
-                onChange={handleInputChange}
-                onBlur={handlerBlur}
-                id='priceBusiness'
-                type='number'
-                name='priceBusiness'
-              />
-              {errors?.priceBusiness &&
-                (!product?.priceBusiness ||
-                  parseInt(product.priceBusiness as any) <= 0) && (
-                  <p style={{ color: "red" }}>{errors.priceBusiness}</p>
-                )}
-
-              <label className={style.formLabel} htmlFor='priceVAT'>
-                Precio Consumidor Final C/IVA:{" "}
-              </label>
-              <input
-                min='0'
-                max='1000000'
-                className={style.formInput}
-                value={product.priceVAT}
-                onChange={handleInputChange}
-                onBlur={handlerBlur}
-                id='priceBusiness'
-                type='number'
-                name='priceVAT'
-              />
-              {errors?.priceVAT &&
-                (!product?.priceVAT ||
-                  parseInt(product.priceVAT as any) <= 0) && (
-                  <p style={{ color: "red" }}>{errors.priceVAT}</p>
-                )}
-
-              <label className={style.formLabel} htmlFor='priceVATBusiness'>
-                Precio Empresa C/IVA:{" "}
-              </label>
-              <input
-                min='0'
-                max='1000000'
-                className={style.formInput}
-                value={product.priceVATBusiness}
-                onChange={handleInputChange}
-                onBlur={handlerBlur}
-                id='priceVATBusiness'
-                type='number'
-                name='priceVATBusiness'
-              />
-              {errors?.priceVATBusiness &&
-                (!product?.priceVATBusiness ||
-                  parseInt(product.priceVATBusiness as any) <= 0) && (
-                  <p style={{ color: "red" }}>{errors.priceVATBusiness}</p>
                 )}
 
               <label className={style.formLabel} htmlFor='image'>

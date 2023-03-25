@@ -11,7 +11,18 @@ export interface Product {
     secure_url: string;
   };
 }
-
+export interface UpProductForm {
+  descriptionName: string;
+  category: string;
+  price: number;
+  image?: File | null
+}
+export interface TouchedProductForm {
+  descriptionName: boolean;
+  category: boolean;
+  price: boolean;
+  image: boolean
+}
 // export interface ProductWithOutImage extends Omit<Product, 'image'> {}
 
 // export interface OldProduct extends ProductWithOutImage {
@@ -36,6 +47,7 @@ export interface Errors {
   descriptionName?: string;
   category?: string;
   price?: string;
+  image?: string
 }
 
 // export interface ProductToDashboard extends ProductWithOutImage{

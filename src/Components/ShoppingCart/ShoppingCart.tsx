@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Product } from "../../types.d";
+import { Product, KEY_LOCAL_STORAGE } from "../../types.d";
 import style from "../ShoppingCart/ShoppingCart.module.css";
-import { KEY_LOCAL_STORAGE } from "../../types.d";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -80,7 +79,7 @@ const ShoppingCart: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {products?.map((product: Product) => (
+            {products.map((product: Product) => (
               <ShoppingCartItem
                 key={product._id}
                 descriptionName={product.descriptionName}
