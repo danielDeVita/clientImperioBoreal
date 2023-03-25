@@ -3,13 +3,14 @@ import axios from "axios";
 import style from "./CreateProductForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../Redux/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/actions";
 import {
   Errors,
   Product,
   TouchedProductForm,
   UpProductForm,
+  State
 } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
@@ -36,7 +37,8 @@ const validateInputs = (
 const CreateProductForm: React.FC = () => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [touched, setTouched] = useState<TouchedProductForm>({
+  const categories = useSelector((state: State) => state.categories)
+  const [touched, setTouched] = useState <TouchedProductForm>({
     descriptionName: false,
     category: false,
     price: false,
@@ -44,7 +46,7 @@ const CreateProductForm: React.FC = () => {
     image: false,
   });
 
-  const [product, setProduct] = useState<UpProductForm>({
+  const [product, setProduct] = useState <UpProductForm>({
     descriptionName: "",
     category: "",
     price: 0,
@@ -65,7 +67,7 @@ const CreateProductForm: React.FC = () => {
   const navigate = useNavigate();
 
   const handlerBlur = (e: any) => {
-    if (touched[e.target.name as keyof TouchedProductForm]) {
+    if (touched[e.target.name as keyof Omit<TouchedProductForm, 'category'>]) {
       if (!e.target.value) {
         setErrors(validateInputs(product, touched));
       } else if (errors.hasOwnProperty(e.target.name as keyof Errors)) {
@@ -75,7 +77,7 @@ const CreateProductForm: React.FC = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: any) => {
     if (e.target.name === "image") {
       setProduct((prevFormData) => ({
         ...prevFormData,
@@ -103,6 +105,7 @@ const CreateProductForm: React.FC = () => {
       delete errors[e.target.name as keyof Errors];
       setErrors(errors);
     }
+    console.log(product.category)
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -186,18 +189,16 @@ const CreateProductForm: React.FC = () => {
               <label className={style.formLabel} htmlFor='category'>
                 Categoría:{" "}
               </label>
-              <input
-                className={style.formInput}
-                value={product.category}
-                onChange={handleInputChange}
-                onBlur={handlerBlur}
-                id='category'
-                type='text'
-                name='category'
-              />
+              <select onChange={(e) => handleInputChange(e)}name="category" id="category" defaultValue='default'>
+                <option value="default" disabled>Elija su cateogría</option>
+                {categories.map((category: any) => {
+                  return <option value={category.category}>{category.category}</option>
+                })}
+              </select>
+            
               {errors?.category && !product.category && (
                 <p style={{ color: "red" }}>{errors?.category}</p>
-              )}
+              )} 
               <label className={style.formLabel} htmlFor='price'>
                 Precio:{" "}
               </label>
@@ -257,7 +258,7 @@ const CreateProductForm: React.FC = () => {
                !product?.image) && 
                   <p style={{ color: "red" }}>{errors.image}</p>
                 }
-              <button className={style.formButton} type='submit' disabled={!Object.keys(errors).length ? false : true}>
+              <button className={style.formButton} type='submit'disabled={!Object.keys(errors).length ? false : true} >
                 Crear producto
               </button>
             </form>
