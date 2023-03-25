@@ -56,7 +56,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 .cardContent div {
@@ -97,6 +97,26 @@
   color: #a9a9a9;
 }
 
-p {
+.pCantidad p {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  margin-left: 0px;
+}
+.btnStock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+}
+.btnStock button {
+  border: none;
+  background-color: white;
+  font-size: 25px;
+  color: #0FB1BD;
+}
+.btnStock input {
+  width: 40px;
+  height: min-content;
 }

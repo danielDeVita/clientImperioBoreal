@@ -23,20 +23,6 @@ export interface TouchedProductForm {
   price: boolean;
   image: boolean
 }
-// export interface ProductWithOutImage extends Omit<Product, 'image'> {}
-
-// export interface OldProduct extends ProductWithOutImage {
-//     readonly _id: string;
-// }
-
-// export interface ProductToStorage extends Omit<Product, 'image'> {
-//     readonly id: string;
-//     image: {
-//         public_id: string;
-//         secure_url: string;
-//     }
-// }
-
 export interface ShoppingCartInteface
   extends Pick<Product, "descriptionName" | "category" | "price"> {
   readonly id: string;
@@ -49,27 +35,10 @@ export interface Errors {
   price?: string;
   image?: string
 }
-
-// export interface ProductToDashboard extends ProductWithOutImage{
-//     readonly _id: string;
-// }
-
 export interface DetailParams {
   id: string;
   [key: string]: string | undefined;
 }
-
-// interface DetailInterface extends ProductWithOutImage {
-//     image: {
-//       public_id: string;
-//       secure_url: string;
-//     };
-// }
-
-// export interface RootState {
-//   detail: DetailInterface;
-// }
-
 export enum KEY_LOCAL_STORAGE {
   KEY = "CART_PRODUCT",
 }
@@ -92,3 +61,33 @@ export interface State {
   detail: Product;
   categories: String[];
 }
+
+// interface DetailInterface extends ProductWithOutImage {
+//     image: {
+//       public_id: string;
+//       secure_url: string;
+//     };
+// }
+
+// export interface RootState {
+//   detail: DetailInterface;
+// }
+
+
+// export interface ProductToDashboard extends ProductWithOutImage{
+//     readonly _id: string;
+// }
+
+// export interface ProductWithOutImage extends Omit<Product, 'image'> {}
+
+// export interface OldProduct extends ProductWithOutImage {
+//     readonly _id: string;
+// }
+
+// export interface ProductToStorage extends Omit<Product, 'image'> {
+//     readonly id: string;
+//     image: {
+//         public_id: string;
+//         secure_url: string;
+//     }
+// }
