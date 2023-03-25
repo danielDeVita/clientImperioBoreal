@@ -9,7 +9,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { getProducts } from "../../Redux/actions";
 import { AppDispatch } from "../../Redux/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "../../types.d";
 
 
 const validateInputs = (product: UpProductForm, touched: TouchedProductForm): Errors => {
@@ -30,22 +31,25 @@ const UpdateProductForm: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
   const formRef = useRef<HTMLFormElement | null>(null);
+  const categories = useSelector((state:State) => state.categories)
 
   const [product, setProduct] = useState<UpProductForm>({
     descriptionName: "",
-    category: "",
+    // category: {},
     price: 0,
     stock: 0,
   });
   const [errors, setErrors] = useState<Errors>({
     descriptionName: "",
-    category: "",
+    // category: "",
     price: "",
+    stock: ""
   });
   const [touched, setTouched] = useState<TouchedProductForm>({
     descriptionName: false,
-    category: false,
+    // category: false,
     price: false,
+    stock: false
   });
 
   const handlerBlur = (e: any) => {
@@ -58,7 +62,7 @@ const UpdateProductForm: React.FC = () => {
       }
     }
   };
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
+  const handleInputChange = (e: any) => { 
       setProduct({
         ...product,
         [e.target.name]: e.target.value,
@@ -73,7 +77,6 @@ const UpdateProductForm: React.FC = () => {
     e.preventDefault();
     try {
       await axios.put(`/products/${id}`, product);
-      console.log(product);
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -96,7 +99,7 @@ const UpdateProductForm: React.FC = () => {
         const oldProduct = response.data;
         setProduct({
           descriptionName: oldProduct.descriptionName,
-          category: oldProduct.category.categoryName,
+          // category: oldProduct.category,
           price: oldProduct.price,
           stock: oldProduct.stock
          });
@@ -104,6 +107,7 @@ const UpdateProductForm: React.FC = () => {
       .catch((error) => {
         console.error(error);
       });
+    
   }, []);
 
   return (
@@ -150,10 +154,10 @@ const UpdateProductForm: React.FC = () => {
                 <p style={{ color: "red" }}>{errors?.descriptionName}</p>
               )}
 
-              <label className={style.formLabel} htmlFor='category'>
+              {/* <label className={style.formLabel} htmlFor='category'>
                 Categoría:{" "}
               </label>
-              <input
+              {/* <input
                 className={style.formInput}
                 value={product.category}
                 onChange={handleInputChange}
@@ -161,10 +165,15 @@ const UpdateProductForm: React.FC = () => {
                 id='category'
                 type='text'
                 name='category'
-              />
+              /> */}
+              {/* <select onChange={(e) => handleInputChange(e)} name="category" id="category" value={product.category}>
+                {categories.map((category: any) => {
+                  return <option value={category.category}>{category.category}</option>
+                })} */}
+              {/* </select>
                {errors?.category && !product.category && (
                 <p style={{ color: "red" }}>{errors?.category}</p>
-              )}
+              )} */}
 
               <label className={style.formLabel} htmlFor='price'>
                 Precio:{" "}
@@ -183,6 +192,25 @@ const UpdateProductForm: React.FC = () => {
               {errors?.price &&
                 (!product?.price || parseInt(product.price as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.price}</p>
+                )}
+
+                <label className={style.formLabel} htmlFor='stock'>
+                Stock:{" "}
+              </label>
+              <input
+                min='0'
+                max='10000'
+                className={style.formInput}
+                value={product.stock}
+                onChange={handleInputChange}
+                onBlur={handlerBlur}
+                id='stock'
+                type='number'
+                name='stock'
+              />
+              {errors?.stock &&
+                (!product?.stock || parseInt(product.stock as any) <= 0) && (
+                  <p style={{ color: "red" }}>{errors.stock}</p>
                 )}
               <button className={style.formButton} type='submit'>
                 Modificar producto
