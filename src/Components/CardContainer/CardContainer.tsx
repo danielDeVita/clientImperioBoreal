@@ -16,6 +16,7 @@ const CardContainer: React.FC<productProps> = ({ productsFiltered }) => {
               price={product.price}
               _id={product._id}
               image={product.image}
+              stock={product.stock}
             />
           );
         })}

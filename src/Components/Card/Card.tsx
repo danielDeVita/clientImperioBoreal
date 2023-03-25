@@ -14,10 +14,12 @@ const Card: React.FC<Product> = ({
   price,
   _id,
   image,
+  stock
 }) => {
   const { setItmes, deleteItems, validateProducst } = useLocalStorage(
     KEY_LOCAL_STORAGE.KEY
   );
+  const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState<boolean>(validateProducst(_id as string));
   const handlerAddProduct = () => {
     if (added) {
@@ -38,10 +40,17 @@ const Card: React.FC<Product> = ({
         price,
         _id,
         image,
+        quantity
       });
     }
     setAdded((prevValue) => !prevValue);
   };
+
+  const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (parseInt(e.target.value) > (stock || 40) ) {
+         setQuantity((stock || 40))
+      } else setQuantity(parseInt(e.target.value))
+  }
   return (
     <div className={style.card}>
       <h1>{descriptionName}</h1>
@@ -57,10 +66,10 @@ const Card: React.FC<Product> = ({
         <p>Cantidad</p>
       </div>
       <div className={style.btnStock}>
-        <input type="number" min="0" max="100" />
+          <input type='number' min='1' max={stock} value={quantity} onChange={handleQuantity}/>
       </div>
       <div className={style.cardContent}>
-        <h5>Stock: num</h5>
+        <h5>Stock: {stock}</h5>
         <h5>Categoria: {category.categoryName}</h5>
         <div>
           <h2>${price} ARS</h2>
