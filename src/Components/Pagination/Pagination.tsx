@@ -22,7 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({productsPerPage, allProducts, pa
              {pageNumbers.length > 1 && (
             <ul className={style.paginadoList} >
               {currentPage > 1 ? (
-                <button className={style.btn} onClick={prevPage}>Previous</button>
+                <button className={style.btn} onClick={prevPage}>Anterior</button>
                 ) : ( 
                     <button hidden className={style.btn}>Anterior</button>
                 )}
