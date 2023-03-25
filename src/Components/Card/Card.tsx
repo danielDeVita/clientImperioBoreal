@@ -43,7 +43,14 @@ const Card: React.FC<Product> = ({
           />
         </Link>
       </div>
+      <div className={style.pCantidad}>
+        <p>Cantidad</p>
+      </div>
+      <div className={style.btnStock}>
+        <input type="number" min="0" max="100" />
+      </div>
       <div className={style.cardContent}>
+        <h5>Stock: num</h5>
         <h5>Categoria: {category.categoryName}</h5>
         <div>
           <h2>${price} ARS</h2>
