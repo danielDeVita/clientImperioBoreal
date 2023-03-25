@@ -15,7 +15,7 @@ const useLocalStorage = (KEY: string) => {
     return values;
   };
 
-  const setItmes = (values: Product) => {
+  const setItmes = (values: Omit<Product,'stock'>) => {
     const products = getLocalStorage();
     products.push(values);
     localStorage.setItem(KEY, JSON.stringify(products));
