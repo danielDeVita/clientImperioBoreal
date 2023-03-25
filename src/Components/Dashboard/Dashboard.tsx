@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
           <table className={style.dashboardTable}>
             <thead>
               <tr>
-                <th>Image</th>
+                <th>Imagen</th>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Categoría</th>
