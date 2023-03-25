@@ -5,7 +5,7 @@ export interface Product {
     _id: string;
     categoryName: string;
   };
-  stock?: number
+  stock: number 
   price: number;
   quantity?: number;
   image: {
@@ -17,12 +17,14 @@ export interface UpProductForm {
   descriptionName: string;
   category: string;
   price: number;
+  stock: number
   image?: File | null
 }
 export interface TouchedProductForm {
   descriptionName: boolean;
   category: boolean;
   price: boolean;
+  stock?: boolean,
   image?: boolean; 
 }
 export interface ShoppingCartInteface
@@ -34,7 +36,8 @@ export interface Errors {
   descriptionName?: string;
   category?: string;
   price?: string;
-  image?: string
+  stock?: string;
+  image?: string;
 }
 export interface DetailParams {
   id: string;

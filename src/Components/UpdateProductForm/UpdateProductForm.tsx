@@ -35,6 +35,7 @@ const UpdateProductForm: React.FC = () => {
     descriptionName: "",
     category: "",
     price: 0,
+    stock: 0,
   });
   const [errors, setErrors] = useState<Errors>({
     descriptionName: "",
@@ -96,7 +97,8 @@ const UpdateProductForm: React.FC = () => {
         setProduct({
           descriptionName: oldProduct.descriptionName,
           category: oldProduct.category.categoryName,
-          price: oldProduct.price
+          price: oldProduct.price,
+          stock: oldProduct.stock
          });
       })
       .catch((error) => {

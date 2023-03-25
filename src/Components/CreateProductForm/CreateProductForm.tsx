@@ -12,6 +12,7 @@ import {
   UpProductForm,
 } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const validateInputs = (
   product: UpProductForm,
@@ -25,6 +26,8 @@ const validateInputs = (
     errors.category = "Por favor ingrese una categoría para el producto.";
   if (touched.price && product.price <= 0)
     errors.price = "El precio debe ser mayor a cero.";
+  if (touched.stock && product.stock <= 0)
+    errors.stock = "El stock debe ser mayor a cero.";
   if (touched.image && product.image == null)
     errors.image = "Por favor ingresa una imagen para el producto";
   return errors;
@@ -37,6 +40,7 @@ const CreateProductForm: React.FC = () => {
     descriptionName: false,
     category: false,
     price: false,
+    stock: false,
     image: false,
   });
 
@@ -44,6 +48,7 @@ const CreateProductForm: React.FC = () => {
     descriptionName: "",
     category: "",
     price: 0,
+    stock: 0,
     image: null,
   });
 
@@ -51,9 +56,9 @@ const CreateProductForm: React.FC = () => {
     descriptionName: "",
     category: "",
     price: "",
+    stock:"",
     image: "",
   });
-
   const [imagePreview, setImagePreview] = useState<string | undefined>();
 
   const dispatch: AppDispatch = useDispatch();
@@ -80,17 +85,24 @@ const CreateProductForm: React.FC = () => {
       if (selectedFile) {
         const url = URL.createObjectURL(selectedFile);
         setImagePreview(url);
+      } else{
+        setImagePreview('')
       }
     } else {
       setProduct({
         ...product,
         [e.target.name]: e.target.value,
       });
+      
     }
     setTouched({
       ...touched,
       [e.target.name]: true,
     });
+    if (errors.hasOwnProperty(e.target.name as keyof Errors)) {
+      delete errors[e.target.name as keyof Errors];
+      setErrors(errors);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -99,19 +111,29 @@ const CreateProductForm: React.FC = () => {
       if (Object.keys(errors).length === 0) {
         const dataToSend = new FormData(formRef.current as HTMLFormElement);
         await axios.post("/products", dataToSend);
-        //sweetalert aca
-        alert("Producto creado");
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto Creado',
+          showConfirmButton: false,
+          timer: 600,
+          backdrop: false
+        })
         setProduct({
           descriptionName: "",
           category: "",
           price: 0,
+          stock: 0,
           image: null,
         });
         dispatch(getProducts());
         navigate("/dashboard");
       } else {
-        //sweet alert aca
-        alert("Faltan completar campos");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Faltan completar campos',
+        })     
       }
     } catch (error) {
       console.error(error);
@@ -176,7 +198,6 @@ const CreateProductForm: React.FC = () => {
               {errors?.category && !product.category && (
                 <p style={{ color: "red" }}>{errors?.category}</p>
               )}
-
               <label className={style.formLabel} htmlFor='price'>
                 Precio:{" "}
               </label>
@@ -195,6 +216,24 @@ const CreateProductForm: React.FC = () => {
                 (!product?.price || parseInt(product.price as any) <= 0) && (
                   <p style={{ color: "red" }}>{errors.price}</p>
                 )}
+              <label className={style.formLabel} htmlFor='stock'>
+                Stock:{" "}
+              </label>
+              <input
+                min='0'
+                max='10000'
+                className={style.formInput}
+                value={product.stock}
+                onChange={handleInputChange}
+                onBlur={handlerBlur}
+                id='stock'
+                type='number'
+                name='stock'
+              />
+              {errors?.stock &&
+                (!product?.stock || parseInt(product.stock as any) <= 0) && (
+                  <p style={{ color: "red" }}>{errors.stock}</p>
+                )}
               {imagePreview && (
                 <img
                   src={imagePreview}
@@ -209,11 +248,16 @@ const CreateProductForm: React.FC = () => {
               <input
                 className={style.formInput}
                 onChange={handleInputChange}
+                onBlur={handlerBlur}
                 id='image'
                 type='file'
                 name='image'
               />
-              <button className={style.formButton} type='submit'>
+              {(errors?.image &&
+               !product?.image) && 
+                  <p style={{ color: "red" }}>{errors.image}</p>
+                }
+              <button className={style.formButton} type='submit' disabled={!Object.keys(errors).length ? false : true}>
                 Crear producto
               </button>
             </form>
