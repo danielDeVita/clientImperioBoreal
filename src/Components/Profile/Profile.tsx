@@ -20,7 +20,8 @@ const Profile: any = () => {
     <>
       {
         !isAuthenticated ? loginWithRedirect() : (
-          <div className={styles.profileContainer}>
+          <div className={styles.Container}>
+            <div className={styles.profileContainer}>
             <img className={styles.profileImage} src={user?.picture} alt={user?.name} />
             <div className={styles.profileDetails}>
               <h2 className={styles.profileName}>{user?.name}</h2>
@@ -31,6 +32,7 @@ const Profile: any = () => {
               <button className={styles.button}>Volver</button>
             </Link>
           </div>
+            </div>
         )
       }
     </>
