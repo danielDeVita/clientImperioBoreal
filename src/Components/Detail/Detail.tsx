@@ -4,28 +4,16 @@ import { useParams, Link } from "react-router-dom";
 import { getDetail } from "../../Redux/actions";
 import style from "./Detail.module.css";
 import noImage from "../../assets/no-image.png";
-import agendas from "../../assets/agendas.jpg";
-import articulosDeOficina from "../../assets/articulos-de-oficina.jpg";
-import escolares from "../../assets/escolares.jpg";
-import lapiceras from "../../assets/lapiceras.jpg";
-import lapices from "../../assets/lapices.jpg";
-import resmas from "../../assets/resmas.jpg";
 import { AppDispatch } from "../../Redux/store";
 import Footer from "../Footer/Footer";
-import { DetailParams, RootState } from '../../types.d'
+import { DetailParams, State } from "../../types.d";
 
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams<DetailParams>();
-  const {
-    descriptionName,
-    category,
-    price,
-    priceBusiness,
-    priceVAT,
-    priceVATBusiness,
-    image
-  } = useSelector((state: RootState) => state.detail); 
+  const { descriptionName, category, price, image } = useSelector(
+    (state: State) => state.detail
+  );
 
   useEffect(() => {
     if (id) {
@@ -47,37 +35,15 @@ const Detail: React.FC = () => {
       <div className={style.card}>
         <div className={style.imageContainer}>
           <img
-            src={
-              image
-                ? image.secure_url
-                : category === "lapiz"
-                  ? lapices
-                  : category === "resmas"
-                    ? resmas
-                    : category === "agenda"
-                      ? agendas
-                      : category === "oficina"
-                        ? articulosDeOficina
-                        : category === "lapicera"
-                          ? lapiceras
-                          : category === "escolar"
-                            ? escolares
-                            : noImage
-            }
+            src={image?.secure_url ? image?.secure_url : noImage}
             alt={descriptionName}
             className={style.image}
           />
         </div>
         <div className={style.content}>
           <h2 className={style.title}>{descriptionName}</h2>
-          <p className={style.detail}>Categoría: {category}</p>
+          <p className={style.detail}>Categoría: {category?.categoryName}</p>
           <p className={style.detail}>Precio: ${price} ARS</p>
-          <p className={style.detail}>Precio mayorista: ${priceBusiness} ARS</p>
-          <p className={style.detail}>Precio + IVA: ${priceVAT} ARS</p>
-          <p className={style.detail}>
-            Precio mayorista + IVA: ${priceVATBusiness} ARS
-          </p>
-          <p className={style.detail}>ID:{id}</p>
         </div>
       </div>
       <Link to={"/"}>
