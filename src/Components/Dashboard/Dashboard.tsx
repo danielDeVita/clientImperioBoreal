@@ -15,9 +15,7 @@ const Dashboard: React.FC = () => {
 
   const allProducts = useSelector((state: State) => state.products);
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [allProducts]);
+  useEffect(() => {}, [allProducts]);
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -35,6 +33,7 @@ const Dashboard: React.FC = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const deleteProduct = await axios.delete(`/products/${_id}`);
+          dispatch(getProducts());
           Swal.fire(
             "Eliminado con éxito",
             "Tu producto ha sido eliminado",
