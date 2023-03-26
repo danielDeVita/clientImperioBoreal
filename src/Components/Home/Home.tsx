@@ -47,6 +47,7 @@ const Home: React.FC = () => {
   };
 
   const allProducts = useSelector((state: RootState) => state.filteredProducts);
+  const categories = useSelector((state: RootState) => state.categories)
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [productsPerPage, setProductsPerPage] = useState<number>(2);
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
           id='filterByCategory'
           value={selectedOption}
         >
-          <option
+          {/*  <option
             className={style.categoryOptionStyle}
             value='default'
             disabled
@@ -121,7 +122,11 @@ const Home: React.FC = () => {
           </option>
           <option className={style.categoryOptionStyle} value='escolar'>
             Escolares
-          </option>
+          </option> */}
+          <option className={style.categoryOptionStyle} value='default' disabled >Categorias</option>
+          {categories.map((category: any) => {
+            return <option className={style.categoryOptionStyle} value={category.category}>{category.category}</option>
+          })}
         </select>
         <button
           className={style.resetFiltersBtn}
