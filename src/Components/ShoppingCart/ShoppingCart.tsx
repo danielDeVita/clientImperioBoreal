@@ -4,15 +4,17 @@ import style from "../ShoppingCart/ShoppingCart.module.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartItem from "../ShoppingCartItem/ShoppingCartItem";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 //EL QUE DESACOOMODA EL CART LO CAGO A PALOS
 
 const ShoppingCart: React.FC = () => {
   const [user_id, setUser_id] = useState("");
   const payment = useSelector((state: State) => state.payment)
   const { user } = useAuth0();
+  const navigate = useNavigate();
 
   const getUser_id = async () => {
     const response = await axios.get(`/users/${user?.email}`);
@@ -37,7 +39,6 @@ const ShoppingCart: React.FC = () => {
 
   const products = getLocalStorage();
 
-
   useEffect(() => {
     loadPayment()
   }, [])
@@ -46,18 +47,33 @@ const ShoppingCart: React.FC = () => {
     getUser_id();
   }, [user]);
 
-
   const cartToDB = async (products: any, user_id: string) => {
-    const carrito = {
-      user: user_id,
-      products: products.map((product:any) => ({
-        quantity: product.quantity,
-        product: product._id
-      })),
-      totalAmount: payment
-
-    };
-    await axios.post("/carts", carrito);
+    if (products.length) {
+      const carrito = {
+        user: user_id,
+        products: products.map((product: any) => ({
+          quantity: product.quantity,
+          product: product._id
+        })),
+        totalAmount: payment
+      };
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Hemos recibido su compra',
+        showConfirmButton: false,
+        timer: 1000,
+        backdrop: false
+      })
+      navigate("/profile");
+      await axios.post("/carts", carrito);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El carrito de compras se encuentra vacío',
+      })
+    }
   };
 
   return (
@@ -85,9 +101,9 @@ const ShoppingCart: React.FC = () => {
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
-              <th>Cantidad: {}</th>
+              <th>Cantidad: { }</th>
               <th>Tachito Icono</th>
-              <th>Subtotal: {}</th>
+              <th>Subtotal: { }</th>
             </tr>
           </thead>
           <tbody>
