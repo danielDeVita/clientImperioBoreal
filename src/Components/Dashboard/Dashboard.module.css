@@ -78,6 +78,12 @@
   color: #0fb1bd;
   font-size: 24px;
   font-weight: 700;
+  background-color: white;
+  border-radius: 999rem;
+  padding: .5rem;
+  margin-left: 50px;
+  margin-top: 50px;
+  border: 2px solid #0fb1bd;
 }
 
 .backBtn:hover {
@@ -92,8 +98,9 @@
   color: #0fb1bd;
   cursor: pointer;
   float: right;
-  margin-right: 30px;
-  margin-top: 30px;
+  margin-right: 50px;
+  margin-top: 50px;
+  background-color: white;
 }
 
 .crearProductoBtn:hover {

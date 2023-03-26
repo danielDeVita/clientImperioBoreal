@@ -29,7 +29,7 @@ const Profile: any = () => {
               <p className={styles.profileNickname}>nickname: {user?.nickname}</p>
             </div>
             <Link to={"/"}>
-              <button className={styles.button}>Volver</button>
+              <button className={styles.Backbutton}>Volver</button>
             </Link>
           </div>
             </div>

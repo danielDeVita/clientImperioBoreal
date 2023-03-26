@@ -109,11 +109,17 @@
 }
 
 .backBtn {
-  position: absolute;
+ position: absolute;
   left: 20px;
   color: #0fb1bd;
   font-size: 24px;
   font-weight: 700;
+  background-color: white;
+  border-radius: 999rem;
+  padding: .5rem;
+  margin-left: 50px;
+  margin-top: 50px;
+  border: 2px solid #0fb1bd;
 }
 
 .backBtn:hover {
