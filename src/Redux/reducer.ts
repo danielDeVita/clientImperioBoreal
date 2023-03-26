@@ -115,15 +115,8 @@ const reducer = (
       return {
         ...state,
         filteredProducts: [...state.filteredProducts].sort((a, b) => {
-          if (isDescendent) {
-            if (a.price < b.price) return 1;
-            if (a.price > b.price) return -1;
-            return 0;
-          } else {
-            if (a.price > b.price) return 1;
-            if (a.price < b.price) return -1;
-            return 0;
-          }
+          if (isDescendent) return b.price - a.price;
+          return a.price - b.price;
         }),
       };
     case RESET_FILTERS:
