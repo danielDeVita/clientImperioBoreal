@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getDetail } from "../../Redux/actions";
@@ -7,12 +7,20 @@ import noImage from "../../assets/no-image.png";
 import { AppDispatch } from "../../Redux/store";
 import Footer from "../Footer/Footer";
 import { DetailParams, State } from "../../types.d";
+import addToCart from "../../assets/add-to-cart.png";
+import checkOut from "../../assets/check-out.png";
+import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import Swal from "sweetalert2";
 
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams<DetailParams>();
-  const { descriptionName, category, price, image } = useSelector(
+  const { descriptionName, category, price, image, stock, _id } = useSelector(
     (state: State) => state.detail
+  );
+  const { setItmes, deleteItems, validateProducst } = useLocalStorage(
+    KEY_LOCAL_STORAGE.KEY
   );
 
   useEffect(() => {
@@ -20,7 +28,38 @@ const Detail: React.FC = () => {
       dispatch(getDetail(id));
     }
   }, [dispatch, id]);
+  const [quantity, setQuantity] = useState(1)
+  const [added, setAdded] = useState<boolean>(validateProducst(id as string));
+  const handlerAddProduct = () => {
+    if (added) {
+      deleteItems(id as string);
+    } else {
+      Swal.fire({
+        returnFocus: false,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Agregado al carrito',
+        showConfirmButton: false,
+        timer: 550,
+        backdrop: false,      
+      })
+      setItmes({
+        descriptionName,
+        category,
+        price,
+        _id,
+        image,
+        quantity
+      });
+    }
+    setAdded((prevValue) => !prevValue);
+  };
 
+  const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (parseInt(e.target.value) > (stock || 40) ) {
+         setQuantity((stock || 40))
+      } else setQuantity(parseInt(e.target.value))
+  }
   return (
     <>
       <div className={style.logoContainer}>
@@ -44,6 +83,15 @@ const Detail: React.FC = () => {
           <h2 className={style.title}>{descriptionName}</h2>
           <p className={style.detail}>Categoría: {category?.categoryName}</p>
           <p className={style.detail}>Precio: ${price} ARS</p>
+          <div className={style.pCantidad}>
+          <p>Cantidad</p>
+          </div>
+          <div className={style.btnStock}>
+              <input type='number' min='1' max={stock} value={quantity} onChange={handleQuantity}/>
+          </div>
+            <button className={style.button} onClick={handlerAddProduct}>
+              <img src={added ? checkOut : addToCart} alt='Call to action' />
+            </button>
         </div>
       </div>
       <Link to={"/"}>
