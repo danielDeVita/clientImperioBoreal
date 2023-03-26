@@ -62,7 +62,7 @@ const CreateProductForm: React.FC = () => {
     image: "",
   });
   const [imagePreview, setImagePreview] = useState<string | undefined>();
-
+  const [show, setShow] = useState(false)
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -95,7 +95,6 @@ const CreateProductForm: React.FC = () => {
         ...product,
         [e.target.name]: e.target.value,
       });
-      
     }
     setTouched({
       ...touched,
@@ -105,7 +104,6 @@ const CreateProductForm: React.FC = () => {
       delete errors[e.target.name as keyof Errors];
       setErrors(errors);
     }
-    console.log(product.category)
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -113,6 +111,8 @@ const CreateProductForm: React.FC = () => {
     try {
       if (Object.keys(errors).length === 0) {
         const dataToSend = new FormData(formRef.current as HTMLFormElement);
+        dataToSend.delete('category')
+        dataToSend.append('category', product.category as string)
         await axios.post("/products", dataToSend);
         Swal.fire({
           position: 'top-end',
@@ -189,12 +189,16 @@ const CreateProductForm: React.FC = () => {
               <label className={style.formLabel} htmlFor='category'>
                 Categoría:{" "}
               </label>
-              <select onChange={(e) => handleInputChange(e)}name="category" id="category" defaultValue='default'>
-                <option value="default" disabled>Elija su cateogría</option>
-                {categories.map((category: any) => {
-                  return <option value={category.category}>{category.category}</option>
-                })}
-              </select>
+              <div className={style.select__category__container}>
+                <select onChange={handleInputChange} className={ !show ? style.select__category : style.hidden} name="category" id="category" defaultValue='default'>
+                  <option value="default" disabled>Elija su cateogría</option>
+                  {categories.map((category: any) => {
+                    return <option value={category.category}>{category.category}</option>
+                  })}
+                </select>
+                <input  type='text' onBlur={handlerBlur} onChange={handleInputChange} className={ show ?  style.select__category_input :  style.hidden} name="category" value={product.category as string} />
+                <button type="button" className={style.select__category__button} onClick={() => setShow(preValue => !preValue)}>+</button>
+              </div>
             
               {errors?.category && !product.category && (
                 <p style={{ color: "red" }}>{errors?.category}</p>

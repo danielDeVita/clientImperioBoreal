@@ -92,3 +92,47 @@
 .backBtn:hover {
   color: #13deec;
 }
+
+.select__category__container {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+}
+
+.select__category {
+  padding: 6px;
+  width: 90%;
+  height: 34px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+
+.select__category__button {
+  width: 40px;
+  background-color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.select__category__button:hover {
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.select__category_input {
+  width: 95%;
+  height: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.input__show {
+  display: block;
+}
