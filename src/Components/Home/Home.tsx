@@ -50,7 +50,7 @@ const Home: React.FC = () => {
   const categories = useSelector((state: RootState) => state.categories)
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [productsPerPage, setProductsPerPage] = useState<number>(2);
+  const [productsPerPage, setProductsPerPage] = useState<number>(20);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(
