@@ -101,9 +101,9 @@ const ShoppingCart: React.FC = () => {
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
-              <th>Cantidad: { }</th>
-              <th>Tachito Icono</th>
-              <th>Subtotal: { }</th>
+              <th>Cantidad { }</th>
+              <th>Eliminar</th>
+              <th>Subtotal { }</th>
             </tr>
           </thead>
           <tbody>
