@@ -47,10 +47,15 @@ const ShoppingCart: React.FC = () => {
   }, [user]);
 
 
-  const cartToDB = async (products: Product[], user_id: string) => {
+  const cartToDB = async (products: any, user_id: string) => {
     const carrito = {
       user: user_id,
-      products: products.map((product) => product._id),
+      products: products.map((product:any) => ({
+        quantity: product.quantity,
+        product: product._id
+      })),
+      totalAmount: payment
+
     };
     await axios.post("/carts", carrito);
   };
