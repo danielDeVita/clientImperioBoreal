@@ -5,6 +5,8 @@ import style from "../AboutUs/AboutUs.module.css";
 const AboutUs: React.FC = () => {
   return (
     <div className={style.container}>
+      <div className={style.texto}>
+
       <h1>Bienvenidos Imperio Boreal</h1>
       <p>
         Somos una empresa comprometida con la educación y el desarrollo de
@@ -39,11 +41,13 @@ const AboutUs: React.FC = () => {
         dispuestos a escuchar tus comentarios y sugerencias para seguir
         mejorando nuestros servicios y productos.
       </p>
-      <p>
+      <br />
+      <h3><strong>
         ¡Gracias por elegirnos como tu librería y tienda de útiles escolares de
         confianza!
-      </p>
-
+      </strong>
+      </h3>
+      </div>
       <div className={style.containerBtn}>
         <Link to="/">
           <button className={style.button}>VOLVER</button>
