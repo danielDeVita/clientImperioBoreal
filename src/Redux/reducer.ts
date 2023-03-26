@@ -111,11 +111,11 @@ const reducer = (
         ),
       };
     case ORDER_BY_PRICE:
-      const isDescendent = action.payload === "descendente";
+      const isAscendent = action.payload === "ascendente";
       return {
         ...state,
         filteredProducts: [...state.filteredProducts].sort((a, b) => {
-          if (isDescendent) {
+          if (isAscendent) {
             if (a.price < b.price) return 1;
             if (a.price > b.price) return -1;
             return 0;
