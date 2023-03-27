@@ -50,16 +50,16 @@ const Profile: any = () => {
             </Link>
           </div>
             </div>
+            
           
 
          
         )
       }
-                  {
-              
+               <h2>Historial de ordenes:</h2>
+            {
               orders.map(order => {
                 return (
-                  
                   <CardOrder 
                   key={order.orderId}
                   user={order.user}
