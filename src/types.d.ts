@@ -69,6 +69,8 @@ export interface User {
   password: string;
   email: string;
   isAdmin: boolean;
+  username?: string;
+  _id?: string;
 }
 export interface State {
   payment: number
