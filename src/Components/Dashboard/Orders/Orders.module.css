@@ -1,0 +1,87 @@
+.orderContainer {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem auto;
+  padding: 1rem;
+  height: auto;
+}
+
+.orderCard {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  flex-basis: 26%;
+  background-color: white;
+}
+
+.dataUser {
+  margin-bottom: 1rem;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  width: 240px;
+  margin: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.pName {
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+}
+
+.pName img {
+  width: 100px;
+}
+
+.btnEliminar {
+  border: none;
+  color: white;
+  background-color: #f44336;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btnModificar {
+  border: none;
+  color: white;
+  background-color: #f44336;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btnEliminar:hover {
+  background-color: #c62828;
+}
+
+.formOrder {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.selectStatus {
+  padding: 0.5rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.btnModificar[type="submit"] {
+  background-color: #4caf50;
+}
+
+.btnModificar[type="submit"]:hover {
+  background-color: #388e3c;
+}
