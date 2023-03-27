@@ -18,6 +18,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./Components/Loading/Loading";
 import axios from "axios";
 import Orders from "./Components/Dashboard/Orders/Orders";
+import Users from "./Components/Dashboard/Users/Users"
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 //Si tienen problemas con el import en minuscula o mayuscula
@@ -48,6 +49,7 @@ function App() {
       <Route path='/shoppingcart' element={<ShoppingCart />}></Route>
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/dashboard/orders' element={<Orders />} />
+      <Route path='/dashboard/users' element={<Users />} />
       <Route path='/productform' element={<CreateProductForm />} />
       <Route path='/updateform/:id' element={<UpdateProductForm />} />
       <Route path='/products/:id' element={<Detail />} />

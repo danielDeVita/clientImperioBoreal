@@ -61,6 +61,7 @@ const Dashboard: React.FC = () => {
               />
             </Link>
             <Link to="/dashboard/orders">Ordenes de compra</Link>
+            <Link to="/dashboard/users">Lista de usarios</Link>
           </div>
           <Link to='/'>
             <p className={style.backBtn}>
