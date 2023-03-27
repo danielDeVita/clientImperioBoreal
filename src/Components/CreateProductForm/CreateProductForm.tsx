@@ -38,7 +38,7 @@ const CreateProductForm: React.FC = () => {
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const formRef = useRef<HTMLFormElement | null>(null);
   const categories = useSelector((state: State) => state.categories)
-  const [touched, setTouched] = useState <TouchedProductForm>({
+  const [touched, setTouched] = useState<TouchedProductForm>({
     descriptionName: false,
     category: false,
     price: false,
@@ -46,7 +46,7 @@ const CreateProductForm: React.FC = () => {
     image: false,
   });
 
-  const [product, setProduct] = useState <UpProductForm>({
+  const [product, setProduct] = useState<UpProductForm>({
     descriptionName: "",
     category: "",
     price: 0,
@@ -58,7 +58,7 @@ const CreateProductForm: React.FC = () => {
     descriptionName: "",
     category: "",
     price: "",
-    stock:"",
+    stock: "",
     image: "",
   });
   const [imagePreview, setImagePreview] = useState<string | undefined>();
@@ -87,7 +87,7 @@ const CreateProductForm: React.FC = () => {
       if (selectedFile) {
         const url = URL.createObjectURL(selectedFile);
         setImagePreview(url);
-      } else{
+      } else {
         setImagePreview('')
       }
     } else {
@@ -136,7 +136,7 @@ const CreateProductForm: React.FC = () => {
           icon: 'error',
           title: 'Oops...',
           text: 'Faltan completar campos',
-        })     
+        })
       }
     } catch (error) {
       console.error(error);
@@ -190,19 +190,19 @@ const CreateProductForm: React.FC = () => {
                 Categoría:{" "}
               </label>
               <div className={style.select__category__container}>
-                <select onChange={handleInputChange} className={ !show ? style.select__category : style.hidden} name="category" id="category" defaultValue='default'>
+                <select onChange={handleInputChange} className={!show ? style.select__category : style.hidden} name="category" id="category" defaultValue='default'>
                   <option value="default" disabled>Elija su cateogría</option>
                   {categories.map((category: any) => {
                     return <option value={category.category}>{category.category}</option>
                   })}
                 </select>
-                <input  type='text' onBlur={handlerBlur} onChange={handleInputChange} className={ show ?  style.select__category_input :  style.hidden} name="category" value={product.category as string} />
+                <input type='text' onBlur={handlerBlur} onChange={handleInputChange} className={show ? style.select__category_input : style.hidden} name="category" value={product.category as string} />
                 <button type="button" className={style.select__category__button} onClick={() => setShow(preValue => !preValue)}>+</button>
               </div>
-            
+
               {errors?.category && !product.category && (
                 <p style={{ color: "red" }}>{errors?.category}</p>
-              )} 
+              )}
               <label className={style.formLabel} htmlFor='price'>
                 Precio:{" "}
               </label>
@@ -259,10 +259,10 @@ const CreateProductForm: React.FC = () => {
                 name='image'
               />
               {(errors?.image &&
-               !product?.image) && 
-                  <p style={{ color: "red" }}>{errors.image}</p>
-                }
-              <button className={style.formButton} type='submit'disabled={!Object.keys(errors).length ? false : true} >
+                !product?.image) &&
+                <p style={{ color: "red" }}>{errors.image}</p>
+              }
+              <button className={style.formButton} type='submit' disabled={!Object.keys(errors).length ? false : true} >
                 Crear producto
               </button>
             </form>

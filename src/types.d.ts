@@ -37,7 +37,7 @@ export interface TouchedProductForm {
   category?: boolean;
   price: boolean;
   stock?: boolean,
-  image?: boolean; 
+  image?: boolean;
 }
 export interface ShoppingCartInteface
   extends Pick<Product, "descriptionName" | "category" | "price"> {
@@ -78,4 +78,5 @@ export interface State {
   detail: Product;
   categories: String[];
   ordersByUser: UserOrder[],
+  orders: UserOrder[]
 }
