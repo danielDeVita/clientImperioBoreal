@@ -5,10 +5,14 @@ import { getUsers } from "../../../Redux/actions";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Users: React.FC = () => {
 
     const dispatch: AppDispatch = useDispatch();
+    const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
         dispatch(getUsers())
@@ -44,6 +48,14 @@ const Users: React.FC = () => {
 
     return (
         <>
+        {!isAuthenticated ? (
+          loginWithRedirect()
+        ) : (
+        <>
+        <Link to='/dashboard'>
+            <button>Volver</button>
+          </Link>
+          
             {users.map(user => {
                 return (
                     <div>
@@ -67,6 +79,8 @@ const Users: React.FC = () => {
                 )
             })}
         </>
+        )}
+    </>
     )
 }
 
