@@ -12,6 +12,7 @@ import checkOut from "../../assets/check-out.png";
 import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import Swal from "sweetalert2";
+import Reviews from "../Reviews/Reviews"
 
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -98,6 +99,8 @@ const Detail: React.FC = () => {
         <button className={style.Backbutton}>Volver</button>
       </Link>
       <div className={style.footerContainer}>
+      <div></div>
+      <Reviews />
         <Footer />
       </div>
     </>
