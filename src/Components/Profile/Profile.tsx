@@ -45,6 +45,7 @@ const Profile: any = () => {
             </div>
           </div>
         )}
+        <h2>Historial de ordenes:</h2>
       {
         orders.map(order => {
           return (
