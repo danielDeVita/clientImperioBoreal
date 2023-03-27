@@ -14,6 +14,7 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL';
 export const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER';
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
 
 interface GETPaymentTotal {
   type: typeof GET_PAYMENTOTAL,
@@ -61,6 +62,11 @@ interface GetOrdersByUser {
   payload: UserOrder[];
 }
 
+interface GetAllOrders {
+  type: typeof GET_ALL_ORDERS;
+  payload: UserOrder[];
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -72,6 +78,7 @@ export type ProductActionTypes =
   | GetCategories
   | GETPaymentTotal
   | GetOrdersByUser
+  | GetAllOrders
 
 export const getPaymentTotal = (total: number) => {
   return { type: GET_PAYMENTOTAL, payload: total }
@@ -147,14 +154,31 @@ export const getUserOrders = (userId: string): ThunkAction<
   RootState,
   null,
   ProductActionTypes
-  > => {
-    return async (dispatch: Dispatch<ProductActionTypes>) => {
-      try {
-        const { data } = await axios.get(`/orders/user/${userId}`)
-        console.log(data);
-        dispatch({ type: GET_ORDERS_BY_USER, payload: data })
-      } catch (error) {
-      console.error(error);        
-      }
+> => {
+  return async (dispatch: Dispatch<ProductActionTypes>) => {
+    try {
+      const { data } = await axios.get(`/orders/user/${userId}`)
+      console.log(data);
+      dispatch({ type: GET_ORDERS_BY_USER, payload: data })
+    } catch (error) {
+      console.error(error);
     }
   }
+}
+
+
+export const getAllOrders = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  ProductActionTypes
+> => {
+  return async (dispatch: Dispatch<ProductActionTypes>) => {
+    try {
+      const { data } = await axios.get(`/orders`)
+      dispatch({ type: GET_ALL_ORDERS, payload: data })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}

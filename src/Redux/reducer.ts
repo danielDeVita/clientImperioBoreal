@@ -9,7 +9,8 @@ import {
   FILTER_BY_CATEGORY,
   GET_CATEGORIES,
   GET_PAYMENTOTAL,
-  GET_ORDERS_BY_USER
+  GET_ORDERS_BY_USER,
+  GET_ALL_ORDERS
 } from "./actions";
 
 interface GETPaymentTotal {
@@ -50,14 +51,19 @@ interface FilterByCategory {
   type: typeof FILTER_BY_CATEGORY;
   payload: string;
 }
-  interface GetCategories {
-    type: typeof GET_CATEGORIES;
-    payload: String[];
-  }
-  interface GetOrdersByUser {
-    type: typeof GET_ORDERS_BY_USER;
-    payload: UserOrder[];
-  }
+interface GetCategories {
+  type: typeof GET_CATEGORIES;
+  payload: String[];
+}
+interface GetOrdersByUser {
+  type: typeof GET_ORDERS_BY_USER;
+  payload: UserOrder[];
+}
+
+interface GetAllOrders {
+  type: typeof GET_ALL_ORDERS;
+  payload: UserOrder[];
+}
 
 export type ProductActionTypes =
   | GetProductsAction
@@ -70,6 +76,7 @@ export type ProductActionTypes =
   | GETPaymentTotal
   | GetCategories
   | GetOrdersByUser
+  | GetAllOrders
 
 const initialState: State = {
   products: [],
@@ -78,7 +85,8 @@ const initialState: State = {
   detail: {} as Product,
   categories: [],
   payment: 0,
-  ordersByUser: []
+  ordersByUser: [],
+  orders: []
 };
 
 const reducer = (
@@ -138,14 +146,19 @@ const reducer = (
         ),
       };
     case GET_CATEGORIES:
-        return {
-            ...state,
-            categories: action.payload
-        }
+      return {
+        ...state,
+        categories: action.payload
+      }
     case GET_ORDERS_BY_USER:
       return {
         ...state,
         ordersByUser: action.payload
+      }
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        orders: action.payload
       }
     default:
       return { ...state };
