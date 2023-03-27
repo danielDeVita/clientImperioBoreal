@@ -5,10 +5,14 @@ import { getAllOrders } from "../../../Redux/actions";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Orders: React.FC = () => {
 
     const dispatch: AppDispatch = useDispatch();
+    const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
         dispatch(getAllOrders())
@@ -43,6 +47,13 @@ const Orders: React.FC = () => {
 
     return (
         <>
+        {!isAuthenticated ? (
+          loginWithRedirect()
+        ) : (
+        <>
+          <Link to='/dashboard'>
+            <button>Volver</button>
+          </Link>
             {orders.map(order => {
                 return (
                     <div>
@@ -77,6 +88,8 @@ const Orders: React.FC = () => {
                     </div>
                 )
             })}
+        </>
+        )}
         </>
     )
 }
