@@ -94,7 +94,7 @@ const UpdateProductForm: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<Product>(`/products/${id}`)
+      .get<any>(`/products/${id}`)
       .then((response) => {
         const oldProduct = response.data;
         setProduct({

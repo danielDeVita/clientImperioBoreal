@@ -1,4 +1,4 @@
-import { Product, State, User } from "../types.d";
+import { Product, State, User, UserOrder } from "../types.d";
 import {
   GET_PRODUCTS,
   GET_USERS,
@@ -8,7 +8,8 @@ import {
   RESET_FILTERS,
   FILTER_BY_CATEGORY,
   GET_CATEGORIES,
-  GET_PAYMENTOTAL
+  GET_PAYMENTOTAL,
+  GET_ORDERS_BY_USER
 } from "./actions";
 
 interface GETPaymentTotal {
@@ -53,6 +54,10 @@ interface FilterByCategory {
     type: typeof GET_CATEGORIES;
     payload: String[];
   }
+  interface GetOrdersByUser {
+    type: typeof GET_ORDERS_BY_USER;
+    payload: UserOrder[];
+  }
 
 export type ProductActionTypes =
   | GetProductsAction
@@ -63,8 +68,8 @@ export type ProductActionTypes =
   | ResetFilters
   | FilterByCategory
   | GETPaymentTotal
-// GetCategories;
-  | GetCategories;
+  | GetCategories
+  | GetOrdersByUser
 
 const initialState: State = {
   products: [],
@@ -72,7 +77,8 @@ const initialState: State = {
   users: [],
   detail: {} as Product,
   categories: [],
-  payment: 0
+  payment: 0,
+  ordersByUser: []
 };
 
 const reducer = (
@@ -128,7 +134,7 @@ const reducer = (
       return {
         ...state,
         filteredProducts: [...state.products].filter(
-          (product) => product.category.categoryName === action.payload
+          (product) => product.category?.categoryName === action.payload
         ),
       };
     case GET_CATEGORIES:
@@ -136,6 +142,11 @@ const reducer = (
             ...state,
             categories: action.payload
         }
+    case GET_ORDERS_BY_USER:
+      return {
+        ...state,
+        ordersByUser: action.payload
+      }
     default:
       return { ...state };
   }

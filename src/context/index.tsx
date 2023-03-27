@@ -9,6 +9,7 @@ interface ProviderProps {
 
 const PropsProvider: React.FC<ProviderProps> = ({ children }) => {
     const [totalCart, setTotalCart] = React.useState<number>(0)
+    const [userId, setUserId] = React.useState<string>('')
 
     React.useEffect(() => {
         const values = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE.KEY) as string)
@@ -18,7 +19,9 @@ const PropsProvider: React.FC<ProviderProps> = ({ children }) => {
     return (
         <CartContext.Provider value={{
             totalCart,
-            setTotalCart
+            setTotalCart,
+            userId,
+            setUserId
         }}>
             {children}
         </CartContext.Provider>

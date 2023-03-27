@@ -57,7 +57,7 @@ const Card: React.FC<Product> = ({
       <div className={style.cardImage}>
         <Link to={`/products/${_id}`}>
           <img
-            src={image.secure_url ? image.secure_url : noImage}
+            src={image?.secure_url ? image.secure_url : noImage}
             alt={descriptionName}
           />
         </Link>
@@ -70,7 +70,7 @@ const Card: React.FC<Product> = ({
       </div>
       <div className={style.cardContent}>
         <h5>Stock: {stock}</h5>
-        <h5>Categoria: {category.categoryName}</h5>
+        <h5>Categoria: {category?.categoryName}</h5>
         <div>
           <h2>${price} ARS</h2>
           <button className={style.button} onClick={handlerAddProduct}>

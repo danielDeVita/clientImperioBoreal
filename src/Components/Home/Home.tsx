@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import NavBar from "../Navbar/Navbar";
 import style from "./Home.module.css";
 import CardContainer from "../CardContainer/CardContainer";
@@ -16,13 +16,21 @@ import Carousel from "../Carousel/Carousel";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "auth0";
 import axios from "axios";
+import { CartContext } from "../../context";
+import { CartContextType } from "../../types.d";
 
 const Home: React.FC = () => {
   const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
     useAuth0<User>();
 
+ const { setUserId } = useContext(CartContext) as CartContextType;
+
   const postNewUser = async () => {
-    if (isAuthenticated) await axios.post("/users", user);
+    if (isAuthenticated) {
+    const { data } = await axios.post("/users", user);
+    const {_id} = data;
+    setUserId(_id);
+    }
   };
 
   const dispatch = useDispatch();
