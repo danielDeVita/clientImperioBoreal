@@ -40,7 +40,8 @@ const Card: React.FC<Product> = ({
         price,
         _id,
         image,
-        quantity
+        quantity,
+        stock
       });
     }
     setAdded((prevValue) => !prevValue);

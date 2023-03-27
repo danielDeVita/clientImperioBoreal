@@ -107,7 +107,7 @@ const ShoppingCart: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product: Omit<Product, 'stock'>) => (
+            {products.map((product: Product) => (
               <ShoppingCartItem
                 key={product._id}
                 descriptionName={product.descriptionName}
@@ -116,6 +116,7 @@ const ShoppingCart: React.FC = () => {
                 _id={product._id}
                 image={product.image}
                 quantity={product.quantity}
+                stock={product.stock}
               />
             ))}
           </tbody>

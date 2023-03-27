@@ -3,20 +3,23 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
 import style from "./ShoppingCartItem.module.css";
 
-const ShoppingCartItem: React.FC <Omit <Product, 'stock'>> = ({
+const ShoppingCartItem: React.FC <Product> = ({
   descriptionName,
   category,
   price,
   _id,
   image,
-  quantity
+  quantity,
+  stock
 }) => {
   const [productQuantity, setProductQuantity] = useState(quantity);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (typeof parseInt(e.target.value) === "number") {
       updateQuantity(_id as string, parseInt(e.target.value))
-      setProductQuantity(parseInt(e.target.value));
+      if (parseInt(e.target.value) > (stock || 40)) {
+        setProductQuantity(stock)
+      }else setProductQuantity(parseInt(e.target.value));
     }
   };
 
@@ -35,6 +38,7 @@ const ShoppingCartItem: React.FC <Omit <Product, 'stock'>> = ({
           type='number'
           value={productQuantity}
           min='1'
+          max={stock}
           onChange={handleQuantityChange}
           name='quantity'
         ></input>
