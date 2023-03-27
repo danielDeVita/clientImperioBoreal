@@ -50,7 +50,7 @@ const useLocalStorage = (KEY: string) => {
   };
 
   const clearStorage = () => {
-    createStorage();
+     localStorage.setItem(KEY, '[]')
   };
 
   const validateProducst = (id: string): boolean => {

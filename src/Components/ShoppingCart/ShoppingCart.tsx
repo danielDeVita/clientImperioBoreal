@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 const ShoppingCart: React.FC = () => {
   const [user_id, setUser_id] = useState("");
   const payment = useSelector((state: State) => state.payment)
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
   const navigate = useNavigate();
 
   const getUser_id = async () => {
@@ -35,7 +35,7 @@ const ShoppingCart: React.FC = () => {
     return count + 1;
   };
 
-  const { getLocalStorage, loadPayment } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
+  const { getLocalStorage, loadPayment, clearStorage } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
 
   const products = getLocalStorage();
 
@@ -65,6 +65,7 @@ const ShoppingCart: React.FC = () => {
         timer: 1750,
         backdrop: false
       })
+      clearStorage()
       navigate("/");
       await axios.post("/carts", carrito);
     } else {
@@ -124,12 +125,19 @@ const ShoppingCart: React.FC = () => {
         <div className={style.tablaComprar}>
           <h2>Total:</h2>
           <p>${payment}</p>
-          <button
-            className={style.btnComprar}
-            onClick={() => cartToDB(products, user_id)}
-          >
-            Comprar
-          </button>
+          {isAuthenticated ? 
+            <button
+              className={style.btnComprar}
+              onClick={() => cartToDB(products, user_id)}
+            >
+              Comprar
+            </button>
+            :
+             <button
+              className={style.btnComprar}
+              onClick={() => loginWithRedirect()}
+             > Iniciar sesión </button>
+          }
         </div>
       </div>
     </>
