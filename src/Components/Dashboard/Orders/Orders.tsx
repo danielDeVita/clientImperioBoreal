@@ -21,8 +21,26 @@ const Orders: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     try {
+        Swal.fire({
+            title: "Seguro que quieres eliminar la orden?",
+            text: "No se puede revertir",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#0fb1bd",
+            confirmButtonText: "Eliminar",
+            iconColor: "red",
+          }).then(async (result) => {
+            if (result.isConfirmed) {
       dispatch(getAllOrders());
       const deleteProduct = await axios.delete(`/orders/${id}`);
+      Swal.fire(
+        "Eliminada con éxito",
+        "La orden ha sido eliminada",
+        "success"
+      );
+    }
+  });
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +72,7 @@ const Orders: React.FC = () => {
       ) : (
         <>
           <Link to='/dashboard'>
-            <button>Volver</button>
+            <button className={style.Backbutton}>Volver</button>
           </Link>
           {orders.map((order) => {
             return (

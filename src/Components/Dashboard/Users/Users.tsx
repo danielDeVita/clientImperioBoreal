@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import style from "../Users/Users.module.css"
 
 const Users: React.FC = () => {
 
@@ -23,8 +24,26 @@ const Users: React.FC = () => {
 
     const handleDelete = async (_id: any) => {
         try {
+            Swal.fire({
+                title: "Seguro que quieres eliminar el usuario?",
+                text: "No se puede revertir",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#0fb1bd",
+                confirmButtonText: "Eliminar",
+                iconColor: "red",
+              }).then(async (result) => {
+                if (result.isConfirmed) {
             const deleteUser = await axios.delete(`/users/${_id}`);
             dispatch(getUsers());
+            Swal.fire(
+                "Eliminado con éxito",
+                "El usuario ha sido eliminado",
+                "success"
+              );
+            }
+          });
         } catch (error) {
             console.error(error)
         }
@@ -53,7 +72,7 @@ const Users: React.FC = () => {
         ) : (
         <>
         <Link to='/dashboard'>
-            <button>Volver</button>
+            <button className={style.Backbutton}>Volver</button>
           </Link>
           
             {users.map(user => {
