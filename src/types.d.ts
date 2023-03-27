@@ -1,17 +1,29 @@
 export interface Product {
   _id?: string;
   descriptionName: string;
-  category: {
+  category?: {
     _id: string;
     categoryName: string;
   };
-  stock: number 
+  stock?: number | undefined;
   price: number;
   quantity?: number;
-  image: {
+  image?: {
     public_id: string;
     secure_url: string;
   };
+}
+export interface UserOrder {
+  user: {
+    _id: string,
+    email: string
+  }
+  status: string,
+  cart: {
+    products: Product[];
+    totalAmount: number,
+  }
+  orderId: string,
 }
 export interface UpProductForm {
   descriptionName: string;
@@ -49,12 +61,14 @@ export enum KEY_LOCAL_STORAGE {
 export interface CartContextType {
   totalCart: number;
   setTotalCart: (count: number) => void;
+  userId: string;
+  setUserId: (id: string) => void;
 }
 export interface User {
-  name: String;
-  password: String;
-  email: String;
-  isAdmin: Boolean;
+  name: string;
+  password: string;
+  email: string;
+  isAdmin: boolean;
 }
 export interface State {
   payment: number
@@ -63,4 +77,5 @@ export interface State {
   users: User[];
   detail: Product;
   categories: String[];
+  ordersByUser: UserOrder[],
 }

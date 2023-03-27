@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { Product, User } from "../types.d";
+import { Product, User, UserOrder } from "../types.d";
 import { RootState } from "./store";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -12,7 +12,8 @@ export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const GET_CATEGORIES = "GET_CATEGORIES";
-export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL'
+export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL';
+export const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER';
 
 interface GETPaymentTotal {
   type: typeof GET_PAYMENTOTAL,
@@ -55,6 +56,10 @@ interface GetCategories {
   type: typeof GET_CATEGORIES;
   payload: String[];
 }
+interface GetOrdersByUser {
+  type: typeof GET_ORDERS_BY_USER;
+  payload: UserOrder[];
+}
 
 export type ProductActionTypes =
   | GetProductsAction
@@ -66,6 +71,7 @@ export type ProductActionTypes =
   | FilterByCategory
   | GetCategories
   | GETPaymentTotal
+  | GetOrdersByUser
 
 export const getPaymentTotal = (total: number) => {
   return { type: GET_PAYMENTOTAL, payload: total }
@@ -135,3 +141,20 @@ export const getCategories = (): ThunkAction<
     }
   };
 };
+
+export const getUserOrders = (userId: string): ThunkAction<
+  void,
+  RootState,
+  null,
+  ProductActionTypes
+  > => {
+    return async (dispatch: Dispatch<ProductActionTypes>) => {
+      try {
+        const { data } = await axios.get(`/orders/user/${userId}`)
+        console.log(data);
+        dispatch({ type: GET_ORDERS_BY_USER, payload: data })
+      } catch (error) {
+      console.error(error);        
+      }
+    }
+  }

@@ -88,7 +88,7 @@ const Dashboard: React.FC = () => {
                 <tr key={product._id}>
                   <th>
                     <img
-                      src={product.image.secure_url}
+                      src={product.image?.secure_url}
                       alt={product.descriptionName}
                       width='100'
                       height='100'
@@ -97,7 +97,7 @@ const Dashboard: React.FC = () => {
                   <td>{product._id}</td>
                   <td>{product.descriptionName}</td>
                   <td>{product.stock}</td>
-                  <td>{product.category.categoryName}</td>
+                  <td>{product.category?.categoryName}</td>
                   <td>{product.price}</td>
                   <td>
                     <Link to={`/updateform/${product._id}`}>
