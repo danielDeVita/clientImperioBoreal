@@ -51,6 +51,7 @@ const useLocalStorage = (KEY: string) => {
 
   const clearStorage = () => {
      localStorage.setItem(KEY, '[]')
+     setTotalCart(0)
   };
 
   const validateProducst = (id: string): boolean => {
