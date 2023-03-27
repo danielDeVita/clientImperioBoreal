@@ -62,10 +62,10 @@ const ShoppingCart: React.FC = () => {
         icon: 'success',
         title: 'Hemos recibido su compra',
         showConfirmButton: false,
-        timer: 1000,
+        timer: 1750,
         backdrop: false
       })
-      navigate("/profile");
+      navigate("/");
       await axios.post("/carts", carrito);
     } else {
       Swal.fire({

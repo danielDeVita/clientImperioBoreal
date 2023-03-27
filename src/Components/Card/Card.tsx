@@ -31,7 +31,7 @@ const Card: React.FC<Product> = ({
         icon: 'success',
         title: 'Agregado al carrito',
         showConfirmButton: false,
-        timer: 550,
+        timer: 1000,
         backdrop: false,      
       })
       setItmes({
