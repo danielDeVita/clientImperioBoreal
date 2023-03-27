@@ -58,7 +58,7 @@ const Users: React.FC = () => {
                             <input onChange={handleChange} type="radio" value="admin" name="userRole" />
                             
                             <label htmlFor="user">User</label>
-                            <input  onChange={handleChange} type="radio" value="user" name="userRole" checked />
+                            <input  onChange={handleChange} type="radio" value="user" name="userRole"  />
                             
                             <button type="submit">Modificar</button>
                      </form>
