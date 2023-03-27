@@ -1,18 +1,21 @@
 .orderContainer {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   margin: 1rem auto;
   padding: 1rem;
+  height: auto;
 }
 
 .orderCard {
+  display: flex;
+  flex-wrap: wrap;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
   flex-basis: 26%;
   background-color: white;
+  height: auto;
 }
 
 .dataUser {
@@ -41,7 +44,16 @@
   width: 100px;
 }
 
-button {
+.btnEliminar {
+  border: none;
+  color: white;
+  background-color: #f44336;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btnModificar {
   border: none;
   color: white;
   background-color: #f44336;
@@ -51,25 +63,26 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.btnEliminar:hover {
   background-color: #c62828;
 }
 
-form {
+.formOrder {
   margin-top: 1rem;
+  margin-bottom: 0;
 }
 
-select {
+.selectStatus {
   padding: 0.5rem;
   margin-right: 1rem;
   font-size: 1rem;
   border-radius: 5px;
 }
 
-button[type="submit"] {
+.btnModificar[type="submit"] {
   background-color: #4caf50;
 }
 
-button[type="submit"]:hover {
+.btnModificar[type="submit"]:hover {
   background-color: #388e3c;
 }

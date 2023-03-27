@@ -79,17 +79,25 @@ const Orders: React.FC = () => {
               </div>
 
               <form
+                className={style.formOrder}
                 onSubmit={(e) => {
                   handleSubmit(e, order.orderId);
                 }}
               >
-                <select name='status' onChange={handleChange}>
+                <select
+                  className={style.selectStatus}
+                  name='status'
+                  onChange={handleChange}
+                >
                   <option value='InProcess'>InProcess</option>
                   <option value='Cancelled'>Cancelled</option>
                   <option value='Paid'>Paid</option>
                 </select>
-                <button type='submit'>Modificar</button>
+                <button className={style.btnModificar} type='submit'>
+                  Modificar
+                </button>
                 <button
+                  className={style.btnEliminar}
                   onClick={() => {
                     handleDelete(order.orderId);
                   }}
