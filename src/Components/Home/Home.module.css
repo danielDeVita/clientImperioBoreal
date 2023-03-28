@@ -136,3 +136,19 @@ margin: 3px;
 .categoryOptionStyle {
 color: #333;
 }
+
+.finalFrase{
+  color: #333;
+  font-size: 18px;
+  background-color: #fff;
+  border: 2px solid #0FB1BD;
+  border-radius: 12px;
+  text-align: center;
+  margin-right:30%;
+  margin-left: 30%;
+}
+
+.linkourteam{
+  font-weight: 900;
+  color: #0FB1BD;
+}

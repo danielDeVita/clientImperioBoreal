@@ -1,0 +1,90 @@
+.cardsMemberCont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cardMemberContainer{
+    display: flex;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9.5px );
+    -webkit-backdrop-filter: blur( 9.5px );
+    border-radius: 10px;
+    border: 3px solid #0FB1BD;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 3000px;
+    width: 300px;
+    height: 320px;
+    border-radius: 12px;
+    margin: 10px;
+}
+
+.cardMemberContainer:hover{
+    border: 3px solid #771e62;
+    scale: 1.02;
+}
+
+.imgMember{
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px;
+    border: 5px solid #0FB1BD;
+}
+
+.nombreMember{
+    padding: 0;
+    margin-top: -10px;
+    margin-bottom: -5px;
+}
+
+.logoLinkedin{
+    margin-left: 8px;
+}
+
+.saborText{
+    font-size: 10px;
+    color: #771e62;
+    margin-bottom: 20px;
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background-color: white;
+    border-radius: 12px;
+    border-top: 3px solid #0fb1bd;
+    -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+    -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+    box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  }
+  
+  .logoStyle {
+    margin: 0;
+    height: 180px;
+    width: 180px;
+  }
+
+  .tituloTeam{
+    color: #0fb1bd;
+    font-weight: 800;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9.5px );
+    -webkit-backdrop-filter: blur( 9.5px );
+    border-radius: 10px;
+    border: 3px solid #0FB1BD;
+    margin-left: 33%;
+    margin-right: 33%;
+
+  }
