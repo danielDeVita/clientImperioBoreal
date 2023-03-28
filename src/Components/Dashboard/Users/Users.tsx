@@ -78,13 +78,15 @@ const Users: React.FC = () => {
             {users.map(user => {
                 return (
                     <div className={style.userCard}>
-                        <div className={style.dataUser}></div>
+                        <div className={style.userInfo}>
+
                         <h2>Usuario: {user.username}</h2>
                         <h3>Id de usuario: {user._id}</h3>
-                        <p>Email: {user.email}</p>
-                        <p>Rol: {user.isAdmin ? "Administrador" : "No-Administrador"}</p>
-                        <button  className={style.btnEliminar} onClick={() => handleDelete(user._id)}>Eliminar</button>
-
+                        <p><strong>Email:</strong> {user.email}</p>
+                        <p><strong>Rol:</strong> {user.isAdmin ? "Administrador" : "No-Administrador"}</p>
+                         </div>
+                        
+                        <div className={style.btnContainer}>
                         <form className={style.formUser} onSubmit={(e) => {handleSubmit(e, user._id)}}>
                             <label htmlFor="admin">Admin</label>
                             <input onChange={handleChange} type="radio" value="admin" name="userRole" />
@@ -94,7 +96,8 @@ const Users: React.FC = () => {
                             
                             <button className={style.btnModificar} type="submit">Modificar</button>
                      </form>
-                        <hr />
+                        <button  className={style.btnEliminar} onClick={() => handleDelete(user._id)}>X</button>
+                        </div>
                     </div>
                 )
             })}
