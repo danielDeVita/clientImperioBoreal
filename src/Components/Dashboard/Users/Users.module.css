@@ -1,4 +1,5 @@
 .userCard {
+    display: flex;
     flex-wrap: wrap;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -6,49 +7,93 @@
     margin: 1rem;
     flex-basis: 26%;
     background-color: white;
+    opacity: .95;
+    justify-content: space-evenly;
+    gap: 50rem;
 }
 
-.dataUser {
-    margin-bottom: 1rem;
+.userInfo{
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    max-width: 400px;
+
+}
+
+.btnContainer {
+    display: flex;
+    gap: 1rem;
+    max-width: 100%;
 }
 
 .formUser {
-    margin-top: 1rem;
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
+.formUser label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+  
+.formUser input[type="radio"] {
+    display: inline-block;
+    margin-right: 10px;
+}
+  
+
+.btnModificar {
+    display: inline-block;
+    background-color: #0fb1bd;;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+  
+.btnModificar:hover {
+    background-color: #771e62;
+}
+  
 .btnEliminar {
+    left: -500px;
     border: none;
     color: white;
     background-color: #f44336;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
+    font-size: .8rem;
+    padding: 6px 13px;
+    height: 2rem;
     border-radius: 5px;
     cursor: pointer;
+    
 }
 
 .btnEliminar:hover {
     background-color: #c62828;
+    transition: background-color 0.3s ease-in-out;
 }
 
-.btnModificar {
-    border: none;
-    color: white;
-    background-color: #0fb1bd;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-}
-  
 
 .Backbutton {
-    left: 46.5%;
     background-color: #0fb1bd;
     color: white;
     font-size: 1.2rem;
     font-weight: 600;
     padding: 0.5rem 1rem;
+    margin-left: 1.3rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -60,3 +105,4 @@
 .Backbutton:hover {
     background-color: #771e62;
 }
+
