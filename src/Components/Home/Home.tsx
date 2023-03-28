@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   const postNewUser = async () => {
     if (isAuthenticated) {
     const { data } = await axios.post("/users", user);
-    const {_id} = data;
+    const { _id } = data;
     setUserId(_id);
     }
   };
@@ -77,7 +77,8 @@ const Home: React.FC = () => {
     setSelectedOption("default");
     setSelectedOptionOrder("default");
     postNewUser();
-  }, [user]);
+  }, []);
+
   return (
     <>
       <NavBar setCurrentPage={setCurrentPage} />

@@ -1,4 +1,4 @@
-import { State } from "../../../types";
+import { Product, State } from "../../../types.d";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../Redux/store";
 import { getAllOrders } from "../../../Redux/actions";
@@ -9,15 +9,37 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import downArrow from '../../../assets/down-arrow.png'
 
-const Orders: React.FC = () => {
+interface OrderProps {
+  cart: Product[]
+  orderId: string;
+  email: string;
+  _id: string;
+  status: string;
+  totalAmount: number
+}
+
+const OrderItem: React.FC<OrderProps> = ({ orderId, email, _id, status, cart, totalAmount }) => {
   const dispatch: AppDispatch = useDispatch();
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
-  useEffect(() => {
-    dispatch(getAllOrders());
-  }, []);
-  const orders = useSelector((state: State) => state.orders);
+  const [toggle, setToggle] = useState(false)
+  const [newStatus, setStatus] = useState("");
+
+  const handleChange = (e: any) => {
+    setStatus(e.target.value);
+  };
+
+  const handleSubmit = async (
+    id: string
+  ) => {
+    try {
+      await axios.put(`/orders/${id}`, { status: newStatus });
+      dispatch(getAllOrders());
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleDelete = async (id: string) => {
     try {
@@ -46,24 +68,87 @@ const Orders: React.FC = () => {
     }
   };
 
-  const [status, setStatus] = useState("");
+  return (
+    <div className={ !toggle ? `${style.orderCard} ${style.setHeight}` : style.orderCard}>
+    <button 
+     className={style.toggle}
+     onClick={() => setToggle(prev => !prev)}
+     >
+      <img src={downArrow} alt='Down arrow'/>
+     </button>
+    <div className={style.dataUser}>
+      <span className={style.wrapperInfo}>
+        <h5>Número de orden:</h5>
+        <p>{orderId}</p>
+      </span>
+      <span className={style.wrapperInfo}>
+        <h5>Usuario:</h5>
+        <p>{email}</p>
+      </span>
+      <span className={style.wrapperInfo}>
+        <h5>Id de usuario:</h5>
+        <p>{ _id }</p>
+      </span>
+      <span className={style.wrapperInfo}>
+        <h5>Estatus de compra: </h5>
+        <p>{ status }</p>
+      </span>
+    </div>
+    <div className={ !toggle ? `${style.productCartContainer} ${style.productHidden}`: style.productCartContainer}>
+      {cart.map((product: any, index) => {
+        return (
+          <div key={index} className={style.productCard}>
+            <div className={style.pName}>
+              <h5>{product.descriptionName}</h5>
+              <img src={product.image} />
+            </div>
+            <div className={style.pContent}>
+              <p>Precio: {product.price}</p>
+              <p>Cantidad: {product.quantity}</p>
+            </div>
+          </div>
+        );
+      })}
+      </div>
+    <div className={style.pTotalAmount}>
+      <p>Total: {totalAmount}</p>
+    </div>
 
-  const handleChange = (e: any) => {
-    setStatus(e.target.value);
-  };
+      <div className={style.btnContainer}>
+        <select
+          className={style.selectStatus}
+          name='status'
+          onChange={handleChange}
+        >
+          <option value='InProcess'>InProcess</option>
+          <option value='Cancelled'>Cancelled</option>
+          <option value='Paid'>Paid</option>
+        </select>
+          <button onClick={() => handleSubmit(orderId)} className={style.btnModificar} type='button'>
+            Modificar
+          </button>
+          <button
+            className={style.btnEliminar}
+            onClick={() => {
+              handleDelete(orderId);
+            }}
+          >
+            Eliminar
+          </button>
+      </div>
+  </div>
+  )
+}
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-    id: string
-  ) => {
-    try {
-      e.preventDefault();
-      await axios.put(`/orders/${id}`, { status });
-      dispatch(getAllOrders());
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const Orders: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
+  useEffect(() => {
+    dispatch(getAllOrders());
+  }, []);
+  const orders = useSelector((state: State) => state.orders);
+
 
   return (
     <>
@@ -74,69 +159,18 @@ const Orders: React.FC = () => {
           <Link to='/dashboard'>
             <button className={style.Backbutton}>Volver</button>
           </Link>
-          {orders.map((order) => {
-            return (
-              <div className={style.orderCard}>
-                <div className={style.dataUser}>
-                  <h5>Número de orden:</h5>
-                  <p>{order.orderId}</p>
-                  <h5>Usuario:</h5>
-                  <p>{order.user.email}</p>
-                  <h5>Id de usuario:</h5>
-                  <p>{order.user._id}</p>
-                  <h5>Estatus de compra: </h5>
-                  <p>{order.status}</p>
-                </div>
-                {order.cart.products.map((product: any) => {
-                  return (
-                    <div className={style.productCard}>
-                      <div className={style.pName}>
-                        <h5>{product.descriptionName}</h5>
-                        <img src={product.image} />
-                      </div>
-                      <div className={style.pContent}>
-                        <p>Precio: {product.price}</p>
-                        <p>Cantidad: {product.quantity}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-                <div className={style.pTotalAmount}>
-                  <p>Total: {order.cart.totalAmount}</p>
-                </div>
-
-                <form
-                  className={style.formOrder}
-                  onSubmit={(e) => {
-                    handleSubmit(e, order.orderId);
-                  }}
-                >
-                  <select
-                    className={style.selectStatus}
-                    name='status'
-                    onChange={handleChange}
-                  >
-                    <option value='InProcess'>InProcess</option>
-                    <option value='Cancelled'>Cancelled</option>
-                    <option value='Paid'>Paid</option>
-                  </select>
-                  <div>
-                    <button className={style.btnModificar} type='submit'>
-                      Modificar
-                    </button>
-                    <button
-                      className={style.btnEliminar}
-                      onClick={() => {
-                        handleDelete(order.orderId);
-                      }}
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                </form>
-              </div>
-            );
-          })}
+          <section className={style.CardContainer}>
+          { orders.map((order) => (
+            <OrderItem 
+              email={order.user.email}
+              _id={order.user._id}
+              orderId={order.orderId}
+              status={order.status}
+              cart={order.cart.products}
+              totalAmount={order.cart.totalAmount}
+            />
+          ))}
+          </section>
         </>
       )}
     </>

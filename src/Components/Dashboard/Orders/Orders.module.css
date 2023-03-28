@@ -8,21 +8,26 @@
 
 .orderCard {
   display: flex;
-  flex-wrap: wrap;
+  width: 430px;
+  flex-direction: column;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   margin: 1rem;
-  flex-basis: 26%;
+  position: relative;
   background-color: white;
 }
 
 .dataUser {
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .productCard {
-  display: flex;
+  display: flex; 
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -41,6 +46,15 @@
 
 .pName img {
   width: 100px;
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-top: 20px;
+  bottom: 20px;
 }
 
 .btnEliminar {
@@ -72,17 +86,17 @@
 }
 
 .selectStatus {
-  padding: 0.5rem;
+  padding: .3rem;
   margin-right: 1rem;
   font-size: 1rem;
   border-radius: 5px;
 }
 
-.btnModificar[type="submit"] {
+.btnModificar[type="button"] {
   background-color: #4caf50;
 }
 
-.btnModificar[type="submit"]:hover {
+.btnModificar[type="button"]:hover {
   background-color: #388e3c;
 }
 
@@ -103,4 +117,62 @@
 
 .Backbutton:hover {
   background-color: #771e62;
+}
+
+.CardContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 530px);
+  place-content: center;
+}
+
+.wrapperInfo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toggle {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+.toggle:hover {
+  background-color: #dfdcdc;
+}
+
+.toggle > img {
+  width: 50%;
+  height: 50%;
+} 
+
+.pTotalAmount  {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.productCartContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.productHidden {
+  display: none;
+}
+
+
+.setHeight {
+  height: 400px;
 }
