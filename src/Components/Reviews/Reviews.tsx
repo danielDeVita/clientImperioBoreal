@@ -13,12 +13,12 @@ function Reviews() {
         <div>
           <label className={style.label}>Valoración de tu compra</label>
           <select className={style.select} name="rating">
-            <option value="">seleccionar</option>
-            <option value="★☆☆☆☆">★☆☆☆☆</option>
-            <option value="★★☆☆☆">★★☆☆☆</option>
-            <option value="★★★☆☆">★★★☆☆</option>
-            <option value="★★★★☆">★★★★☆</option>
-            <option value="★★★★★">★★★★★</option>
+            <option value="">Puntue el producto!</option>
+            <option value="1">⭐ ☆ ☆ ☆ ☆</option>
+            <option value="2">⭐⭐ ☆ ☆ ☆</option>
+            <option value="3">⭐⭐⭐ ☆ ☆</option>
+            <option value="4">⭐⭐⭐⭐ ☆</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
           </select>
         </div>
         <textarea className={style.textarea}
