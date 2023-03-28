@@ -1,4 +1,4 @@
-import { Product, State, User, UserOrder } from "../types.d";
+import { Product, State, User, UserOrder, Review } from "../types.d";
 import {
   GET_PRODUCTS,
   GET_USERS,
@@ -10,7 +10,8 @@ import {
   GET_CATEGORIES,
   GET_PAYMENTOTAL,
   GET_ORDERS_BY_USER,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_REVIEWS_BY_PRODUCT
 } from "./actions";
 
 interface GETPaymentTotal {
@@ -64,6 +65,10 @@ interface GetAllOrders {
   type: typeof GET_ALL_ORDERS;
   payload: UserOrder[];
 }
+interface GetReviewsByProduct {
+  type: typeof GET_REVIEWS_BY_PRODUCT,
+  payload: Review[]
+}
 
 export type ProductActionTypes =
   | GetProductsAction
@@ -77,6 +82,7 @@ export type ProductActionTypes =
   | GetCategories
   | GetOrdersByUser
   | GetAllOrders
+  | GetReviewsByProduct
 
 const initialState: State = {
   products: [],
@@ -86,7 +92,9 @@ const initialState: State = {
   categories: [],
   payment: 0,
   ordersByUser: [],
-  orders: []
+  orders: [],
+  productReviews: []
+
 };
 
 const reducer = (
@@ -160,6 +168,11 @@ const reducer = (
         ...state,
         orders: action.payload
       }
+    case GET_REVIEWS_BY_PRODUCT: 
+    return {
+      ...state,
+      productReviews: action.payload
+    }
     default:
       return { ...state };
   }

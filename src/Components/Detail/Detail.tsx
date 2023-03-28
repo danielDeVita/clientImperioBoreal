@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { getDetail } from "../../Redux/actions";
+import { getDetail, getReviewsByProduct } from "../../Redux/actions";
 import style from "./Detail.module.css";
 import noImage from "../../assets/no-image.png";
 import { AppDispatch } from "../../Redux/store";
@@ -24,9 +24,13 @@ const Detail: React.FC = () => {
     KEY_LOCAL_STORAGE.KEY
   );
 
+  const productReviews = useSelector((state: State) => state.productReviews)
+
+
   useEffect(() => {
     if (id) {
       dispatch(getDetail(id));
+      dispatch(getReviewsByProduct(id))
     }
   }, [dispatch, id]);
   const [quantity, setQuantity] = useState(1)
@@ -101,6 +105,21 @@ const Detail: React.FC = () => {
       <div className={style.footerContainer}>
       <div></div>
       <Reviews />
+      {
+        productReviews.map((review) => {
+          return(
+            <div>
+              <h6>{review.createdAt}</h6>
+              <h4>{review.userId.email} dice:</h4>
+              <p>{review.comment}</p>
+              <h3>
+                {review.product.descriptionName}
+              </h3>
+              <h4>Puntaje: {review.rating}</h4>
+            </div>
+          )
+        })
+      }
         <Footer />
       </div>
     </>

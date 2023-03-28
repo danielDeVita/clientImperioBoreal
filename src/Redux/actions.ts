@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { Product, User, UserOrder } from "../types.d";
+import { Product, User, UserOrder, Review } from "../types.d";
 import { RootState } from "./store";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -15,7 +15,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL';
 export const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER';
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-
+export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'
 interface GETPaymentTotal {
   type: typeof GET_PAYMENTOTAL,
   payload: number
@@ -66,6 +66,10 @@ interface GetAllOrders {
   type: typeof GET_ALL_ORDERS;
   payload: UserOrder[];
 }
+interface GetReviewsByProduct {
+  type: typeof GET_REVIEWS_BY_PRODUCT,
+  payload: Review[]
+}
 
 export type ProductActionTypes =
   | GetProductsAction
@@ -79,6 +83,7 @@ export type ProductActionTypes =
   | GETPaymentTotal
   | GetOrdersByUser
   | GetAllOrders
+  | GetReviewsByProduct
 
 export const getPaymentTotal = (total: number) => {
   return { type: GET_PAYMENTOTAL, payload: total }
@@ -166,7 +171,6 @@ export const getUserOrders = (userId: string): ThunkAction<
   }
 }
 
-
 export const getAllOrders = (): ThunkAction<
   void,
   RootState,
@@ -177,6 +181,22 @@ export const getAllOrders = (): ThunkAction<
     try {
       const { data } = await axios.get(`/orders`)
       dispatch({ type: GET_ALL_ORDERS, payload: data })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+export const getReviewsByProduct = (productId: string): ThunkAction<
+void,
+RootState,
+null,
+ProductActionTypes
+> => {
+  return async(dispatch:Dispatch<ProductActionTypes>) => {
+    try {
+      const { data } = await axios.get(`/reviews/${productId}`)
+      dispatch({type: GET_REVIEWS_BY_PRODUCT, payload: data})
     } catch (error) {
       console.error(error);
     }
