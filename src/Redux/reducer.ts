@@ -11,7 +11,8 @@ import {
   GET_PAYMENTOTAL,
   GET_ORDERS_BY_USER,
   GET_ALL_ORDERS,
-  GET_REVIEWS_BY_PRODUCT
+  GET_REVIEWS_BY_PRODUCT,
+  RESET_REVIEWS_BY_PRODUCT
 } from "./actions";
 
 interface GETPaymentTotal {
@@ -70,6 +71,11 @@ interface GetReviewsByProduct {
   payload: Review[]
 }
 
+interface ResetReviewsByProduct {
+  type: typeof RESET_REVIEWS_BY_PRODUCT,
+  payload: []
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -83,6 +89,7 @@ export type ProductActionTypes =
   | GetOrdersByUser
   | GetAllOrders
   | GetReviewsByProduct
+  | ResetReviewsByProduct
 
 const initialState: State = {
   products: [],
@@ -168,11 +175,21 @@ const reducer = (
         ...state,
         orders: action.payload
       }
-    case GET_REVIEWS_BY_PRODUCT: 
-    return {
-      ...state,
-      productReviews: action.payload
-    }
+    case GET_REVIEWS_BY_PRODUCT:
+      return {
+        ...state,
+        productReviews: action.payload
+      }
+    case GET_REVIEWS_BY_PRODUCT:
+      return {
+        ...state,
+        productReviews: action.payload
+      }
+    case RESET_REVIEWS_BY_PRODUCT:
+      return {
+        ...state,
+        productReviews: action.payload
+      }
     default:
       return { ...state };
   }
