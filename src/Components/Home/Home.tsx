@@ -3,6 +3,7 @@ import NavBar from "../Navbar/Navbar";
 import style from "./Home.module.css";
 import CardContainer from "../CardContainer/CardContainer";
 import Footer from "../Footer/Footer";
+import { Link } from "react-router-dom";
 import {
   resetFilters,
   orderByPrice,
@@ -156,6 +157,7 @@ const Home: React.FC = () => {
       />
       <div className={style.footerContainer}>
         <Footer />
+        <p className={style.finalFrase}> <Link className={style.linkourteam} to="/OurTeam">Conoce a los desarrolladores que crearon esta Web</Link></p>
       </div>
     </>
   );

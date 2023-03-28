@@ -15,6 +15,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import { KEY_LOCAL_STORAGE } from "./types.d";
 import Profile from "./Components/Profile/Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import OurTeam from "./Components/OurTeam/OurTeam";
 import Loading from "./Components/Loading/Loading";
 import axios from "axios";
 import Orders from "./Components/Dashboard/Orders/Orders";
@@ -55,6 +56,7 @@ function App() {
       <Route path='/products/:id' element={<Detail />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/aboutUs' element={<AboutUs />} />
+      <Route path='/ourTeam' element={<OurTeam />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
