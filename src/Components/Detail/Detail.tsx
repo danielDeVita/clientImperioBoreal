@@ -123,7 +123,7 @@ const Detail: React.FC = () => {
         </div>
 
 
-        <Reviews />
+        <Reviews id={id as string}/>
         <Footer />
       </div>
     </>
