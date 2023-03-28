@@ -8,6 +8,7 @@ import {
   resetFilters,
   orderByPrice,
   filterByCategory,
+  ResetReviewsByProduct
 } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -78,6 +79,7 @@ const Home: React.FC = () => {
     setSelectedOption("default");
     setSelectedOptionOrder("default");
     postNewUser();
+    dispatch(ResetReviewsByProduct());
   }, []);
 
   return (

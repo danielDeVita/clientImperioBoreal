@@ -46,7 +46,7 @@ const Detail: React.FC = () => {
         title: 'Agregado al carrito',
         showConfirmButton: false,
         timer: 550,
-        backdrop: false,      
+        backdrop: false,
       })
       setItmes({
         descriptionName,
@@ -61,9 +61,9 @@ const Detail: React.FC = () => {
   };
 
   const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (parseInt(e.target.value) > (stock || 40) ) {
-         setQuantity((stock || 40))
-      } else setQuantity(parseInt(e.target.value))
+    if (parseInt(e.target.value) > (stock || 40)) {
+      setQuantity((stock || 40))
+    } else setQuantity(parseInt(e.target.value))
   }
   return (
     <>
@@ -89,37 +89,38 @@ const Detail: React.FC = () => {
           <p className={style.detail}>Categoría: {category?.categoryName}</p>
           <p className={style.detail}>Precio: ${price} ARS</p>
           <div className={style.pCantidad}>
-          <p>Cantidad</p>
+            <p>Cantidad</p>
           </div>
           <div className={style.btnStock}>
-              <input type='number' min='1' max={stock} value={quantity} onChange={handleQuantity}/>
+            <input type='number' min='1' max={stock} value={quantity} onChange={handleQuantity} />
           </div>
-            <button className={style.button} onClick={handlerAddProduct}>
-              <img src={added ? checkOut : addToCart} alt='Call to action' />
-            </button>
+          <button className={style.button} onClick={handlerAddProduct}>
+            <img src={added ? checkOut : addToCart} alt='Call to action' />
+          </button>
         </div>
       </div>
       <Link to={"/"}>
         <button className={style.Backbutton}>Volver</button>
       </Link>
       <div className={style.footerContainer}>
-      <div></div>
-      <Reviews />
-      {
-        productReviews.map((review) => {
-          return(
-            <div>
-              <h6>{review.createdAt}</h6>
-              <h4>{review.userId.email} dice:</h4>
-              <p>{review.comment}</p>
-              <h3>
-                {review.product.descriptionName}
-              </h3>
-              <h4>Puntaje: {review.rating}</h4>
-            </div>
-          )
-        })
-      }
+        <div></div>
+
+        <div className={style.container}>
+          {productReviews &&
+            productReviews.map((review) => {
+              return (
+                <div className={style.reviewCard}>
+                  <h6>{review.createdAt}</h6>
+                  <h6>{review.userId.email} dice:</h6>
+                  <p>{review.comment}</p>
+                  <h6 className={style.rating}>Puntaje: {review.rating}</h6>
+                </div>
+              )
+            })
+          }
+        </div>
+
+        <Reviews />
         <Footer />
       </div>
     </>

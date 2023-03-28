@@ -16,6 +16,8 @@ export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL';
 export const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER';
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
 export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'
+export const RESET_REVIEWS_BY_PRODUCT = 'RESET_REVIEWS_BY_PRODUCT'
+
 interface GETPaymentTotal {
   type: typeof GET_PAYMENTOTAL,
   payload: number
@@ -71,6 +73,11 @@ interface GetReviewsByProduct {
   payload: Review[]
 }
 
+interface ResetReviewsByProduct {
+  type: typeof RESET_REVIEWS_BY_PRODUCT,
+  payload: []
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -84,6 +91,7 @@ export type ProductActionTypes =
   | GetOrdersByUser
   | GetAllOrders
   | GetReviewsByProduct
+  | ResetReviewsByProduct
 
 export const getPaymentTotal = (total: number) => {
   return { type: GET_PAYMENTOTAL, payload: total }
@@ -188,17 +196,21 @@ export const getAllOrders = (): ThunkAction<
 }
 
 export const getReviewsByProduct = (productId: string): ThunkAction<
-void,
-RootState,
-null,
-ProductActionTypes
+  void,
+  RootState,
+  null,
+  ProductActionTypes
 > => {
-  return async(dispatch:Dispatch<ProductActionTypes>) => {
+  return async (dispatch: Dispatch<ProductActionTypes>) => {
     try {
       const { data } = await axios.get(`/reviews/${productId}`)
-      dispatch({type: GET_REVIEWS_BY_PRODUCT, payload: data})
+      dispatch({ type: GET_REVIEWS_BY_PRODUCT, payload: data })
     } catch (error) {
       console.error(error);
     }
   }
+}
+
+export const ResetReviewsByProduct = () => {
+  return { type: RESET_REVIEWS_BY_PRODUCT, payload: [] }
 }

@@ -156,7 +156,41 @@
   font-size: 25px;
   color: #0FB1BD;
 }
+
 .btnStock input {
   width: 40px;
   height: min-content;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem
+}
+
+.reviewCard {
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: .8;
+  border-radius: 16px;
+}
+
+.reviewCard h6 {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.reviewCard p {
+  color: #555;
+}
+
+.reviewCard h3 {
+  color: #333;
+}
+
+.reviewCard h4.rating {
+  color: #f39c12;
 }
