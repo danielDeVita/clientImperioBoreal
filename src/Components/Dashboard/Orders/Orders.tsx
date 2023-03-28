@@ -142,56 +142,13 @@ const OrderItem: React.FC<OrderProps> = ({ orderId, email, _id, status, cart, to
 
 const Orders: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     dispatch(getAllOrders());
   }, []);
   const orders = useSelector((state: State) => state.orders);
 
-  const handleDelete = async (id: string) => {
-    try {
-        Swal.fire({
-            title: "Seguro que quieres eliminar la orden?",
-            text: "No se puede revertir",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#0fb1bd",
-            confirmButtonText: "Eliminar",
-            iconColor: "red",
-          }).then(async (result) => {
-            if (result.isConfirmed) {
-      dispatch(getAllOrders());
-      const deleteProduct = await axios.delete(`/orders/${id}`);
-      Swal.fire(
-        "Eliminada con éxito",
-        "La orden ha sido eliminada",
-        "success"
-      );
-    }
-  });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const [status, setStatus] = useState("");
-
-  const handleChange = (e: any) => {
-    setStatus(e.target.value);
-  };
-
-  const handleSubmit = async (
-    id: string
-  ) => {
-    try {
-      await axios.put(`/orders/${id}`, { status });
-      dispatch(getAllOrders());
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <>
