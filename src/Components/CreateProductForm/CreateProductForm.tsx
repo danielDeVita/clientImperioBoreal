@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/actions";
 import {
   Errors,
-  Product,
   TouchedProductForm,
   UpProductForm,
   State
