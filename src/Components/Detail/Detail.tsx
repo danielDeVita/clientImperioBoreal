@@ -14,6 +14,14 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import Swal from "sweetalert2";
 import Reviews from "../Reviews/Reviews"
 
+const stars: any = {
+  1: '⭐ ☆ ☆ ☆ ☆',
+  2: '⭐⭐ ☆ ☆ ☆',
+  3: '⭐⭐⭐ ☆ ☆',
+  4: '⭐⭐⭐⭐ ☆',
+  5: '⭐⭐⭐⭐⭐'
+}
+
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams<DetailParams>();
@@ -112,11 +120,15 @@ const Detail: React.FC = () => {
             productReviews.map((review) => {
               return (
                 <div className={style.reviewCard}>
-                  <h6>{review.createdAt}</h6>
-                  <h6>{review.userId.email} dice:</h6>
-                  <p>{review.comment}</p>
-                  <h6 className={style.rating}>Puntaje: {review.rating}</h6>
-                </div>
+                   <p>{review.userId.email}</p>
+                    <div className={style.infoContainer}>
+                         <p className={style.rating}>{stars[review.rating]}</p>
+                         <p>{review.createdAt}</p>
+                    </div>
+                    <div className={style.commentSection}>
+                      <p>{review.comment}</p>
+                    </div>
+                  </div>
               )
             })
           }
