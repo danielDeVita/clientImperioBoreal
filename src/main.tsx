@@ -10,7 +10,6 @@ import { PropsProvider } from './context/'
 
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
     <PropsProvider>
       <Auth0Provider
         domain={import.meta.env.VITE_DOMAIN}
@@ -25,6 +24,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           </BrowserRouter>
         </Provider>
       </Auth0Provider>
-    </PropsProvider>
-  </React.StrictMode>
+    </PropsProvider> 
 );
