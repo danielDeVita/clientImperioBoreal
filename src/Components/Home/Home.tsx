@@ -8,7 +8,7 @@ import {
   resetFilters,
   orderByPrice,
   filterByCategory,
-  ResetReviewsByProduct
+  ResetReviewsByProduct,
 } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -25,13 +25,13 @@ const Home: React.FC = () => {
   const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
     useAuth0<User>();
 
- const { setUserId } = useContext(CartContext) as CartContextType;
+  const { setUserId } = useContext(CartContext) as CartContextType;
 
   const postNewUser = async () => {
     if (isAuthenticated) {
-    const { data } = await axios.post("/users", user);
-    const { _id } = data;
-    setUserId(_id);
+      const { data } = await axios.post("/users", user);
+      const { _id } = data;
+      setUserId(_id);
     }
   };
 
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
   };
 
   const allProducts = useSelector((state: RootState) => state.filteredProducts);
-  const categories = useSelector((state: RootState) => state.categories)
+  const categories = useSelector((state: RootState) => state.categories);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [productsPerPage, setProductsPerPage] = useState<number>(10);
@@ -110,34 +110,22 @@ const Home: React.FC = () => {
           id='filterByCategory'
           value={selectedOption}
         >
-          {/*  <option
+          <option
             className={style.categoryOptionStyle}
             value='default'
             disabled
           >
             Categorias
           </option>
-          <option className={style.categoryOptionStyle} value='lapiz'>
-            Lapices
-          </option>
-          <option className={style.categoryOptionStyle} value='resmas'>
-            Resmas
-          </option>
-          <option className={style.categoryOptionStyle} value='agenda'>
-            Agendas
-          </option>
-          <option className={style.categoryOptionStyle} value='oficina'>
-            Articulos de oficina
-          </option>
-          <option className={style.categoryOptionStyle} value='lapicera'>
-            Lapiceras
-          </option>
-          <option className={style.categoryOptionStyle} value='escolar'>
-            Escolares
-          </option> */}
-          <option className={style.categoryOptionStyle} value='default' disabled >Categorias</option>
           {categories.map((category: any) => {
-            return <option className={style.categoryOptionStyle} value={category.category}>{category.category}</option>
+            return (
+              <option
+                className={style.categoryOptionStyle}
+                value={category.category}
+              >
+                {category.category}
+              </option>
+            );
           })}
         </select>
         <button
@@ -160,7 +148,12 @@ const Home: React.FC = () => {
       />
       <div className={style.footerContainer}>
         <Footer />
-        <p className={style.finalFrase}> <Link className={style.linkourteam} to="/OurTeam">Conoce a los desarrolladores que crearon esta Web</Link></p>
+        <p className={style.finalFrase}>
+          {" "}
+          <Link className={style.linkourteam} to='/OurTeam'>
+            Conoce a los desarrolladores que crearon esta Web
+          </Link>
+        </p>
       </div>
     </>
   );

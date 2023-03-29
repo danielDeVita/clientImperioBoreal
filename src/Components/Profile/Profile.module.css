@@ -1,70 +1,71 @@
-.Container{
+.Container {
   display: grid;
   place-items: center;
 }
 .profileContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1rem;
-    padding: 1rem;
-    border: 1px solid black;
-    border-radius: 7px;
-    background-color: #fff ;
-    width: 500px;
-    height: 280px;
-  }
-  
-  .profileImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 1rem;
-  }
-  
-  .profileDetails {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 16px;
-  }
-  
-  .profileName {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .profilEemail {
-    margin: 0;
-    margin-bottom: 5px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 7px;
+  background-color: #fff;
+  width: 500px;
+  height: 280px;
+}
 
-  .profileNickname {
-    margin: 0;
-    margin-bottom: 5px;
-  }
-  
-  .Backbutton {
-    position: absolute;
-    left: 46.5%;
-    background-color: #0fb1bd;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 20px;
-    margin-left: 10px;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
-    -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
-    box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
-  }
-  
-  .Backbutton:hover {
-    background-color: #771e62;
-  }
+.profileImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+}
+
+.profileName {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profilEemail {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.profileNickname {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.Backbutton {
+  position: absolute;
+  left: 46.5%;
+  background-color: #0fb1bd;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  -webkit-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+  box-shadow: 0px 7px 19px 2px rgba(0, 0, 0, 0.27);
+}
+
+.Backbutton:hover {
+  background-color: #771e62;
+}
