@@ -117,9 +117,10 @@ const Home: React.FC = () => {
           >
             Categorias
           </option>
-          {categories.map((category: any) => {
+          {categories.map((category: any, index) => {
             return (
               <option
+                key={index}
                 className={style.categoryOptionStyle}
                 value={category.category}
               >
