@@ -16,10 +16,13 @@ const ShoppingCartItem: React.FC <Product> = ({
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (typeof parseInt(e.target.value) === "number") {
-      updateQuantity(_id as string, parseInt(e.target.value))
+      if (parseInt(e.target.value) === 0) return setProductQuantity(1) 
       if (parseInt(e.target.value) > (stock || 40)) {
         setProductQuantity(stock)
-      }else setProductQuantity(parseInt(e.target.value));
+      }else {
+        updateQuantity(_id as string, parseInt(e.target.value))
+        setProductQuantity(parseInt(e.target.value))
+      };
     }
   };
 
