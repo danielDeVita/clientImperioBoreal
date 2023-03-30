@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { getDetail, getReviewsByProduct } from "../../Redux/actions";
+import { getDetail, getReviewsByProduct, resetDetail } from "../../Redux/actions";
 import style from "./Detail.module.css";
 import noImage from "../../assets/no-image.png";
 import { AppDispatch } from "../../Redux/store";
@@ -34,13 +34,16 @@ const Detail: React.FC = () => {
 
   const productReviews = useSelector((state: State) => state.productReviews)
 
-
   useEffect(() => {
+
     if (id) {
       dispatch(getDetail(id));
       dispatch(getReviewsByProduct(id))
+      return () => {
+        dispatch(resetDetail())
+      }
     }
-  }, [dispatch, id]);
+  }, [id]);
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState<boolean>(validateProducst(id as string));
   const handlerAddProduct = () => {
@@ -86,11 +89,17 @@ const Detail: React.FC = () => {
       </div>
       <div className={style.card}>
         <div className={style.imageContainer}>
-          <img
-            src={image?.secure_url ? image?.secure_url : noImage}
+
+          {/* { */}
+            {/* image?.secure_url ? */}
+            <img
+            src={image?.secure_url ? image?.secure_url : noImage }
             alt={descriptionName}
             className={style.image}
-          />
+          /> 
+          {/* // : <span className="loader"></span> */}
+          {/* } */}
+          
         </div>
         <div className={style.content}>
           <h2 className={style.title}>{descriptionName}</h2>

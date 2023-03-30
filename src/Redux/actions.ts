@@ -12,11 +12,12 @@ export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const GET_CATEGORIES = "GET_CATEGORIES";
-export const GET_PAYMENTOTAL = 'GET_PAYMENTOTAL';
-export const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER';
-export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'
-export const RESET_REVIEWS_BY_PRODUCT = 'RESET_REVIEWS_BY_PRODUCT'
+export const GET_PAYMENTOTAL = "GET_PAYMENTOTAL";
+export const GET_ORDERS_BY_USER = "GET_ORDERS_BY_USER";
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
+export const GET_REVIEWS_BY_PRODUCT = "GET_REVIEWS_BY_PRODUCT";
+export const RESET_REVIEWS_BY_PRODUCT = "RESET_REVIEWS_BY_PRODUCT";
+export const RESET_DETAIL = "RESET_DETAIL";
 
 interface GETPaymentTotal {
   type: typeof GET_PAYMENTOTAL,
@@ -78,6 +79,11 @@ interface ResetReviewsByProduct {
   payload: []
 }
 
+interface ResetDetail {
+  type: typeof RESET_DETAIL,
+  payload: {}
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -92,6 +98,7 @@ export type ProductActionTypes =
   | GetAllOrders
   | GetReviewsByProduct
   | ResetReviewsByProduct
+  | ResetDetail
 
 export const getPaymentTotal = (total: number) => {
   return { type: GET_PAYMENTOTAL, payload: total }
@@ -213,4 +220,8 @@ export const getReviewsByProduct = (productId: string): ThunkAction<
 
 export const ResetReviewsByProduct = () => {
   return { type: RESET_REVIEWS_BY_PRODUCT, payload: [] }
+}
+
+export const resetDetail = () => {
+  return {type: RESET_DETAIL, payload: {}}
 }
