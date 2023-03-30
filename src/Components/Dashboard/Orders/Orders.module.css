@@ -4,6 +4,7 @@
   margin: 1rem auto;
   padding: 1rem;
   height: auto;
+  
 }
 
 .orderCard {
@@ -69,7 +70,7 @@
 .btnModificar {
   border: none;
   color: white;
-  background-color: #f44336;
+  background-color: #0fb1bd;
   padding: 0.5rem 1rem;
   margin: 0.5rem;
   border-radius: 5px;
@@ -93,11 +94,11 @@
 }
 
 .btnModificar[type="button"] {
-  background-color: #4caf50;
+  background-color: #0fb1bd;
 }
 
 .btnModificar[type="button"]:hover {
-  background-color: #388e3c;
+  background-color: #09949e;
 }
 
 .Backbutton {
