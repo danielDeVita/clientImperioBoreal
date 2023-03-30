@@ -32,12 +32,10 @@ function App() {
 
   useEffect(() => {
     createStorage();
-   return () => {
     dispatch(getProducts());
     dispatch(getCategories());
-   }
   }, []);
-
+  
   if (isLoading) {
     return (
       <div>
