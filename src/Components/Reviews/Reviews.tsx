@@ -68,7 +68,7 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
 
   return (
     <div className={style.container}>
-      <h2 className={style.h4}><strong>Cantidad de comentarios:</strong></h2>
+      <h2 className={style.h4}><strong>Cantidad de comentarios: {reviews.length}</strong></h2>
       <br />
       {!reviews.length && <p>Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu opinión!</p>}
       <br />
