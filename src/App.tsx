@@ -20,6 +20,7 @@ import Loading from "./Components/Loading/Loading";
 import axios from "axios";
 import Orders from "./Components/Dashboard/Orders/Orders";
 import Users from "./Components/Dashboard/Users/Users"
+import PaymentStatus from "./Components/PaymentStatus/PaymentStatus";
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 //Si tienen problemas con el import en minuscula o mayuscula
@@ -35,7 +36,7 @@ function App() {
     dispatch(getProducts());
     dispatch(getCategories());
   }, []);
-  
+
   if (isLoading) {
     return (
       <div>
@@ -57,6 +58,7 @@ function App() {
       <Route path='/profile' element={<Profile />} />
       <Route path='/aboutUs' element={<AboutUs />} />
       <Route path='/ourTeam' element={<OurTeam />} />
+      <Route path='/paymentStatus' element={<PaymentStatus />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
