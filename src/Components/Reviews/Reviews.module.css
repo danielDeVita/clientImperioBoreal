@@ -61,3 +61,25 @@
 .input:hover {
   background-color: #771e62;
 }
+
+.button__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button__comment {
+  background-color: #0fb1bd;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  width: 12rem;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.button__comment:hover {
+  background-color: #771e62;
+}
