@@ -37,6 +37,16 @@ const Button: React.FC = () => {
         })),
         totalAmount: payment
       };
+      const mpCart = {
+        products: products.map((product: any) => ({
+          title: product.descriptionName,
+          picture_url: product.image.secure_url,
+          quantity:product.quantity,
+          unit_price: product.price,
+        })),
+        totalAmount: payment
+      }
+      console.log(mpCart)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -48,19 +58,7 @@ const Button: React.FC = () => {
       clearStorage()
       /* navigate("/"); */
       await axios.post("/carts", carrito);
-      let { data } = await axios.post('/mp', {
-        products: [{
-          transaction_amount: 10,
-          description: "testProduct 10",
-          quantity: 10
-        },
-        {
-          transaction_amount: 10,
-          description: "testProduct 10",
-          quantity: 10
-        }
-        ]
-      })
+      let { data } = await axios.post('/mp', mpCart)
       window.location.replace(data)
     } else {
       Swal.fire({
