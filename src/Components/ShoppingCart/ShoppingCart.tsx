@@ -14,11 +14,11 @@ const Button: React.FC = () => {
   const payment = useSelector((state: State) => state.payment)
   const [user_id, setUser_id] = useState("");
 
-  
+
   const { user, isAuthenticated, loginWithRedirect } = useAuth0()
   const navigate = useNavigate();
   const { clearStorage, loadPayment, getLocalStorage } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
-  
+
   const products = getLocalStorage();
 
   const getUser_id = async () => {
@@ -46,8 +46,22 @@ const Button: React.FC = () => {
         backdrop: false
       })
       clearStorage()
-      navigate("/");
+      /* navigate("/"); */
       await axios.post("/carts", carrito);
+      let { data } = await axios.post('/mp', {
+        products: [{
+          transaction_amount: 10,
+          description: "testProduct 10",
+          quantity: 10
+        },
+        {
+          transaction_amount: 10,
+          description: "testProduct 10",
+          quantity: 10
+        }
+        ]
+      })
+      window.location.replace(data)
     } else {
       Swal.fire({
         icon: 'error',
@@ -68,18 +82,18 @@ const Button: React.FC = () => {
   if (isAuthenticated && payment > 0) {
     return (
       <button
-      className={style.btnComprar}
-      onClick={() => cartToDB(products, user_id)}
-    >
-      Comprar
-    </button>
+        className={style.btnComprar}
+        onClick={() => cartToDB(products, user_id)}
+      >
+        Comprar
+      </button>
     )
-  }else if (!isAuthenticated && payment > 0) {
+  } else if (!isAuthenticated && payment > 0) {
     return (
       <button
-      className={style.btnComprar}
-      onClick={() => loginWithRedirect()}
-     > Iniciar sesión </button>
+        className={style.btnComprar}
+        onClick={() => loginWithRedirect()}
+      > Iniciar sesión </button>
     )
   }
 
