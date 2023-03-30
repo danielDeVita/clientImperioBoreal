@@ -91,7 +91,9 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
           placeholder="Escribe un comentario sobre tu compra"
         />
         <br />
-        <button type="submit">Comentar</button>
+        <div className={style.button__container}>
+            <button type="submit" className={style.button__comment}>Comentar</button>
+        </div>
       </form>
     </div>
   );
