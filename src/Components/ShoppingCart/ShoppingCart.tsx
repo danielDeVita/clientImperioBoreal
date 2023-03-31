@@ -17,7 +17,7 @@ const Button: React.FC = () => {
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0()
   const navigate = useNavigate();
-  const { clearStorage, loadPayment, getLocalStorage } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
+  const { clearStorage, loadPayment, getLocalStorage, setItmes } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
 
   const products = getLocalStorage();
 
@@ -46,7 +46,6 @@ const Button: React.FC = () => {
         })),
         totalAmount: payment
       }
-      console.log(mpCart)
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -57,7 +56,10 @@ const Button: React.FC = () => {
       })
       clearStorage()
       /* navigate("/"); */
-      await axios.post("/carts", carrito);
+     const response =  await axios.post("/carts", carrito);
+     localStorage.setItem("objectId", response.data);
+
+
       let { data } = await axios.post('/mp', mpCart)
       window.location.replace(data)
     } else {
