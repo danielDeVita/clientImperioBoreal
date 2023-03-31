@@ -1,23 +1,101 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { Product, State } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { useSelector } from "react-redux";
 import { getProducts } from "../../Redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../Redux/store";
-import UserIcon from '../../assets/user.png'
-import OrdersIcon from '../../assets/clipboard.png'
+import UserIcon from "../../assets/user.png";
+import OrdersIcon from "../../assets/clipboard.png";
+import Pagination from "../Pagination/Pagination";
+import stylePag from "../Pagination/Pagination.module.css";
 
 const Dashboard: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const allProducts = useSelector((state: State) => state.products);
+  // ================ Pagination =============================================
+  const [currentItems, setCurrentItems] = useState<Array<any>>();
 
-  useEffect(() => { }, [allProducts]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(9);
+
+  const [pageNumberLimit, setPageNumberLimit] = useState<number>(2);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState<number>(5);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState<number>(0);
+
+  const handleClick = (event: React.MouseEvent<HTMLLIElement>): void => {
+    setCurrentPage(Number(event.currentTarget.id));
+  };
+  const pages = [];
+
+  for (let i = 1; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
+    pages.push(i);
+  }
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirsttItem = indexOfLastItem - itemsPerPage;
+
+  const renderPageNumbers = pages.map((number) => {
+    const isActive = currentPage === number;
+    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+      return (
+        <li
+          key={number}
+          id={String(number)}
+          onClick={handleClick}
+          className={`${stylePag.number} ${
+            isActive ? stylePag.active : undefined
+          }`}
+        >
+          {number}
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+  const handleNextbtn = (): void => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
+  };
+  const handlePrevbtn = () => {
+    setCurrentPage(currentPage - 1);
+
+    if ((currentPage - 1) % pageNumberLimit === 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
+  };
+  let pageIncrementBtn = null;
+  if (pages.length > maxPageNumberLimit) {
+    pageIncrementBtn = (
+      <li className={stylePag.hellipBtn} onClick={handleNextbtn}>
+        {" "}
+        &hellip;{" "}
+      </li>
+    );
+  }
+  let pageDecrementBtn = null;
+  if (minPageNumberLimit >= 1) {
+    pageDecrementBtn = (
+      <li className={stylePag.hellipBtn} onClick={handlePrevbtn}>
+        {" "}
+        &hellip;{" "}
+      </li>
+    );
+  }
+
+  useEffect(() => {
+    setCurrentItems(allProducts?.slice(indexOfFirsttItem, indexOfLastItem));
+  }, [allProducts, indexOfFirsttItem, indexOfLastItem]);
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -47,7 +125,9 @@ const Dashboard: React.FC = () => {
       console.error(error);
     }
   };
-
+  if (!currentItems) {
+    return <div>No hay productos para mostrar</div>;
+  }
   return (
     <>
       {!isAuthenticated ? (
@@ -63,11 +143,11 @@ const Dashboard: React.FC = () => {
               />
             </Link>
             <div className={style.linksContainer}>
-              <Link to="/dashboard/orders">
-                <img src={OrdersIcon} alt='Link a ordenes'/>
+              <Link to='/dashboard/orders'>
+                <img src={OrdersIcon} alt='Link a ordenes' />
               </Link>
-              <Link to="/dashboard/users" className={style.userIcon}>
-                <img src={UserIcon} alt='Link a usuarios'/>
+              <Link to='/dashboard/users' className={style.userIcon}>
+                <img src={UserIcon} alt='Link a usuarios' />
               </Link>
             </div>
           </div>
@@ -94,14 +174,12 @@ const Dashboard: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {allProducts.map((product: Product) => (
+              {currentItems.map((product: Product) => (
                 <tr key={product._id}>
                   <th>
                     <img
                       src={product.image?.secure_url}
                       alt={product.descriptionName}
-                      width='100'
-                      height='100'
                     />
                   </th>
                   <td>{product._id}</td>
@@ -130,6 +208,19 @@ const Dashboard: React.FC = () => {
               ))}
             </tbody>
           </table>
+          <Pagination
+            // productsPerPage={productsPerPage}
+            // allProducts={allProducts.length}
+            // paginado={paginado}
+            // currentPage={currentPage}
+            handleNextbtn={handleNextbtn}
+            handlePrevbtn={handlePrevbtn}
+            currentPage={currentPage}
+            pages={pages}
+            pageDecrementBtn={pageDecrementBtn}
+            pageIncrementBtn={pageIncrementBtn}
+            renderPageNumbers={renderPageNumbers}
+          />
         </>
       )}
     </>

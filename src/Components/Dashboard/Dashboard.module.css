@@ -80,7 +80,7 @@
   font-weight: 700;
   background-color: white;
   border-radius: 999rem;
-  padding: .5rem;
+  padding: 0.5rem;
   margin-left: 50px;
   margin-top: 50px;
   border: 2px solid #0fb1bd;
@@ -129,7 +129,6 @@
   cursor: pointer;
 }
 
-
 .linksContainer {
   width: 50%;
   display: flex;
@@ -152,5 +151,10 @@
 
 .linksContainer > a:hover > img {
   transform: scale(1.1);
-  transition: all .1s linear;
+  transition: all 0.1s linear;
+}
+img {
+  object-fit: contain;
+  width: 100px;
+  height: 100px;
 }

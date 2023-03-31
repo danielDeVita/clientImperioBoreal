@@ -14,12 +14,13 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { useSelector } from "react-redux";
 import Pagination from "../Pagination/Pagination";
+import stylePag from "../Pagination/Pagination.module.css";
 import Carousel from "../Carousel/Carousel";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "auth0";
 import axios from "axios";
 import { CartContext } from "../../context";
-import { CartContextType } from "../../types.d";
+import { CartContextType, Product } from "../../types.d";
 
 const Home: React.FC = () => {
   const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
@@ -57,30 +58,108 @@ const Home: React.FC = () => {
   };
 
   const allProducts = useSelector((state: RootState) => state.filteredProducts);
+
   const categories = useSelector((state: RootState) => state.categories);
+  // ============================================================================================
+  // ================ Pagination =============================================
+  const [currentItems, setCurrentItems] = useState<Array<any>>();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [productsPerPage, setProductsPerPage] = useState<number>(10);
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = allProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const [itemsPerPage, setItemsPerPage] = useState<number>(9);
 
-  const paginado = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+  const [pageNumberLimit, setPageNumberLimit] = useState<number>(2);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState<number>(5);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState<number>(0);
+
+  const handleClick = (event: React.MouseEvent<HTMLLIElement>): void => {
+    setCurrentPage(Number(event.currentTarget.id));
   };
+  const pages = [];
+
+  for (let i = 1; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
+    pages.push(i);
+  }
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirsttItem = indexOfLastItem - itemsPerPage;
+
+  const renderPageNumbers = pages.map((number) => {
+    const isActive = currentPage === number;
+    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+      return (
+        <li
+          key={number}
+          id={String(number)}
+          onClick={handleClick}
+          className={`${stylePag.number} ${
+            isActive ? stylePag.active : undefined
+          }`}
+        >
+          {number}
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+  const handleNextbtn = (): void => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
+  };
+  const handlePrevbtn = () => {
+    setCurrentPage(currentPage - 1);
+
+    if ((currentPage - 1) % pageNumberLimit === 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
+  };
+  let pageIncrementBtn = null;
+  if (pages.length > maxPageNumberLimit) {
+    pageIncrementBtn = (
+      <li className={stylePag.hellipBtn} onClick={handleNextbtn}>
+        {" "}
+        &hellip;{" "}
+      </li>
+    );
+  }
+  let pageDecrementBtn = null;
+  if (minPageNumberLimit >= 1) {
+    pageDecrementBtn = (
+      <li className={stylePag.hellipBtn} onClick={handlePrevbtn}>
+        {" "}
+        &hellip;{" "}
+      </li>
+    );
+  }
+
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [productsPerPage, setProductsPerPage] = useState<number>(10);
+  // const indexOfLastProduct = currentPage * productsPerPage;
+  // const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  // const currentProducts = allProducts.slice(
+  //   indexOfFirstProduct,
+  //   indexOfLastProduct
+  // );
+
+  // const paginado = (pageNumber: number) => {
+  //   setCurrentPage(pageNumber);
+  // };
 
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [selectedOptionOrder, setSelectedOptionOrder] = useState<string>("");
 
   useEffect(() => {
+    setCurrentItems(allProducts?.slice(indexOfFirsttItem, indexOfLastItem));
     setSelectedOption("default");
     setSelectedOptionOrder("default");
     postNewUser();
     dispatch(ResetReviewsByProduct());
-  }, []);
+  }, [allProducts, indexOfFirsttItem, indexOfLastItem]);
 
   return (
     <>
@@ -139,13 +218,20 @@ const Home: React.FC = () => {
       </div>
       <Carousel />
       <div className='card-container'>
-        <CardContainer productsFiltered={currentProducts} />
+        <CardContainer productsFiltered={currentItems} />
       </div>
       <Pagination
-        productsPerPage={productsPerPage}
-        allProducts={allProducts.length}
-        paginado={paginado}
+        // productsPerPage={productsPerPage}
+        // allProducts={allProducts.length}
+        // paginado={paginado}
+        // currentPage={currentPage}
+        handleNextbtn={handleNextbtn}
+        handlePrevbtn={handlePrevbtn}
         currentPage={currentPage}
+        pages={pages}
+        pageDecrementBtn={pageDecrementBtn}
+        pageIncrementBtn={pageIncrementBtn}
+        renderPageNumbers={renderPageNumbers}
       />
       <div className={style.footerContainer}>
         <Footer />
