@@ -113,6 +113,7 @@ export const getProducts = (): ThunkAction<
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     const response = await axios.get<Product[]>("/products");
     const products = response.data;
+    console.log(response.data)
     dispatch({ type: GET_PRODUCTS, payload: products });
   };
 };

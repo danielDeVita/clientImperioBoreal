@@ -76,8 +76,8 @@ const Home: React.FC = () => {
   };
   const pages = [];
 
-  for (let i = 1; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
-    pages.push(i);
+  for (let i = 0; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
+    pages.push(i+1);
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
