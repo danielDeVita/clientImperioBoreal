@@ -7,7 +7,6 @@ const CardContainer: React.FC<productProps> = ({ productsFiltered }) => {
   if (!productsFiltered) {
     return <div>No hay productos para mostrar</div>;
   }
-  console.log(productsFiltered)
   return (
     <>
       <div className={style.cardContainer}>
