@@ -7,7 +7,7 @@ import { Product } from "./types.d";
 // }
 
 export interface productProps {
-  productsFiltered: Product[];
+  productsFiltered: Product[] | any;
 }
 
 export interface PaginationProps {
@@ -15,4 +15,13 @@ export interface PaginationProps {
   allProducts: number;
   paginado: (pageNumber: number) => void;
   currentPage: number;
+}
+export interface newPagination {
+  handleNextbtn: any;
+  handlePrevbtn: any;
+  currentPage: any;
+  pages: any;
+  pageDecrementBtn: any;
+  pageIncrementBtn: any;
+  renderPageNumbers: any;
 }

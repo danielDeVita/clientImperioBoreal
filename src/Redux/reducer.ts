@@ -12,7 +12,8 @@ import {
   GET_ORDERS_BY_USER,
   GET_ALL_ORDERS,
   GET_REVIEWS_BY_PRODUCT,
-  RESET_REVIEWS_BY_PRODUCT
+  RESET_REVIEWS_BY_PRODUCT,
+  RESET_DETAIL
 } from "./actions";
 
 interface GETPaymentTotal {
@@ -76,6 +77,11 @@ interface ResetReviewsByProduct {
   payload: []
 }
 
+interface ResetDetail {
+  type: typeof RESET_DETAIL,
+  payload: {}
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -90,6 +96,7 @@ export type ProductActionTypes =
   | GetAllOrders
   | GetReviewsByProduct
   | ResetReviewsByProduct
+  | ResetDetail
 
 const initialState: State = {
   products: [],
@@ -101,7 +108,6 @@ const initialState: State = {
   ordersByUser: [],
   orders: [],
   productReviews: []
-
 };
 
 const reducer = (
@@ -189,6 +195,11 @@ const reducer = (
       return {
         ...state,
         productReviews: action.payload
+      }
+    case RESET_DETAIL:
+      return {
+        ...state,
+        detail: action.payload as Product
       }
     default:
       return { ...state };

@@ -4,6 +4,9 @@ import { productProps } from "../../props.d";
 import { Product } from "../../types";
 
 const CardContainer: React.FC<productProps> = ({ productsFiltered }) => {
+  if (!productsFiltered) {
+    return <div>No hay productos para mostrar</div>;
+  }
   return (
     <>
       <div className={style.cardContainer}>
