@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Product, State } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { getProducts } from "../../Redux/actions";
+import { getCategories, getProducts } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../Redux/store";
 import UserIcon from "../../assets/user.png";
@@ -32,8 +32,8 @@ const Dashboard: React.FC = () => {
   };
   const pages = [];
 
-  for (let i = 1; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
-    pages.push(i);
+  for (let i = 0; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
+    pages.push(i+1);
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
-  const handleDelete = async (_id: string) => {
+  const handleDelete = async (_id: string, categoryId: string) => {
     try {
       Swal.fire({
         title: "Seguro que quieres eliminar el producto?",
@@ -112,8 +112,9 @@ const Dashboard: React.FC = () => {
         iconColor: "red",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const deleteProduct = await axios.delete(`/products/${_id}`);
+          const deleteProduct = await axios.delete(`/products/${_id}?categoryId=${categoryId}`);
           dispatch(getProducts());
+          dispatch(getCategories());
           Swal.fire(
             "Eliminado con éxito",
             "Tu producto ha sido eliminado",
@@ -198,7 +199,7 @@ const Dashboard: React.FC = () => {
                     <button
                       className={style.elimProdStyleBtn}
                       onClick={() => {
-                        handleDelete(product._id as string);
+                        handleDelete(product._id as string, product.category?._id as string);
                       }}
                     >
                       Eliminar
