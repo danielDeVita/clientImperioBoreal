@@ -53,8 +53,10 @@ const Pagination: React.FC<newPagination> = ({
     // </nav>
     <>
       <div className={style.paginadoNavContainer}>
+      {pages.length > 1 && (
         <ul className={style.paginadoList}>
           <li>
+          {currentPage > 1 ? (
             <button
               className={style.btn}
               onClick={handlePrevbtn}
@@ -62,21 +64,24 @@ const Pagination: React.FC<newPagination> = ({
             >
               Anterior
             </button>
-          </li>
-          {pageDecrementBtn}
-          {renderPageNumbers}
-          {pageIncrementBtn}
-
+          ) : (
+              <button hidden className={style.btn}>Anterior</button>
+          )}</li>
+              {pageDecrementBtn}
+              {renderPageNumbers}
+              {pageIncrementBtn}
+              
           <li>
             <button
               className={style.btn}
               onClick={handleNextbtn}
               disabled={currentPage === pages[pages.length - 1] ? true : false}
-            >
+              >
               Siguiente
             </button>
           </li>
         </ul>
+        )}
       </div>
     </>
   );
