@@ -16,6 +16,7 @@ import Reviews from "../Reviews/Reviews";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "auth0";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const stars: any = {
@@ -28,6 +29,7 @@ const stars: any = {
 
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useAuth0<User>();
   const { id } = useParams<DetailParams>();
   const { descriptionName, category, price, image, stock, _id } = useSelector(
@@ -96,8 +98,7 @@ const Detail: React.FC = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const deleteReview = await axios.delete(`/reviews/${id}`);
-          dispatch(getDetail(id));
-          //VER LINEA DE ARRIBA, PARA RECARGAR LAS REVIEWS
+          navigate(0)
           Swal.fire(
             "Eliminado con éxito",
             "El comentario ha sido eliminado",
