@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import style from "../Reviews/Reviews.module.css"
+import style from "../Reviews/Reviews.module.css";
 import axios from "axios";
 import { CartContextType, State } from "../../types.d";
 import { CartContext } from "../../context";
@@ -7,33 +7,32 @@ import { useSelector } from "react-redux";
 import { validate } from "../CreateProductForm/validate";
 
 interface ReviewProps {
-  id: string
+  id: string;
 }
 
 const Reviews: React.FC<ReviewProps> = ({ id }) => {
-
   const validateInputs = (review: any) => {
     const errors: {
-      rating: string,
+      rating: string;
     } = {
-      rating: ""
+      rating: "",
     };
 
-    if (!review.rating) errors.rating = "Por favor ingrese un rating para la reseña."
-    return errors
-  }
-
+    if (!review.rating)
+      errors.rating = "Por favor ingrese un rating para la reseña.";
+    return errors;
+  };
 
   const [review, setReview] = useState<any>({
     rating: 0,
     comment: "",
     productId: "",
-    userId: ""
-  })
+    userId: "",
+  });
   const [errors, setErrors] = useState({
     rating: "",
-  })
-  const reviews = useSelector((state: State) => state.productReviews)
+  });
+  const reviews = useSelector((state: State) => state.productReviews);
   const { userId } = useContext(CartContext) as CartContextType;
 
   const handleInputChange = (e: any) => {
@@ -41,42 +40,59 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
       ...review,
       [e.target.name]: e.target.value,
       productId: id,
-      userId
-    })
-    console.log(review)
+      userId,
+    });
     setErrors(
       validateInputs({
         ...review,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
       })
-    )
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      if (!userId) {
+        alert("Debes estar registrado para dejar un comentario");
+        return;
+      }
       if (review.rating !== 0) {
-        const { data } = await axios.post('/reviews', review)
-        window.location.reload()
+        const { data } = await axios.post("/reviews", review);
+        window.location.reload();
       } else {
-        alert('Seleccione un rating')
+        alert("Seleccione un rating");
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
 
   return (
     <div className={style.container}>
-      <h2 className={style.h4}><strong>Cantidad de comentarios: {reviews.length}</strong></h2>
+      <h2 className={style.h4}>
+        <strong>Cantidad de comentarios: {reviews.length}</strong>
+      </h2>
       <br />
-      {!reviews.length && <p>Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu opinión!</p>}
+      {!reviews.length && (
+        <p>
+          Este producto aún no tiene reseñas. ¡Sé el primero en compartirnos tu
+          opinión!
+        </p>
+      )}
       <br />
       <form onSubmit={handleSubmit}>
         <div>
           <label className={style.label}>Valoración de tu compra</label>
-          <select onChange={handleInputChange} className={style.select} name="rating" defaultValue='default'>
-            <option value="default" disabled>Puntue el producto!</option>
+          <select
+            onChange={handleInputChange}
+            className={style.select}
+            name='rating'
+            defaultValue='default'
+          >
+            <option value='default' disabled>
+              Puntue el producto!
+            </option>
             <option value={1}>⭐ ☆ ☆ ☆ ☆</option>
             <option value={2}>⭐⭐ ☆ ☆ ☆</option>
             <option value={3}>⭐⭐⭐ ☆ ☆</option>
@@ -85,18 +101,22 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
           </select>
           <p>{errors.rating}</p>
         </div>
-        <textarea onChange={handleInputChange} className={style.textarea}
+        <textarea
+          onChange={handleInputChange}
+          className={style.textarea}
           rows={5}
-          name="comment"
-          placeholder="Escribe un comentario sobre tu compra"
+          name='comment'
+          placeholder='Escribe un comentario sobre tu compra'
         />
         <br />
         <div className={style.button__container}>
-            <button type="submit" className={style.button__comment}>Comentar</button>
+          <button type='submit' className={style.button__comment}>
+            Comentar
+          </button>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default Reviews;

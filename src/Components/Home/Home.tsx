@@ -67,17 +67,17 @@ const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(9);
 
-  const [pageNumberLimit, setPageNumberLimit] = useState<number>(2);
+  const [pageNumberLimit, setPageNumberLimit] = useState<number>(5);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState<number>(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState<number>(0);
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>): void => {
     setCurrentPage(Number(event.currentTarget.id));
   };
-  const pages = [];
+  const pages: number[] = [];
 
-  for (let i = 0; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
-    pages.push(i+1);
+  for (let i = 1; i <= Math.ceil(allProducts?.length / itemsPerPage); i++) {
+    pages.push(i);
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -110,10 +110,13 @@ const Home: React.FC = () => {
       setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
     }
   };
-  const handlePrevbtn = () => {
+  const handlePrevbtn = (): void => {
     setCurrentPage(currentPage - 1);
 
-    if ((currentPage - 1) % pageNumberLimit === 0) {
+    if (
+      (currentPage - 1) % pageNumberLimit === 0 &&
+      maxPageNumberLimit > pageNumberLimit
+    ) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
@@ -122,8 +125,7 @@ const Home: React.FC = () => {
   if (pages.length > maxPageNumberLimit) {
     pageIncrementBtn = (
       <li className={stylePag.hellipBtn} onClick={handleNextbtn}>
-        {" "}
-        &hellip;{" "}
+        &hellip;
       </li>
     );
   }
@@ -131,8 +133,7 @@ const Home: React.FC = () => {
   if (minPageNumberLimit >= 1) {
     pageDecrementBtn = (
       <li className={stylePag.hellipBtn} onClick={handlePrevbtn}>
-        {" "}
-        &hellip;{" "}
+        &hellip;
       </li>
     );
   }

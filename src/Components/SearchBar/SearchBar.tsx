@@ -34,7 +34,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCurrentPage }) => {
     // );
     // let productsFound = response.data;
     // setProducts(productsFound);
-    // console.log(products);
 
     dispatch(searchProducts(query));
     setCurrentPage(1);
