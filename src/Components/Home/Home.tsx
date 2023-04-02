@@ -203,6 +203,15 @@ const Home: React.FC = () => {
         </button>
       </div>
       <Carousel />
+      <Pagination
+        handleNextbtn={handleNextbtn}
+        handlePrevbtn={handlePrevbtn}
+        currentPage={currentPage}
+        pages={pages}
+        pageDecrementBtn={pageDecrementBtn}
+        pageIncrementBtn={pageIncrementBtn}
+        renderPageNumbers={renderPageNumbers}
+      />
       {currentItems?.length === 0 ? (
         <div className={style.searchError}>
           No existe el producto solicitado!

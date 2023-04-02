@@ -163,7 +163,15 @@ const Dashboard: React.FC = () => {
           <Link to='/productForm'>
             <button className={style.crearProductoBtn}>+</button>
           </Link>
-
+          <Pagination
+            handleNextbtn={handleNextbtn}
+            handlePrevbtn={handlePrevbtn}
+            currentPage={currentPage}
+            pages={pages}
+            pageDecrementBtn={pageDecrementBtn}
+            pageIncrementBtn={pageIncrementBtn}
+            renderPageNumbers={renderPageNumbers}
+          />
           <table className={style.dashboardTable}>
             <thead>
               <tr>
