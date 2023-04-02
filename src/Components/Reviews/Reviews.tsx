@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import style from "../Reviews/Reviews.module.css";
 import axios from "axios";
 import { CartContextType, State } from "../../types.d";
@@ -6,12 +6,16 @@ import { CartContext } from "../../context";
 import { useSelector } from "react-redux";
 import { validate } from "../CreateProductForm/validate";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 interface ReviewProps {
   id: string;
 }
 
 const Reviews: React.FC<ReviewProps> = ({ id }) => {
+
+  const navigate = useNavigate();
+
   const validateInputs = (review: any) => {
     const errors: {
       rating: string;
@@ -64,7 +68,8 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
       }
       if (review.rating !== 0) {
         const { data } = await axios.post("/reviews", review);
-        window.location.reload();
+        /*  window.location.reload(); */
+        navigate(0)
       } else {
         alert("Seleccione un rating");
       }
