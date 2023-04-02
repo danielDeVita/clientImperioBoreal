@@ -5,6 +5,7 @@ import { CartContextType, State } from "../../types.d";
 import { CartContext } from "../../context";
 import { useSelector } from "react-redux";
 import { validate } from "../CreateProductForm/validate";
+import Swal from "sweetalert2";
 
 interface ReviewProps {
   id: string;
@@ -54,7 +55,11 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
     e.preventDefault();
     try {
       if (!userId) {
-        alert("Debes estar registrado para dejar un comentario");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Debes estar registrado para dejar un comentario!",
+        });
         return;
       }
       if (review.rating !== 0) {
