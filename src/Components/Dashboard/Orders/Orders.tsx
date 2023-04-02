@@ -199,9 +199,8 @@ const Orders: React.FC = () => {
           key={number}
           id={String(number)}
           onClick={handleClick}
-          className={`${stylePag.number} ${
-            isActive ? stylePag.active : undefined
-          }`}
+          className={`${stylePag.number} ${isActive ? stylePag.active : undefined
+            }`}
         >
           {number}
         </li>
