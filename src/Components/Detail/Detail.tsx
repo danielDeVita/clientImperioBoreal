@@ -12,7 +12,11 @@ import checkOut from "../../assets/check-out.png";
 import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import Swal from "sweetalert2";
-import Reviews from "../Reviews/Reviews"
+import Reviews from "../Reviews/Reviews";
+import { useAuth0 } from "@auth0/auth0-react";
+import { User } from "auth0";
+import axios from "axios";
+
 
 const stars: any = {
   1: '⭐ ☆ ☆ ☆ ☆',
@@ -24,6 +28,7 @@ const stars: any = {
 
 const Detail: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { user } = useAuth0<User>();
   const { id } = useParams<DetailParams>();
   const { descriptionName, category, price, image, stock, _id } = useSelector(
     (state: State) => state.detail
@@ -76,6 +81,35 @@ const Detail: React.FC = () => {
       setQuantity((stock || 40))
     } else setQuantity(parseInt(e.target.value))
   }
+
+  const handleDelete = async (id: any) => {
+    try {
+      Swal.fire({
+        title: "Seguro que quieres eliminar el comentario?",
+        text: "No se puede revertir",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#0fb1bd",
+        confirmButtonText: "Eliminar",
+        iconColor: "red",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const deleteReview = await axios.delete(`/reviews/${id}`);
+          dispatch(getDetail(id));
+          //VER LINEA DE ARRIBA, PARA RECARGAR LAS REVIEWS
+          Swal.fire(
+            "Eliminado con éxito",
+            "El comentario ha sido eliminado",
+            "success"
+          );
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className={style.logoContainer}>
@@ -137,9 +171,15 @@ const Detail: React.FC = () => {
                     <div className={style.commentSection}>
                       <p>{review.comment}</p>
                     </div>
+                    {user?.email === import.meta.env.VITE_ADMIN_EMAIL 
+                      ? (<button className={style.btnEliminar}
+                        onClick={() => handleDelete(review._id)}>ELIMINAR
+                        </button>
+                      ) : null}
                   </div>
               )
             })
+            
           }
         </div>
 
