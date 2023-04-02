@@ -19,7 +19,6 @@ const Users: React.FC = () => {
   }, []);
 
   const users = useSelector((state: State) => state.users);
-  console.log(users);
 
   const handleDelete = async (_id: any) => {
     try {

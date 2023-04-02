@@ -20,8 +20,8 @@ export const RESET_REVIEWS_BY_PRODUCT = "RESET_REVIEWS_BY_PRODUCT";
 export const RESET_DETAIL = "RESET_DETAIL";
 
 interface GETPaymentTotal {
-  type: typeof GET_PAYMENTOTAL,
-  payload: number
+  type: typeof GET_PAYMENTOTAL;
+  payload: number;
 }
 
 interface GetProductsAction {
@@ -70,18 +70,18 @@ interface GetAllOrders {
   payload: UserOrder[];
 }
 interface GetReviewsByProduct {
-  type: typeof GET_REVIEWS_BY_PRODUCT,
-  payload: Review[]
+  type: typeof GET_REVIEWS_BY_PRODUCT;
+  payload: Review[];
 }
 
 interface ResetReviewsByProduct {
-  type: typeof RESET_REVIEWS_BY_PRODUCT,
-  payload: []
+  type: typeof RESET_REVIEWS_BY_PRODUCT;
+  payload: [];
 }
 
 interface ResetDetail {
-  type: typeof RESET_DETAIL,
-  payload: {}
+  type: typeof RESET_DETAIL;
+  payload: {};
 }
 
 export type ProductActionTypes =
@@ -98,11 +98,11 @@ export type ProductActionTypes =
   | GetAllOrders
   | GetReviewsByProduct
   | ResetReviewsByProduct
-  | ResetDetail
+  | ResetDetail;
 
 export const getPaymentTotal = (total: number) => {
-  return { type: GET_PAYMENTOTAL, payload: total }
-}
+  return { type: GET_PAYMENTOTAL, payload: total };
+};
 
 export const getProducts = (): ThunkAction<
   void,
@@ -169,22 +169,18 @@ export const getCategories = (): ThunkAction<
   };
 };
 
-export const getUserOrders = (userId: string): ThunkAction<
-  void,
-  RootState,
-  null,
-  ProductActionTypes
-> => {
+export const getUserOrders = (
+  userId: string
+): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     try {
-      const { data } = await axios.get(`/orders/user/${userId}`)
-      console.log(data);
-      dispatch({ type: GET_ORDERS_BY_USER, payload: data })
+      const { data } = await axios.get(`/orders/user/${userId}`);
+      dispatch({ type: GET_ORDERS_BY_USER, payload: data });
     } catch (error) {
       console.error(error);
     }
-  }
-}
+  };
+};
 
 export const getAllOrders = (): ThunkAction<
   void,
@@ -194,34 +190,31 @@ export const getAllOrders = (): ThunkAction<
 > => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     try {
-      const { data } = await axios.get(`/orders`)
-      dispatch({ type: GET_ALL_ORDERS, payload: data })
+      const { data } = await axios.get(`/orders`);
+      dispatch({ type: GET_ALL_ORDERS, payload: data });
     } catch (error) {
       console.error(error);
     }
-  }
-}
+  };
+};
 
-export const getReviewsByProduct = (productId: string): ThunkAction<
-  void,
-  RootState,
-  null,
-  ProductActionTypes
-> => {
+export const getReviewsByProduct = (
+  productId: string
+): ThunkAction<void, RootState, null, ProductActionTypes> => {
   return async (dispatch: Dispatch<ProductActionTypes>) => {
     try {
-      const { data } = await axios.get(`/reviews/${productId}`)
-      dispatch({ type: GET_REVIEWS_BY_PRODUCT, payload: data })
+      const { data } = await axios.get(`/reviews/${productId}`);
+      dispatch({ type: GET_REVIEWS_BY_PRODUCT, payload: data });
     } catch (error) {
       console.error(error);
     }
-  }
-}
+  };
+};
 
 export const ResetReviewsByProduct = () => {
-  return { type: RESET_REVIEWS_BY_PRODUCT, payload: [] }
-}
+  return { type: RESET_REVIEWS_BY_PRODUCT, payload: [] };
+};
 
 export const resetDetail = () => {
-  return {type: RESET_DETAIL, payload: {}}
-}
+  return { type: RESET_DETAIL, payload: {} };
+};
