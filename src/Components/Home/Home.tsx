@@ -60,7 +60,6 @@ const Home: React.FC = () => {
   const allProducts = useSelector((state: RootState) => state.filteredProducts);
 
   const categories = useSelector((state: RootState) => state.categories);
-  // ============================================================================================
   // ================ Pagination =============================================
   const [currentItems, setCurrentItems] = useState<Array<any>>();
 
@@ -138,26 +137,12 @@ const Home: React.FC = () => {
     );
   }
 
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [productsPerPage, setProductsPerPage] = useState<number>(10);
-  // const indexOfLastProduct = currentPage * productsPerPage;
-  // const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  // const currentProducts = allProducts.slice(
-  //   indexOfFirstProduct,
-  //   indexOfLastProduct
-  // );
-
-  // const paginado = (pageNumber: number) => {
-  //   setCurrentPage(pageNumber);
-  // };
-
-  const [selectedOption, setSelectedOption] = useState<string>("");
-  const [selectedOptionOrder, setSelectedOptionOrder] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>("default");
+  const [selectedOptionOrder, setSelectedOptionOrder] =
+    useState<string>("default");
 
   useEffect(() => {
     setCurrentItems(allProducts?.slice(indexOfFirsttItem, indexOfLastItem));
-    setSelectedOption("default");
-    setSelectedOptionOrder("default");
     postNewUser();
     dispatch(ResetReviewsByProduct());
   }, [allProducts, indexOfFirsttItem, indexOfLastItem]);
@@ -222,10 +207,6 @@ const Home: React.FC = () => {
         <CardContainer productsFiltered={currentItems} />
       </div>
       <Pagination
-        // productsPerPage={productsPerPage}
-        // allProducts={allProducts.length}
-        // paginado={paginado}
-        // currentPage={currentPage}
         handleNextbtn={handleNextbtn}
         handlePrevbtn={handlePrevbtn}
         currentPage={currentPage}
