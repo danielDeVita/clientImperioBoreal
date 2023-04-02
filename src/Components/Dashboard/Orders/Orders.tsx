@@ -41,7 +41,7 @@ const OrderItem: React.FC<OrderProps> = ({
 
   const handleSubmit = async (id: string) => {
     try {
-      await axios.put(`/orders/${id}`, { status: newStatus });
+      await axios.put(`/orders/${id}`, { putStatus: newStatus });
       dispatch(getAllOrders());
     } catch (error) {
       console.error(error);
