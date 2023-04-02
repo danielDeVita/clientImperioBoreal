@@ -120,6 +120,24 @@
   bottom: 10px;
 }
 
+.btnEliminar {
+  /* left: -500px; */
+  border: none;
+  color: white;
+  background-color: #f44336;
+  font-size: .9rem;
+  padding: 10px 15px;
+  /* height: 2rem; */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btnEliminar:hover {
+  background-color: #c62828;
+}
+
+
 @media only screen and (max-width: 768px) {
   .card {
     flex-direction: column;
