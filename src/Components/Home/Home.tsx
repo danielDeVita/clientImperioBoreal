@@ -203,9 +203,16 @@ const Home: React.FC = () => {
         </button>
       </div>
       <Carousel />
-      <div className='card-container'>
-        <CardContainer productsFiltered={currentItems} />
-      </div>
+      {currentItems?.length === 0 ? (
+        <div className={style.searchError}>
+          No existe el producto solicitado!
+        </div>
+      ) : (
+        <div className='card-container'>
+          <CardContainer productsFiltered={currentItems} />
+        </div>
+      )}
+
       <Pagination
         handleNextbtn={handleNextbtn}
         handlePrevbtn={handlePrevbtn}

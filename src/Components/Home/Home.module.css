@@ -147,3 +147,16 @@
   font-weight: 900;
   color: #0fb1bd;
 }
+.searchError {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid black;
+  height: 15vh;
+  font-size: 3rem;
+  background-color: whitesmoke;
+  color: #666;
+  text-align: center;
+  margin: 30px 300px 0 300px;
+  border-radius: 15px;
+}
