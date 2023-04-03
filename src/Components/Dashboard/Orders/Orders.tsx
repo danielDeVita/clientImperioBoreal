@@ -3,15 +3,17 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../Redux/store";
 import { getAllOrders } from "../../../Redux/actions";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import style from "./Orders.module.css";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import downArrow from "../../../assets/down-arrow.png";
 import Pagination from "../../Pagination/Pagination";
 import stylePag from "../../Pagination/Pagination.module.css";
+import { CartContextType } from "../../../types.d";
+import { CartContext } from "../../../context/index";
 
 interface OrderProps {
   cart: Product[];
@@ -30,6 +32,7 @@ const OrderItem: React.FC<OrderProps> = ({
   cart,
   totalAmount,
 }) => {
+
   const dispatch: AppDispatch = useDispatch();
 
   const [toggle, setToggle] = useState(false);
@@ -165,6 +168,10 @@ const Orders: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 
+  const navigate = useNavigate()
+
+  const { totalCart, user: loggedUser, setUser } = useContext(CartContext) as CartContextType;
+
   useEffect(() => {
     dispatch(getAllOrders());
   }, []);
@@ -249,8 +256,8 @@ const Orders: React.FC = () => {
   }, [orders, indexOfFirsttItem, indexOfLastItem]);
   return (
     <>
-      {!isAuthenticated ? (
-        loginWithRedirect()
+      {!loggedUser ? (
+        navigate("/")
       ) : (
         <>
           <Link to='/dashboard'>

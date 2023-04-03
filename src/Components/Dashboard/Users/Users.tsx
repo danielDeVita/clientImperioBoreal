@@ -3,18 +3,24 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../Redux/store";
 import { getUsers } from "../../../Redux/actions";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "../Users/Users.module.css";
 import Pagination from "../../Pagination/Pagination";
 import stylePag from "../../Pagination/Pagination.module.css";
+import { CartContextType } from "../../../types.d";
+import { CartContext } from "../../../context/index";
 
 const Users: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+
+  const { totalCart, user: loggedUser, setUser } = useContext(CartContext) as CartContextType;
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getUsers());
@@ -97,9 +103,8 @@ const Users: React.FC = () => {
           key={number}
           id={String(number)}
           onClick={handleClick}
-          className={`${stylePag.number} ${
-            isActive ? stylePag.active : undefined
-          }`}
+          className={`${stylePag.number} ${isActive ? stylePag.active : undefined
+            }`}
         >
           {number}
         </li>
@@ -148,8 +153,8 @@ const Users: React.FC = () => {
   }, [users, indexOfFirsttItem, indexOfLastItem]);
   return (
     <>
-      {!isAuthenticated ? (
-        loginWithRedirect()
+      {!loggedUser ? (
+        navigate("/")
       ) : (
         <>
           <Link to='/dashboard'>

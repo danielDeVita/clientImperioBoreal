@@ -1,7 +1,7 @@
 //<------------------IMPORTACIONES---------------------->
 
 import React, { useContext } from "react";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../searchBar/SearchBar";
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
-  const { totalCart } = useContext(CartContext) as CartContextType;
+  const { totalCart, user: loggedUser, setUser } = useContext(CartContext) as CartContextType;
   const { user, isAuthenticated } = useAuth0<User>();
 
   return (
@@ -44,7 +44,7 @@ const NavBar: React.FC<NavBarProps> = ({ setCurrentPage }) => {
             <i className='fa-solid fa-user'></i>
           </button>
         </Link>
-        {user?.email === import.meta.env.VITE_ADMIN_EMAIL ? (
+        {loggedUser ? (
           <Link to='/dashboard'>
             <button className={style.AdminDashboardButton}>
               <i className='fa-solid fa-gear'></i>

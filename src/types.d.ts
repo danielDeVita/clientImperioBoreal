@@ -25,7 +25,7 @@ export interface UserOrder {
   }
   orderId: string,
 }
-export interface Review { 
+export interface Review {
   _id: string,
   userId: {
     _id: string,
@@ -34,8 +34,8 @@ export interface Review {
     isDeleted: false,
   }
   product: {
-   _id: string,
-   descriptionName: string
+    _id: string,
+    descriptionName: string
   }
   rating: string | number,
   comment: string,
@@ -79,6 +79,8 @@ export interface CartContextType {
   setTotalCart: (count: number) => void;
   userId: string;
   setUserId: (id: string) => void;
+  user: string;
+  setUser: (mail: string) => void;
 }
 export interface User {
   name: string;
