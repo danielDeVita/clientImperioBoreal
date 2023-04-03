@@ -57,7 +57,7 @@
 .button {
   width: 9em;
   height: 2.5em;
-  border-radius: 30em;
+  border-radius: 5px;
   font-size: 17px;
   font-family: inherit;
   border: none;
@@ -75,7 +75,7 @@
   content: '';
   width: 0;
   height: 2.5em;
-  border-radius: 30em;
+  border-radius: 5px;
   position: absolute;
   top: 0;
   left: 0;
