@@ -26,11 +26,12 @@ const Home: React.FC = () => {
   const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
     useAuth0<User>();
 
-  const { setUserId } = useContext(CartContext) as CartContextType;
+  const { setUserId, setUser } = useContext(CartContext) as CartContextType;
 
   const postNewUser = async () => {
     if (isAuthenticated) {
       const { data } = await axios.post("/users", user);
+      setUser(data.isAdmin);
       const { _id } = data;
       setUserId(_id);
     }
@@ -90,9 +91,8 @@ const Home: React.FC = () => {
           key={number}
           id={String(number)}
           onClick={handleClick}
-          className={`${stylePag.number} ${
-            isActive ? stylePag.active : undefined
-          }`}
+          className={`${stylePag.number} ${isActive ? stylePag.active : undefined
+            }`}
         >
           {number}
         </li>
