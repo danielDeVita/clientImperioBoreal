@@ -1,7 +1,7 @@
 //<------------------IMPORTACIONES---------------------->
 
 import React, { useContext } from "react";
-import SearchBar from "../searchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { Link } from "react-router-dom";

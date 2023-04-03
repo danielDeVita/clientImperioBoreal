@@ -18,6 +18,7 @@ export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_REVIEWS_BY_PRODUCT = "GET_REVIEWS_BY_PRODUCT";
 export const RESET_REVIEWS_BY_PRODUCT = "RESET_REVIEWS_BY_PRODUCT";
 export const RESET_DETAIL = "RESET_DETAIL";
+export const DASHBOARD_SEARCH = 'DASHBOARD_SEARCH';
 
 interface GETPaymentTotal {
   type: typeof GET_PAYMENTOTAL;
@@ -84,6 +85,11 @@ interface ResetDetail {
   payload: {};
 }
 
+interface DashboardSearch {
+  type: typeof DASHBOARD_SEARCH;
+  payload: string
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -98,7 +104,8 @@ export type ProductActionTypes =
   | GetAllOrders
   | GetReviewsByProduct
   | ResetReviewsByProduct
-  | ResetDetail;
+  | ResetDetail
+  | DashboardSearch
 
 export const getPaymentTotal = (total: number) => {
   return { type: GET_PAYMENTOTAL, payload: total };
@@ -217,4 +224,8 @@ export const ResetReviewsByProduct = () => {
 
 export const resetDetail = () => {
   return { type: RESET_DETAIL, payload: {} };
+};
+
+export const dashboardSearch = (query: string) => {
+  return { type: DASHBOARD_SEARCH, payload: query };
 };

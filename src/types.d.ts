@@ -100,4 +100,5 @@ export interface State {
   ordersByUser: UserOrder[],
   orders: UserOrder[]
   productReviews: Review[]
+  dashboardProducts: Product[]
 }
