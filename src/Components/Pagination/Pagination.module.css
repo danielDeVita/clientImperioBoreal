@@ -1,5 +1,6 @@
 .paginadoNavContainer {
   display: flex;
+  width: 100%;
   justify-content: center;
   padding: 1rem;
 }
