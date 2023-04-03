@@ -192,6 +192,7 @@ const Dashboard: React.FC = () => {
                     <img
                       src={product.image?.secure_url}
                       alt={product.descriptionName}
+                      className={style.imageTable}
                     />
                   </th>
                   <td>{product._id}</td>
