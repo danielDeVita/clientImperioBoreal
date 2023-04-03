@@ -1,0 +1,46 @@
+input.searcher{
+    background-color: white;
+    border-radius: 15px;
+    width: 92%;
+    color: #0FB1BD;
+    height: 40px;
+    font-size: 24px;
+    outline: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid #0FB1BD;
+    margin-top: 45px;
+}
+.actualForm{
+    width:50%;
+    margin: 0 auto;
+    ;
+}
+
+.searcher:focus{
+    border-bottom: 2px solid #771e62;
+}
+.formContainer{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;    
+}
+
+.searchBtnStyle{
+    background-color: transparent;
+    border: none;
+    color: #0FB1BD;
+    font-size: 24px;
+}
+
+.searchBtnStyle:hover{
+    color: #13c8d5;
+    cursor: pointer;
+}
+
+.input.searcher::placeholder {
+    color: #0FB1BD;
+  }
+  

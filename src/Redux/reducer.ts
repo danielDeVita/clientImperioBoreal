@@ -13,7 +13,8 @@ import {
   GET_ALL_ORDERS,
   GET_REVIEWS_BY_PRODUCT,
   RESET_REVIEWS_BY_PRODUCT,
-  RESET_DETAIL
+  RESET_DETAIL,
+  DASHBOARD_SEARCH
 } from "./actions";
 
 interface GETPaymentTotal {
@@ -82,6 +83,11 @@ interface ResetDetail {
   payload: {}
 }
 
+interface DashboardSearch {
+  type: typeof DASHBOARD_SEARCH;
+  payload: any;
+}
+
 export type ProductActionTypes =
   | GetProductsAction
   | GetUsersAction
@@ -97,6 +103,7 @@ export type ProductActionTypes =
   | GetReviewsByProduct
   | ResetReviewsByProduct
   | ResetDetail
+  | DashboardSearch
 
 const initialState: State = {
   products: [],
@@ -107,7 +114,8 @@ const initialState: State = {
   payment: 0,
   ordersByUser: [],
   orders: [],
-  productReviews: []
+  productReviews: [],
+  dashboardProducts: []
 };
 
 const reducer = (
@@ -125,6 +133,7 @@ const reducer = (
         ...state,
         products: action.payload,
         filteredProducts: action.payload,
+        dashboardProducts: action.payload
       };
     case GET_USERS:
       return {
@@ -145,6 +154,15 @@ const reducer = (
             .includes(action.payload.toLowerCase())
         ),
       };
+    case DASHBOARD_SEARCH: 
+    return {
+      ...state,
+      dashboardProducts: state.products.filter((product) =>
+        product.descriptionName
+        .toLowerCase()
+        .includes(action.payload.toLowerCase())
+      )
+    }
     case ORDER_BY_PRICE:
       const isDescendent = action.payload === "descendente";
       return {

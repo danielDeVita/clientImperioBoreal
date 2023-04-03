@@ -13,6 +13,7 @@ import OrdersIcon from "../../assets/clipboard.png";
 import Pagination from "../Pagination/Pagination";
 import stylePag from "../Pagination/Pagination.module.css";
 import { CartContext } from "../../context/index";
+import DashboardSearch from "./DashboardSearch/DashboardSearch";
 
 const Dashboard: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -21,7 +22,8 @@ const Dashboard: React.FC = () => {
 
   const { user: loggedUser, setUser } = useContext(CartContext) as CartContextType
 
-  const allProducts = useSelector((state: State) => state.products);
+  const dashboardProducts = useSelector((state: State) => state.dashboardProducts);
+
   // ================ Pagination =============================================
   const [currentItems, setCurrentItems] = useState<Array<any>>();
 
@@ -37,7 +39,7 @@ const Dashboard: React.FC = () => {
   };
   const pages: number[] = [];
 
-  for (let i = 0; i < Math.ceil(allProducts?.length / itemsPerPage); i++) {
+  for (let i = 0; i < Math.ceil(dashboardProducts?.length / itemsPerPage); i++) {
     pages.push(i + 1);
   }
 
@@ -99,8 +101,8 @@ const Dashboard: React.FC = () => {
   }
 
   useEffect(() => {
-    setCurrentItems(allProducts?.slice(indexOfFirsttItem, indexOfLastItem));
-  }, [allProducts, indexOfFirsttItem, indexOfLastItem]);
+    setCurrentItems(dashboardProducts?.slice(indexOfFirsttItem, indexOfLastItem));
+  }, [dashboardProducts, indexOfFirsttItem, indexOfLastItem]);
 
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -167,17 +169,10 @@ const Dashboard: React.FC = () => {
           <Link to='/productForm'>
             <button className={style.crearProductoBtn}>+</button>
           </Link>
-          <Pagination
-            handleNextbtn={handleNextbtn}
-            handlePrevbtn={handlePrevbtn}
-            currentPage={currentPage}
-            pages={pages}
-            pageDecrementBtn={pageDecrementBtn}
-            pageIncrementBtn={pageIncrementBtn}
-            renderPageNumbers={renderPageNumbers}
-          />
+          <DashboardSearch setCurrentPage={setCurrentPage}/>
           <table className={style.dashboardTable}>
             <thead>
+
               <tr>
                 <th>Imagen</th>
                 <th>ID</th>
@@ -230,7 +225,7 @@ const Dashboard: React.FC = () => {
           </table>
           <Pagination
             // productsPerPage={productsPerPage}
-            // allProducts={allProducts.length}
+            // dashboardProducts={dashboardProducts.length}
             // paginado={paginado}
             // currentPage={currentPage}
             handleNextbtn={handleNextbtn}
