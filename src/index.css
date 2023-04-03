@@ -14,3 +14,7 @@
   -webkit-text-size-adjust: 100%;
   background-image: url('./assets/backgroundImage.jpg');
 }
+
+#root {
+  overflow: hidden;
+}
