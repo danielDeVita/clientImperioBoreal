@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import style from "./Dashboard.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Product, State, CartContextType } from "../../types.d";
+import { Product, State, CartContextType, User } from "../../types.d";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { getCategories, getProducts } from "../../Redux/actions";
@@ -17,19 +17,22 @@ import DashboardSearch from "./DashboardSearch/DashboardSearch";
 
 const Dashboard: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-
+  
   const navigate = useNavigate()
 
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  // 
+  
   const { user: loggedUser, setUser } = useContext(CartContext) as CartContextType
-
+  
   const dashboardProducts = useSelector((state: State) => state.dashboardProducts);
-
+  
   // ================ Pagination =============================================
   const [currentItems, setCurrentItems] = useState<Array<any>>();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(9);
-
+  
   const [pageNumberLimit, setPageNumberLimit] = useState<number>(5);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState<number>(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState<number>(0);
@@ -104,7 +107,6 @@ const Dashboard: React.FC = () => {
     setCurrentItems(dashboardProducts?.slice(indexOfFirsttItem, indexOfLastItem));
   }, [dashboardProducts, indexOfFirsttItem, indexOfLastItem]);
 
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
   const handleDelete = async (_id: string, categoryId: string) => {
     try {
@@ -156,9 +158,14 @@ const Dashboard: React.FC = () => {
               <Link to='/dashboard/orders'>
                 <img src={OrdersIcon} alt='Link a ordenes' />
               </Link>
+              {
+                user?.email === import.meta.env.VITE_ADMIN_EMAIL ?
               <Link to='/dashboard/users' className={style.userIcon}>
                 <img src={UserIcon} alt='Link a usuarios' />
               </Link>
+              : null
+
+              }
             </div>
           </div>
           <Link to='/'>

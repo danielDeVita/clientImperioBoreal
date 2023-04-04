@@ -153,7 +153,7 @@ const Users: React.FC = () => {
   }, [users, indexOfFirsttItem, indexOfLastItem]);
   return (
     <>
-      {!loggedUser ? (
+      {user?.email !== import.meta.env.VITE_ADMIN_EMAIL ? (
         navigate("/")
       ) : (
         <>
@@ -231,8 +231,9 @@ const Users: React.FC = () => {
             pageIncrementBtn={pageIncrementBtn}
             renderPageNumbers={renderPageNumbers}
           />
+        
         </>
-      )}
+        )}
     </>
   );
 };
