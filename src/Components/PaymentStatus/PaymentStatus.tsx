@@ -6,40 +6,33 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const PaymentStatus = () => {
   const navigate = useNavigate();
-  const [status, setStatus] = useState<string | undefined>();
+  const [status, setStatus] = useState<string | undefined>(undefined);
 
   const searchParams = new URLSearchParams(window.location.search);
   const paymentId = searchParams.get('payment_id');
   const orderId = localStorage.getItem("objectId");
 
-  const returnUseEffect =  () => {
-    setTimeout(() => {
-      navigate('/')
-    }, 4000)
-  }
-
   useEffect(() => {
     async function fetchData() {
+      if(paymentId === 'null') navigate('/')
       const response = await axios.get(`mp/payment-status?payment_id=${paymentId}`)
       setStatus(response.data.message)
     }
     async function setOrderStatus(orderId: string | null, status: string | undefined) {
       try {
         let putStatus;
-        if (status && status.length > 0) {
+        if (status !== undefined && status.length > 0) {
           if (status === 'Compra aprobada') putStatus = 'Paid'
           if (status === 'Compra rechazada') putStatus = 'Cancelled'
           if (status === 'Compra pendiente') putStatus = 'InProcess'
           await axios.put(`/orders/${orderId}`, { putStatus })
-         
-        }  
+        }
       } catch (error) {
         console.error(error)
       }
     }
     fetchData();
     setOrderStatus(orderId, status);
-    return () => returnUseEffect()
   }, [status]);
 
   return (
