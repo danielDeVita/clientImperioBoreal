@@ -3,33 +3,33 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { KEY_LOCAL_STORAGE, Product } from "../../types.d";
 import style from "./ShoppingCartItem.module.css";
 
-
-const ShoppingCartItem: React.FC <Product> = ({
+const ShoppingCartItem: React.FC<Product> = ({
   descriptionName,
   category,
   price,
   _id,
   image,
   quantity,
-  stock
+  stock,
 }) => {
   const [productQuantity, setProductQuantity] = useState(quantity);
 
-
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (typeof parseInt(e.target.value) === "number") {
-      if (parseInt(e.target.value) === 0) return setProductQuantity(1) 
+      if (parseInt(e.target.value) === 0) return setProductQuantity(1);
       if (parseInt(e.target.value) > (stock as number)) {
-        setProductQuantity(stock)
-        updateQuantity(_id as string, stock as number)
-      }else {
-        updateQuantity(_id as string, parseInt(e.target.value))
-        setProductQuantity(parseInt(e.target.value))
-      };
+        setProductQuantity(stock);
+        updateQuantity(_id as string, stock as number);
+      } else {
+        updateQuantity(_id as string, parseInt(e.target.value));
+        setProductQuantity(parseInt(e.target.value));
+      }
     }
   };
 
-  const { deleteItems, updateQuantity, loadPayment } = useLocalStorage(KEY_LOCAL_STORAGE.KEY);
+  const { deleteItems, updateQuantity, loadPayment } = useLocalStorage(
+    KEY_LOCAL_STORAGE.KEY
+  );
 
   return (
     <tr className={style.trContainer}>
@@ -47,6 +47,7 @@ const ShoppingCartItem: React.FC <Product> = ({
           max={stock}
           onChange={handleQuantityChange}
           name='quantity'
+          className={style.cartInput}
         ></input>
       </td>
       <td>
