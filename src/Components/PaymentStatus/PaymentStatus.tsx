@@ -47,7 +47,6 @@ const PaymentStatus = () => {
         </Link>
       </div>
       <h1 className={style.paymentH1}>{status}</h1>
-      <h2 style={{textAlign: 'center'}}>Sera redirigido a la pagina principal, gracias por elegirnos!</h2>
     </div>
   );
 };
