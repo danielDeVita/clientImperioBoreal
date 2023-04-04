@@ -12,6 +12,12 @@ const PaymentStatus = () => {
   const paymentId = searchParams.get('payment_id');
   const orderId = localStorage.getItem("objectId");
 
+  const returnUseEffect =  () => {
+    setTimeout(() => {
+      navigate('/')
+    }, 4000)
+  }
+
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(`mp/payment-status?payment_id=${paymentId}`)
@@ -25,14 +31,15 @@ const PaymentStatus = () => {
           if (status === 'Compra rechazada') putStatus = 'Cancelled'
           if (status === 'Compra pendiente') putStatus = 'InProcess'
           await axios.put(`/orders/${orderId}`, { putStatus })
-        }
-        navigate('/')
+         
+        }  
       } catch (error) {
         console.error(error)
       }
     }
     fetchData();
     setOrderStatus(orderId, status);
+    return () => returnUseEffect()
   }, [status]);
 
   return (
@@ -47,6 +54,7 @@ const PaymentStatus = () => {
         </Link>
       </div>
       <h1 className={style.paymentH1}>{status}</h1>
+      <h2 style={{textAlign: 'center'}}>Sera redirigido a la pagina principal, gracias por elegirnos!</h2>
     </div>
   );
 };
