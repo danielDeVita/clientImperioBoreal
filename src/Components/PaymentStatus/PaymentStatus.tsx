@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import style from "./PaymentStatus.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const PaymentStatus = () => {
+  const navigate = useNavigate();
   const [status, setStatus] = useState<string | undefined>();
 
   const searchParams = new URLSearchParams(window.location.search);
@@ -15,16 +17,16 @@ const PaymentStatus = () => {
       const response = await axios.get(`mp/payment-status?payment_id=${paymentId}`)
       setStatus(response.data.message)
     }
-
     async function setOrderStatus(orderId: string | null, status: string | undefined) {
       try {
+        let putStatus;
         if (status && status.length > 0) {
-          let putStatus;
           if (status === 'Compra aprobada') putStatus = 'Paid'
           if (status === 'Compra rechazada') putStatus = 'Cancelled'
           if (status === 'Compra pendiente') putStatus = 'InProcess'
           await axios.put(`/orders/${orderId}`, { putStatus })
         }
+        navigate('/')
       } catch (error) {
         console.error(error)
       }
