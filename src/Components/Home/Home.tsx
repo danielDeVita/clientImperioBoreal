@@ -9,6 +9,7 @@ import {
   orderByPrice,
   filterByCategory,
   ResetReviewsByProduct,
+  getCategories,
 } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
@@ -37,7 +38,7 @@ const Home: React.FC = () => {
     }
   };
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(resetFilters(e.currentTarget.value));
@@ -145,6 +146,7 @@ const Home: React.FC = () => {
     setCurrentItems(allProducts?.slice(indexOfFirsttItem, indexOfLastItem));
     postNewUser();
     dispatch(ResetReviewsByProduct());
+    dispatch(getCategories())
   }, [allProducts, indexOfFirsttItem, indexOfLastItem]);
 
   return (
