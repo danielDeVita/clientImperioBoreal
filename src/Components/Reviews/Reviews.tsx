@@ -71,7 +71,12 @@ const Reviews: React.FC<ReviewProps> = ({ id }) => {
         /*  window.location.reload(); */
         navigate(0)
       } else {
-        alert("Seleccione un rating");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Debes seleccionar el rating del producto!",
+        });
+        return;
       }
     } catch (error) {
       console.error(error);
